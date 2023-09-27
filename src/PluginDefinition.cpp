@@ -17,6 +17,8 @@
 
 #include "PluginDefinition.h"
 #include "menuCmdID.h"
+#include <iostream>
+#include <string>
 
 //
 // The plugin data that Notepad++ needs
@@ -60,6 +62,7 @@ void commandMenuInit()
     //            );
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello (with dialog)"), helloDlg, NULL, false);
+    setCommand(2, TEXT("Exclamation Pointify"), exclamationPointify, NULL, 0);
 }
 
 //
@@ -113,4 +116,25 @@ void hello()
 void helloDlg()
 {
     ::MessageBox(NULL, TEXT("Hello, Notepad++!"), TEXT("Notepad++ Plugin Template"), MB_OK);
+}
+
+void exclamationPointify()
+{
+    // Get the current scintilla
+    int which = -1;
+    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+
+    
+    if (which == -1)
+        return;
+    HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+
+
+    // Get the length of the current document.
+    const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
+    const auto test = std::wstring(L"Length: ") + std::to_wstring(length);
+    OutputDebugStringW(test.c_str());
+
+    ::MessageBox(NULL, test.c_str(), TEXT("TEST"), MB_OKCANCEL);
+    std::cout << "!!!!!!" << std::endl;
 }

@@ -20,6 +20,7 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include <map>
 
 //
 // The plugin data that Notepad++ needs
@@ -64,6 +65,7 @@ void commandMenuInit()
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello (with dialog)"), helloDlg, NULL, false);
     setCommand(2, TEXT("Exclamation Pointify"), exclamationPointify, NULL, 0);
+    setCommand(3, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
 }
 
 //
@@ -150,3 +152,69 @@ void exclamationPointify()
 
 
 }
+
+void fixSetupTreeItems() 
+{
+    // Get the current scintilla
+    int which = -1;
+    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+
+
+    if (which == -1)
+        return;
+    HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+
+
+    // Get the length of the current document.
+    const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
+    const std::string test("Length: " + std::to_string(length));
+
+    ::MessageBoxA(NULL, test.c_str(), "TEST", MB_OKCANCEL);
+
+    std::string treeItems;
+    treeItems.resize(length + 1);
+    ::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)treeItems.data());
+
+    // Define the regex pattern to match tags like <P1=...> within sections
+    const std::regex pattern("\\[([^\\]]+)\\]|(<P\\d+=)(.*?)\r\n|([^\\[<]+)");
+
+    // Initialize a map to keep track of the current tag number for each section
+    std::map<std::string, int> sectionTagNumbers;
+
+    // Create a regex iterator to iterate through matches
+    std::sregex_iterator it(treeItems.begin(), treeItems.end(), pattern);
+    std::sregex_iterator end;
+
+    std::string result;
+    std::string currentSection;
+
+    // Iterate through matches
+    while (it != end) {
+        std::smatch match = *it;
+
+        if (match[1].matched) {
+            // Matched a section header, reset the tag number for this section
+            currentSection = match[1].str();
+            sectionTagNumbers[currentSection] = 1;
+            result += match.str();
+        }
+        else if (match[2].matched) {
+            // Matched the beginning of a tag, update the tag number within the section
+            const std::string tagContent = match[3].str();
+            result += "<P" + std::to_string(sectionTagNumbers[currentSection]++) + "=" + tagContent + "\r\n";
+        }
+        else if (match[4].matched) {
+            // Matched text that is not a header or a tag, such as blank lines
+            result += match[4].str();
+        }
+
+        ++it;
+    }
+    
+    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
+}
+
+//void renumberTags(const std::smatch& match, std::map<std::string, int> tagMap) {
+//
+//}
+

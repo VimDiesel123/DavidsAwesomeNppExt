@@ -178,30 +178,26 @@ void fixSetupTreeItems()
     // Define the regex pattern to match tags like <P1=...> within sections
     const std::regex pattern("\\[([^\\]]+)\\]|(<P\\d+=)(.*?)\r\n|([^\\[<]+)");
 
-    // Initialize a map to keep track of the current tag number for each section
-    std::map<std::string, int> sectionTagNumbers;
-
     // Create a regex iterator to iterate through matches
     std::sregex_iterator it(treeItems.begin(), treeItems.end(), pattern);
     std::sregex_iterator end;
 
     std::string result;
-    std::string currentSection;
+    int tagNumber = 1;
 
     // Iterate through matches
     while (it != end) {
         std::smatch match = *it;
 
         if (match[1].matched) {
-            // Matched a section header, reset the tag number for this section
-            currentSection = match[1].str();
-            sectionTagNumbers[currentSection] = 1;
+            // Matched a section header, reset the tag number
+            tagNumber = 1;
             result += match.str();
         }
         else if (match[2].matched) {
-            // Matched the beginning of a tag, update the tag number within the section
+            // Matched the beginning of a tag, update the tag number
             const std::string tagContent = match[3].str();
-            result += "<P" + std::to_string(sectionTagNumbers[currentSection]++) + "=" + tagContent + "\r\n";
+            result += "<P" + std::to_string(tagNumber++) + "=" + tagContent + "\r\n";
         }
         else if (match[4].matched) {
             // Matched text that is not a header or a tag, such as blank lines
@@ -210,6 +206,7 @@ void fixSetupTreeItems()
 
         ++it;
     }
+
     
     ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
 }

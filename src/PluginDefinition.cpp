@@ -19,6 +19,7 @@
 #include "menuCmdID.h"
 #include <iostream>
 #include <string>
+#include <regex>
 
 //
 // The plugin data that Notepad++ needs
@@ -132,9 +133,20 @@ void exclamationPointify()
 
     // Get the length of the current document.
     const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
-    const auto test = std::wstring(L"Length: ") + std::to_wstring(length);
-    OutputDebugStringW(test.c_str());
+    const std::string test("Length: " + std::to_string(length));
 
-    ::MessageBox(NULL, test.c_str(), TEXT("TEST"), MB_OKCANCEL);
-    std::cout << "!!!!!!" << std::endl;
+    ::MessageBoxA(NULL, test.c_str(), "TEST", MB_OKCANCEL);
+
+    std::string text;
+    text.resize(length + 1);
+    ::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)text.data());
+
+    ::MessageBoxA(NULL, text.c_str(), "TEXT TEST", MB_OK);
+
+    const std::regex pattern("(.+)(\r\n|$)");
+    const std::string exclamationPointedText = std::regex_replace(text, pattern, "$1!$2");
+
+    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)exclamationPointedText.c_str());
+
+
 }

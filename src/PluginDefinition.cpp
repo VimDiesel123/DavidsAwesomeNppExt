@@ -111,9 +111,6 @@ void fixSetupTreeItems()
 
     // Get the length of the current document.
     const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
-    const std::string test("Length: " + std::to_string(length));
-
-    ::MessageBoxA(NULL, test.c_str(), "TEST", MB_OKCANCEL);
 
     std::string treeItems;
     treeItems.resize(length + 1);

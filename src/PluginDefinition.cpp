@@ -62,10 +62,8 @@ void commandMenuInit()
     //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
     //            bool check0nInit                // optional. Make this menu item be checked visually
     //            );
-    setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
-    setCommand(1, TEXT("Hello (with dialog)"), helloDlg, NULL, false);
-    setCommand(2, TEXT("Exclamation Pointify"), exclamationPointify, NULL, 0);
-    setCommand(3, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
+    setCommand(0, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
+    setCommand(1, TEXT("GIVE FUNNY"), showFunny, NULL, 0);
 }
 
 //
@@ -99,60 +97,6 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
-void hello()
-{
-    // Open a new document
-    ::SendMessage(nppData._nppHandle, NPPM_MENUCOMMAND, 0, IDM_FILE_NEW);
-
-    // Get the current scintilla
-    int which = -1;
-    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
-    if (which == -1)
-        return;
-    HWND curScintilla = (which == 0)?nppData._scintillaMainHandle:nppData._scintillaSecondHandle;
-
-    // Say hello now :
-    // Scintilla control has no Unicode mode, so we use (char *) here
-    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)"Hello, Notepad++!");
-}
-
-void helloDlg()
-{
-    ::MessageBox(NULL, TEXT("Hello, Notepad++!"), TEXT("Notepad++ Plugin Template"), MB_OK);
-}
-
-void exclamationPointify()
-{
-    // Get the current scintilla
-    int which = -1;
-    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
-
-    
-    if (which == -1)
-        return;
-    HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
-
-
-    // Get the length of the current document.
-    const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
-    const std::string test("Length: " + std::to_string(length));
-
-    ::MessageBoxA(NULL, test.c_str(), "TEST", MB_OKCANCEL);
-
-    std::string text;
-    text.resize(length + 1);
-    ::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)text.data());
-
-    ::MessageBoxA(NULL, text.c_str(), "TEXT TEST", MB_OK);
-
-    const std::regex pattern("(.+)(\r\n|$)");
-    const std::string exclamationPointedText = std::regex_replace(text, pattern, "$1!$2");
-
-    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)exclamationPointedText.c_str());
-
-
-}
-
 void fixSetupTreeItems() 
 {
     // Get the current scintilla
@@ -211,7 +155,8 @@ void fixSetupTreeItems()
     ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
 }
 
-//void renumberTags(const std::smatch& match, std::map<std::string, int> tagMap) {
-//
-//}
+void showFunny()
+{
+    ::MessageBoxA(NULL, "This is a joke.", "FUNNY", MB_OK);
+}
 

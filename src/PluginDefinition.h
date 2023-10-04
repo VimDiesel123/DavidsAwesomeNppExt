@@ -36,7 +36,7 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("David's Awesome Tools");
 //
 // Here define the number of your plugin commands
 //
-const int nbFunc = 4;
+const int nbFunc = 2;
 
 
 //
@@ -70,9 +70,7 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 //
 // Your plugin command functions
 //
-void hello();
-void helloDlg();
-void exclamationPointify();
 void fixSetupTreeItems();
+void showFunny();
 
 #endif //PLUGINDEFINITION_H

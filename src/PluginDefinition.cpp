@@ -111,7 +111,21 @@ void fixSetupTreeItems()
         return;
     HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
 
+    // Get filename of current document
+    std::wstring filename;
+    filename.resize(MAX_PATH);
+    ::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, MAX_PATH, (LPARAM)filename.data());
 
+    const std::wregex treeItemsPattern(L"TreeItems.*\\.ini.*");
+
+    const auto isTreeItemsFile = std::regex_match(filename.c_str(), treeItemsPattern);
+
+    if (!isTreeItemsFile) {
+        std::wstring errormessage = std::wstring(filename.c_str()) + std::wstring(L" is not a TreeItems file.");
+        ::MessageBox(NULL, errormessage.c_str(), L"Wrong file!", MB_OK);
+        return;
+    }
+    
     // Get the length of the current document.
     const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
 
@@ -185,7 +199,7 @@ void showFunny()
         std::string type = jsonData["type"];
         std::string joke = type == "twopart" ? std::string(jsonData["setup"]) + "\n\n" + std::string(jsonData["delivery"]) : jsonData["joke"];
 
-        ::MessageBoxA(NULL, joke.c_str(), std::string(category + " Joke").c_str(), MB_OK);
+        ::MessageBoxA(NULL, joke.c_str(), "FUNNY", MB_OK);
 
     }
     catch (const nlohmann::json::parse_error& e) {

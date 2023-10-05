@@ -183,18 +183,9 @@ void showFunny()
 
         std::string category = jsonData["category"];
         std::string type = jsonData["type"];
+        std::string joke = type == "twopart" ? std::string(jsonData["setup"]) + "\n\n" + std::string(jsonData["delivery"]) : jsonData["joke"];
 
-        if (type == "single") 
-        {
-            std::string joke = jsonData["joke"];
-            ::MessageBoxA(NULL, joke.c_str(), std::string(category + " Joke").c_str(), MB_OK);
-        }
-        else if (type == "twopart")
-        {
-            std::string setup = jsonData["setup"];
-            std::string delivery = jsonData["delivery"];
-            ::MessageBoxA(NULL, std::string(setup + "\n\n" + delivery).c_str(), std::string(category + " Joke").c_str(), MB_OK);
-        }
+        ::MessageBoxA(NULL, joke.c_str(), std::string(category + " Joke").c_str(), MB_OK);
 
     }
     catch (const nlohmann::json::parse_error& e) {

@@ -23,6 +23,7 @@
 #include <map>
 #include <Windows.h>
 #include <wininet.h>
+#include "../lib/json.hpp"
 
 //
 // The plugin data that Notepad++ needs
@@ -158,14 +159,16 @@ void showFunny()
 {
     HINTERNET hInternet = InternetOpen(L"David's Awesome Tools", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
     if (hInternet == NULL) {
-        OutputDebugString(L"Failed to intialize internet handle.");
+        OutputDebugStringA("Failed to intialize internet handle.");
+        handleError();
         return;
     }
 
-    HINTERNET hRequest = InternetOpenUrl(hInternet, L"https://v2.jokeapi.dev/joke/Any", NULL, 0, INTERNET_FLAG_RELOAD, 0);
+    HINTERNET hRequest = InternetOpenUrl(hInternet, L"https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit", NULL, 0, INTERNET_FLAG_RELOAD, 0);
     if (hRequest == NULL) {
-        // Handle request creation failure
-        // Use GetLastError() to get more information
+        OutputDebugStringA("Failed to create request.");
+        handleError();
+        return;
     }
 
     DWORD bytesRead;
@@ -173,13 +176,51 @@ void showFunny()
     InternetReadFile(hRequest, buffer, sizeof(buffer), &bytesRead);
     buffer[bytesRead] = '\0';
     const auto JSONResponse = std::string(buffer);
-    //while (InternetReadFile(hRequest, buffer, sizeof(buffer), &bytesRead) && bytesRead > 0) {
-    //    // Process and/or store the received data
-    //}
+
+    // Parse the JSON response using JSON for Modern C++
+    try {
+        nlohmann::json jsonData = nlohmann::json::parse(JSONResponse);
+
+        std::string category = jsonData["category"];
+        std::string type = jsonData["type"];
+
+        if (type == "single") 
+        {
+            std::string joke = jsonData["joke"];
+            ::MessageBoxA(NULL, joke.c_str(), std::string(category + " Joke").c_str(), MB_OK);
+        }
+        else if (type == "twopart")
+        {
+            std::string setup = jsonData["setup"];
+            std::string delivery = jsonData["delivery"];
+            ::MessageBoxA(NULL, std::string(setup + "\n\n" + delivery).c_str(), std::string(category + " Joke").c_str(), MB_OK);
+        }
+
+    }
+    catch (const nlohmann::json::parse_error& e) {
+        OutputDebugStringA(e.what());
+    }
 
     InternetCloseHandle(hRequest);
     InternetCloseHandle(hInternet);
 
-    ::MessageBoxA(NULL, "This is a joke.", "FUNNY", MB_OK);
+}
+
+void handleError()
+{
+    const auto errorCode = GetLastError();
+    LPVOID lpMsgBuf;
+
+    FormatMessage(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER |
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        errorCode,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR)&lpMsgBuf,
+        0, NULL);
+
+    ::MessageBox(NULL, (LPCTSTR)lpMsgBuf, TEXT("Error"), MB_OK);
 }
 

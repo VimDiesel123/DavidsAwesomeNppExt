@@ -73,4 +73,6 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 void fixSetupTreeItems();
 void showFunny();
 
+void handleError();
+
 #endif //PLUGINDEFINITION_H

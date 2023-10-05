@@ -21,6 +21,8 @@
 #include <string>
 #include <regex>
 #include <map>
+#include <Windows.h>
+#include <wininet.h>
 
 //
 // The plugin data that Notepad++ needs
@@ -154,6 +156,30 @@ void fixSetupTreeItems()
 
 void showFunny()
 {
+    HINTERNET hInternet = InternetOpen(L"David's Awesome Tools", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
+    if (hInternet == NULL) {
+        OutputDebugString(L"Failed to intialize internet handle.");
+        return;
+    }
+
+    HINTERNET hRequest = InternetOpenUrl(hInternet, L"https://v2.jokeapi.dev/joke/Any", NULL, 0, INTERNET_FLAG_RELOAD, 0);
+    if (hRequest == NULL) {
+        // Handle request creation failure
+        // Use GetLastError() to get more information
+    }
+
+    DWORD bytesRead;
+    char buffer[1024];
+    InternetReadFile(hRequest, buffer, sizeof(buffer), &bytesRead);
+    buffer[bytesRead] = '\0';
+    const auto JSONResponse = std::string(buffer);
+    //while (InternetReadFile(hRequest, buffer, sizeof(buffer), &bytesRead) && bytesRead > 0) {
+    //    // Process and/or store the received data
+    //}
+
+    InternetCloseHandle(hRequest);
+    InternetCloseHandle(hInternet);
+
     ::MessageBoxA(NULL, "This is a joke.", "FUNNY", MB_OK);
 }
 

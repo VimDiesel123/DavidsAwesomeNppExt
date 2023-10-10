@@ -22,6 +22,7 @@
 // All difinitions of plugin interface
 //
 #include "PluginInterface.h"
+#include <string>
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
@@ -80,6 +81,7 @@ void showFunny();
 
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
+std::string buildCallTip(const std::string& word);
 
 void handleError();
 

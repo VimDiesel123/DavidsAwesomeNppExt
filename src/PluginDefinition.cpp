@@ -234,12 +234,22 @@ void onDwellStart(SCNotification* pNotify) {
 
    const auto result = ::SendMessage(handle, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
 
-   if (!result) {
+   if (!result || result > 256) {
        return;
    }
 
-    ::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)word);
+   const auto calltip = buildCallTip(std::string(word));
+    ::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)calltip.c_str());
 
+}
+
+std::string buildCallTip(const std::string& word) {
+    return
+        word +
+        "\nThis is a test \n"
+        "I am testing \n"
+        "Creating a larger calltip\n"
+        "THis is a really really long line of text so that I can see what it looks like in the calltip.";
 }
 
 void onDwellEnd(SCNotification* pNotify) {

@@ -19,7 +19,7 @@ typedef size_t Sci_PositionU;
 
 // Deprecated by Notepad++ 2GB+ support via new scintilla interfaces from 5.2.3 (see https://www.scintilla.org/ScintillaHistory.html) 
 // Please use Sci_Position, SCI_GETTEXTRANGEFULL, SCI_FINDTEXTFULL, and SCI_FORMATRANGEFULL and corresponding defines/structs
-// typedef long Sci_PositionCR;
+typedef long Sci_PositionCR;
 
 #ifdef _WIN32
 	#define SCI_METHOD __stdcall

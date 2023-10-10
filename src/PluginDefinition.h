@@ -57,6 +57,11 @@ void pluginCleanUp();
 void commandMenuInit();
 
 //
+//Initialization of calltip extionsion
+//
+void callTipInit();
+
+//
 //Clean up your plugin commands allocation (if any)
 //
 void commandMenuCleanUp();
@@ -73,6 +78,10 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 void fixSetupTreeItems();
 void showFunny();
 
+void onDwellStart(SCNotification* pNotify);
+void onDwellEnd(SCNotification* pNotify);
+
 void handleError();
+
 
 #endif //PLUGINDEFINITION_H

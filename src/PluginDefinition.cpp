@@ -40,6 +40,8 @@ NppData nppData;
 // It will be called while plugin loading   
 void pluginInit(HANDLE /*hModule*/)
 {
+    
+
 }
 
 //
@@ -67,6 +69,7 @@ void commandMenuInit()
     //            );
     setCommand(0, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
     setCommand(1, TEXT("GIVE FUNNY"), showFunny, NULL, 0);
+
 }
 
 //
@@ -75,6 +78,13 @@ void commandMenuInit()
 void commandMenuCleanUp()
 {
 	// Don't forget to deallocate your shortcut here
+}
+
+void callTipInit()
+{
+    // Set the dwell time (in milliseconds) and the styler for dwell events
+    ::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000, 0); // Set a 1-second dwell time
+
 }
 
 
@@ -209,6 +219,34 @@ void showFunny()
     InternetCloseHandle(hRequest);
     InternetCloseHandle(hInternet);
 
+}
+
+void onDwellStart(SCNotification* pNotify) {
+    const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
+    int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
+    int wordEnd = ::SendMessage(handle, SCI_WORDENDPOSITION, pNotify->position, true);
+
+    char word[256];
+    Sci_TextRange tr = {
+        { wordStart, wordEnd },
+        word
+    };
+
+   const auto result = ::SendMessage(handle, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
+
+   if (!result) {
+       return;
+   }
+
+    ::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)word);
+
+}
+
+void onDwellEnd(SCNotification* pNotify) {
+    const auto result = ::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
+    if (!result) {
+        //DO something
+    }
 }
 
 void handleError()

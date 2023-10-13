@@ -1,0 +1,2634 @@
+[
+    {
+        "Command": "01/25/17",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "8",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "56",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "115",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "170",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "234",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "292",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "'",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The ' allows for a user to insert in a comment on a blank line or after a command following a semicolon \";\". See examples for valid uses of '."
+    },
+    {
+        "Command": "-",
+        "Usage": {
+            "Example": "variable = (value1 - value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The subtraction operator takes any two values and returns a value equal to the difference of the arguments."
+    },
+    {
+        "Command": "#",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The # denotes the name of a program label, for example, \n#move\n. \nLabels are often used to implement subroutines or loops. \nLabels are either user-defined\nor are reserved names, called \"automatic subroutines\", that automatically execute when a particular event occurs."
+    },
+    {
+        "Command": "#AMPERR",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine used to run code when a fault occurs on a Galil amplifier. See the TA command and individual amplifier information in the controller\nuser manual."
+    },
+    {
+        "Command": "#AUTO",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Defines the automatic entry point of embedded DMC code. When power is applied to the controller, or after the controller is reset, the program will\nautomatically begin executing at this label. When no host software is used with the controller, #AUTO is required to run an application program on the\ncontroller stand-alone."
+    },
+    {
+        "Command": "#AUTOERR",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine that runs code upon power up if the firmware detects errors. If the EEPROM is corrupted, #AUTOERR will run. The EEPROM is\nconsidered corrupt if the checksum calculated on the bytes in the EEPROM do not match the checksum written to the EEPROM.\nFor SSI and BiSS operation, #AUTOERR will also run if the time to acquire serial position data exceeds 90% of the hardware sample loop. This type of error\nis very rare and should never occur in normal operation."
+    },
+    {
+        "Command": "#CMDERR",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine that runs code when a DMC code error occurs. Without #CMDERR defined, if an error (see TC command) occurs in an application\nprogram running on the Galil controller, the program (and all threads) will stop."
+    },
+    {
+        "Command": "#COMINT",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine to provide interrupt driven communications from the serial port. #COMINT can be configured by the CI command to run either\nwhen any character is received, or when a carriage return is received over the com port. The auxiliary port is used if equipped."
+    },
+    {
+        "Command": "#ININT",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine that runs upon a state transition of digital inputs. #ININT is configured with II. #ININT runs in thread 0."
+    },
+    {
+        "Command": "#LIMSWI",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic sub for running user-defined code on a limit switch event. A limit switch event requires the following conditions.\n1\n. \nMotion profiling in the direction of the given limit. I.E. RPm increasing for forward switch, RPm decreasing for reverse switch.\n2\n. \nLimit switch toggles active. See CN for inverting the active sense of the limit swithes.\nWithout #LIMSWI defined, the controller will issue ST on the axis when its limit switch is tripped during motion in the direction of the switch. With #LIMSWI\ndefined, code is executed in addition to the stop.\nIn lieu of a controlled stop, the motor can turn off and coast stop in the event of a limit switch event. See OE for this feature."
+    },
+    {
+        "Command": "#MCTIME",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic sub used to run user-code if a Motion Complete (MC) trippoint times out. If the motor position does not reach or pass the target within the\nspecified timeout (TW), #MCTIME wil run if present.\nMC uses position from TP for servos, or TD for steppers."
+    },
+    {
+        "Command": "#POSERR",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine that runs user code when a position error event occurs. The factory default behavior of the Galil controller upon a position error\n(_TEn > _ERn) is to drive the error signal low only, turning on the red error LED. If OE is set to 1, the motor whose position error (TE) equals or exceeds\nits threshold (ER) will be turned off (MO). #POSERR is used to run code upon a position error, for example to notify a host computer."
+    },
+    {
+        "Command": "#SERERR",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine that allows user code to run when there is a serial encoder fault.\nThis subroutine is only used with controllers equipped with hardware featuring the -BiSS encoder upgrade."
+    },
+    {
+        "Command": "#TCPERR",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Automatic subroutine which allows execution of user code when an TCP error event occurs. #TCPERR allows the application programmer to run code (for\nexample to reestablish the connection) when error code 123 occurs."
+    },
+    {
+        "Command": "$",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The $ operator denotes that the following string is in hexadecimal notation."
+    },
+    {
+        "Command": "%",
+        "Usage": {
+            "Example": "variable = (value1 % value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The % symbol is the modulo operator. It takes as arguments any two values, variables, array elements, operands, or At functions (@SIN[]) and returns a\nvalue equal to the modulo of the arguments.\nMathmatical operations are calculated left to right rather than multiplication and division calculations performed prior to addition and subraction.\nExample:\n1+2*3 = 9, not 7\nIt is recommended that parenthesis be used when more than one mathmatical operation is combined in one command.\nExample:\nvar = ((10*30)+(60/30));' \nevaluates as 302\nvar = 10*30+60/30;' \nevalutes as 12"
+    },
+    {
+        "Command": "&",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The & symbol is used to pass a variable by reference on the subroutine stack. When passed by reference, a change to the local-scope variable changes\nthe global value."
+    },
+    {
+        "Command": "&",
+        "Usage": {
+            "Example": "variable = (value1 & value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The & symbol is the bitwise AND operator used with IF, JP, and JS decisions, and also to perform bitwise ANDING of values."
+    },
+    {
+        "Command": "( , )",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The parentheses denote the order of math and logical operations."
+    },
+    {
+        "Command": "*",
+        "Usage": {
+            "Example": "variable = (value1 * value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The * symbol is the multiplication operator. It takes as arguments any two values, variables, array elements, operands, or At functions (@SIN[]) and\nreturns a value equal to the product of the arguments."
+    },
+    {
+        "Command": "/",
+        "Usage": {
+            "Example": "variable = (value1 / value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The / symbol is the division operator. It takes as arguments any two values, variables, array elements, operands, or At functions (@SIN[]) and returns a\nvalue equal to the quotient of the arguments."
+    },
+    {
+        "Command": ";",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The semicolon operator allows multiple Galil commands to exist on a single line."
+    },
+    {
+        "Command": "@ABS",
+        "Usage": {
+            "Example": "variable = @ABS[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @ABS[] operation takes the absolute value of the given number. Returns the value if positive, and returns -1 times the value if negative."
+    },
+    {
+        "Command": "@ACOS",
+        "Usage": {
+            "Example": "variable = @ACOS[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @ACOS operator returns in degrees the arc cosine of the given number."
+    },
+    {
+        "Command": "@AN",
+        "Usage": {
+            "Example": "variable = @AN[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @AN[] operator returns the value of the given analog input in volts."
+    },
+    {
+        "Command": "@ASIN",
+        "Usage": {
+            "Example": "variable = @ASIN[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @ASIN operator returns in degrees the arc sine of the given number."
+    },
+    {
+        "Command": "@ATAN",
+        "Usage": {
+            "Example": "variable = @ATAN[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @ATAN operator returns in degrees the arc tangent of the given number."
+    },
+    {
+        "Command": "@COM",
+        "Usage": {
+            "Example": "variable = @COM[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @COM[] operation performs the bitwise complement (NOT) operation to the given number."
+    },
+    {
+        "Command": "@COS",
+        "Usage": {
+            "Example": "variable = @COS[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @COS[] operation returns the cosine of the given angle in degrees"
+    },
+    {
+        "Command": "@FLOT",
+        "Usage": {
+            "Example": "variable = @FLOT[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @FLOT operation returns the 32bit floating representation of a number"
+    },
+    {
+        "Command": "@FRAC",
+        "Usage": {
+            "Example": "variable = @FRAC[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @FRAC operation returns the fractional part of the given number"
+    },
+    {
+        "Command": "@IN",
+        "Usage": {
+            "Example": "variable = @IN[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @IN operand returns the value of the given digital input (either 0 or 1)."
+    },
+    {
+        "Command": "@INT",
+        "Usage": {
+            "Example": "variable = @INT[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @INT operation returns the integer part of the given number. Note that the modulus operator can be implemented with @INT (see example below)."
+    },
+    {
+        "Command": "@OUT",
+        "Usage": {
+            "Example": "variable = @OUT[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "Returns the value of the given digital output (either 0 or 1)"
+    },
+    {
+        "Command": "@REAL",
+        "Usage": {
+            "Example": "variable = @REAL[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @REAL operation returns the Galil 4.2 equivalent of a 32 bit floating point number"
+    },
+    {
+        "Command": "@RND",
+        "Usage": {
+            "Example": "variable = @RND[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @RND operation rounds the given number to the nearest integer."
+    },
+    {
+        "Command": "@SIN",
+        "Usage": {
+            "Example": "variable = @SIN[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @SIN[] operation returns the sine of the given angle in degrees"
+    },
+    {
+        "Command": "@SQR",
+        "Usage": {
+            "Example": "variable = @SQR[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @SQR operation takes the square root of the given number."
+    },
+    {
+        "Command": "@TAN",
+        "Usage": {
+            "Example": "variable = @TAN[value]",
+            "Explanation": "Performs a function on a value or evaluated statement and returns a value"
+        },
+        "Description": "The @TAN[] operation returns the tangent of the given angle in degrees."
+    },
+    {
+        "Command": "[,]",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The square brackets are used to denote the array index for an array, or to denote an array name.\nThey are also used to designate the argument to a function, such as @ABS[n]."
+    },
+    {
+        "Command": "^",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The ^ character provides local subroutine access for variables passed on the subroutine stack. Passing values on the stack is advanced DMC\nprogramming, and is recommended for experienced DMC programmers familiar with the concept of passing arguments by value and by reference."
+    },
+    {
+        "Command": "^L^K",
+        "Usage": {
+            "Example": "^L^K n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "Locks user access to the application program. When locked, the ED, UL, LS, and TR commands will give privilege error #106. The application program will\nstill run when locked. Once the program is unlocked, it will remain accessible until a lock command or a reset (with the locked condition burned in) occurs."
+    },
+    {
+        "Command": "^R^S",
+        "Usage": {
+            "Example": "^R^S",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The Master Reset command resets the controller to factory default settings and erases EEPROM. A master reset can also be performed by installing a\njumper at the location labeled MRST and resetting the board (power cycle or pressing the reset button). Remove the jumper after this procedure."
+    },
+    {
+        "Command": "^R^V",
+        "Usage": {
+            "Example": "^R^V",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The Revision Information command causes the controller to return the firmware revision information."
+    },
+    {
+        "Command": "_GP",
+        "Usage": {
+            "Example": "variable= _GP",
+            "Explanation": "Holds a value"
+        },
+        "Description": "The _GP operand contains the value of the \"phase differential\" accumulated on the most current change in the gearing ratio between the master and the\nslave axes. The value does not update if the distance over which the slave will engage is set to 0 with the GD command."
+    },
+    {
+        "Command": "_LF",
+        "Usage": {
+            "Example": "variable= _LF",
+            "Explanation": "Holds a value"
+        },
+        "Description": "The _LF operand contains the state of the forward limit."
+    },
+    {
+        "Command": "_LR",
+        "Usage": {
+            "Example": "variable= _LR",
+            "Explanation": "Holds a value"
+        },
+        "Description": "The _LR operand contains the state of the reverse limit."
+    },
+    {
+        "Command": "|",
+        "Usage": {
+            "Example": "variable = (value1 | value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The | symbol is the bitwise OR operator used with IF, JP, and JS decisions, and also to perform bitwise ORING of values."
+    },
+    {
+        "Command": "~",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "Variable axis designator. Each variable can be assigned an indivudal axis, a vector plane, or a virtual axis. Motion commands on the variable will then apply\nto the assigned axis.\nCommands supporting variable axes are denoted in this command reference with the following icon.\nVariable axis supported icon"
+    },
+    {
+        "Command": "+",
+        "Usage": {
+            "Example": "variable = (value1 + value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "The + symbol is the addition operator. It takes as arguments any two values, variables, array elements, operands, or At functions (@SIN[]) and returns a\nvalue equal to the sum of the arguments."
+    },
+    {
+        "Command": "<",
+        "Usage": {
+            "Example": "variable = (value1 < value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "\"Less than\" comparator for testing if one value is less than another. Comparators are used in mathematical expressions, IFs, and in conditional jumps. The\nresult is a boolean.\nComparators in DMC Code\nSymbol\nComparator\n<\nLess than\n>\nGreater than\n=\nEqual to\n<=\nLess than or equal to\n>=\nGreater than or equal to\n<>\nNot equal to"
+    },
+    {
+        "Command": "\u00a92017 Galil Motion Control. Corrections, Feedback: ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "<=",
+        "Usage": {
+            "Example": "variable = (value1 <= value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "\"Less than or Equal to\" comparator for testing if one value is less than or equal to another. Comparators are used in mathematical expressions, IFs, and in\nconditional jumps. The result is a boolean.\nComparators in DMC Code\nSymbol\nComparator\n<\nLess than\n>\nGreater than\n=\nEqual to\n<=\nLess than or equal to\n>=\nGreater than or equal to\n<>\nNot equal to"
+    },
+    {
+        "Command": "<=",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "<>",
+        "Usage": {
+            "Example": "variable = (value1 <> value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "\"Not Equal to\" comparator for testing if one value is not equal to another. Comparators are used in mathematical expressions, IFs, and in conditional\njumps. The result is a boolean.\nComparators in DMC Code\nSymbol\nComparator\n<\nLess than\n>\nGreater than\n=\nEqual to\n<=\nLess than or equal to\n>=\nGreater than or equal to\n<>\nNot equal to"
+    },
+    {
+        "Command": "=",
+        "Usage": {
+            "Example": "variable = (value1 = value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "\"Equal to\" comparator for testing if one value is equal to another. Comparators are used in mathematical expressions, IFs, and in conditional jumps. The\nresult is a boolean.\nComparators in DMC Code\nSymbol\nComparator\n<\nLess than\n>\nGreater than\n=\nEqual to\n<=\nLess than or equal to\n>=\nGreater than or equal to\n<>\nNot equal to"
+    },
+    {
+        "Command": "=",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The = operator is the assignment operator for the controller. The assignment operator is used for three reasons:\n(1) \nto define and initialize a variable (x = 0) before it is used\n(2) \nto assign a new value to a variable (x = 5)\n(3) \nto print a variable or array element (x= which is equivalent to MG x). MG is the preferred method of printing."
+    },
+    {
+        "Command": ">",
+        "Usage": {
+            "Example": "variable = (value1 > value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "\"Greater than\" comparator for testing if one value is greater than another. Comparators are used in mathematical expressions, IFs, and in conditional\njumps. The result is a boolean.\nComparators in DMC Code\nSymbol\nComparator\n<\nLess than\n>\nGreater than\n=\nEqual to\n<=\nLess than or equal to\n>=\nGreater than or equal to\n<>\nNot equal to"
+    },
+    {
+        "Command": "\u00a92017 Galil Motion Control. Corrections, Feedback: ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": ">=",
+        "Usage": {
+            "Example": "variable = (value1 >= value2)",
+            "Explanation": "Performs an operation between two values or evaluated statements"
+        },
+        "Description": "\"Greater than or Equal to\" comparator for testing if one value is greater than or equal to another. Comparators are used in mathematical expressions, IFs,\nand in conditional jumps. The result is a boolean.\nComparators in DMC Code\nSymbol\nComparator\n<\nLess than\n>\nGreater than\n=\nEqual to\n<=\nLess than or equal to\n>=\nGreater than or equal to\n<>\nNot equal to"
+    },
+    {
+        "Command": ">=",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "AB",
+        "Usage": {
+            "Example": "AB n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The AB command is a command to issue an abort to controller operation.\nAB (Abort) stops motion instantly without a controlled deceleration. If there is a program operating, AB can also be specified to abort the program and all\nrunning threads. The command, AB, will shut off the motors for any axis in which the off on error function is enabled (see command \"OE\")."
+    },
+    {
+        "Command": "AC",
+        "Usage": {
+            "Example": "ACm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The Acceleration command (AC) sets the linear acceleration rate of the motors for independent moves, such as PR, PA, and JG moves. The parameters\nwill be rounded down to the nearest factor of 1024 and have units of counts per second squared."
+    },
+    {
+        "Command": "AD",
+        "Usage": {
+            "Example": "ADm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "Trippoint to block command execution until a given distance is traversed. This is a profiled trippoint which means it depends on the motion profiler and not\nthe actual motor encoder. AD can only be used when there is commanded motion on the axis."
+    },
+    {
+        "Command": "AF",
+        "Usage": {
+            "Example": "AFm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The AF command configures analog feedback mode for the PID filter.\nThe controller ADC can be used as position feedback for the axis control law. The analog input used for feedback is fixed and uses the input that\ncorresponds with the axis letter. For example, Analog input 1 is used for the A axis.\nSinusoidal feedback encoders are also configured by the AF command."
+    },
+    {
+        "Command": "AG",
+        "Usage": {
+            "Example": "AGm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The AG command sets the amplifier current/voltage gain for the internal amplifier. \nNote: some Galil internal amplifiers have fixed gains. \nPlease reference the\nmanual or data-sheet for more details."
+    },
+    {
+        "Command": "AI",
+        "Usage": {
+            "Example": "AI n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The AI command is a trippoint used in motion programs to wait until after a specified input has changed state. This command can be configured such that\nthe controller will wait until the input goes high or the input goes low."
+    },
+    {
+        "Command": "AL",
+        "Usage": {
+            "Example": "AL mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The AL command enables the latch function (high speed main or auxiliary position capture) of the controller. When the position latch is armed, the main\nor auxiliary encoder position will be captured upon a low going signal from the specified digital input."
+    },
+    {
+        "Command": "JG",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "AM",
+        "Usage": {
+            "Example": "AM mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The AM command is a trippoint used to control the timing of events. This command will hold up execution of the following commands until the current\nmove on the specified axis or axes is completed. Any combination of axes or a motion sequence may be specified with the AM command.\nFor example, AM AB waits for motion on both the A and B axis to be complete. AM with no parameter specifies that motion on all axes to be complete."
+    },
+    {
+        "Command": "AO",
+        "Usage": {
+            "Example": "AO n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The AO command sets the analog outputs on the Galil or for a Modbus Slave."
+    },
+    {
+        "Command": "AP",
+        "Usage": {
+            "Example": "APm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The AP command will hold up the execution of the following command until the actual motor position crosses the specified position. This trippoint does not\nrely on the profiler, but on actual encoder position."
+    },
+    {
+        "Command": "AQ",
+        "Usage": {
+            "Example": "AQ n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The AQ command is used to set the behavior of the analog inputs. This command will set the analog range and operation for the specified input."
+    },
+    {
+        "Command": "AR",
+        "Usage": {
+            "Example": "ARm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The After Relative (AR) command is a trippoint used to control the timing of events. This command will hold up the execution of the following command\nuntil one of the following conditions have been met: \n1. \nThe commanded motor position crosses the specified relative distance from either the start of the move or the last AR or AD command. \n2. \nThe motion profiling on the axis is complete.\n3. \nIf in jog (JG) mode, the commanded motion is in the direction which moves away from the specified position."
+    },
+    {
+        "Command": "AS",
+        "Usage": {
+            "Example": "AS mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The AS command is a trippoint that occurs when the generated motion profile has reached the specified speed. This command will hold up execution of\nthe following command until the commanded speed has been reached. The AS command will operate after either accelerating or decelerating."
+    },
+    {
+        "Command": "AT",
+        "Usage": {
+            "Example": "AT n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The AT command is a trippoint which is used to hold up execution of the next command until after the specified time has elapsed. The time is measured\nwith respect to a defined reference time. AT 0 establishes the initial reference. AT n specifies n msec from the reference. AT -n specifies n msec from the\nreference and establishes a new reference after the elapsed time period.\nAT n,1 specifies n samples from the reference. This is useful when TM is lowered and faster application loop times are required."
+    },
+    {
+        "Command": "AU",
+        "Usage": {
+            "Example": "AUm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The AU command sets the amplifier current loop gain for internal amplifiers.\nFor Galil Trap amplifiers, the current loop is available in one of two settings. AU also sets the switching mode where available, Chopper vs. Inverter.\nFor Galil Sine amplifiers, the optimal current loop gain setting is determined by the bus voltage supplied to the amplifier and the phase to phase inductance\nof the motor. The table in the Arguments section provides ideal AU settings for common bus voltages and phase to phase inductance."
+    },
+    {
+        "Command": "AU ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "AV",
+        "Usage": {
+            "Example": "AV n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The AV command is used to hold up execution of the next command during coordinated moves such as VP,CR or LI. This trippoint occurs when the path\ndistance of a sequence reaches the specified value. The distance is measured from the start of a coordinated move sequence or from the last AV\ncommand."
+    },
+    {
+        "Command": "BA",
+        "Usage": {
+            "Example": "BA mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "BA is used to configure the controller for sinusoidal operation.\nGalil Sine Drive Use\nFor axes equipped with a Galil sine drive, BA is used to configure the axis for sinusoidal operation. In addition to BA, BM and BX or BZ must be used to\ninitialize the drive commutation. When using a Galil sine drive, one axis of control is required for one axis of drive. This is in contrast to the paired behavior\nbelow.\nThird-Party Sine Drives Requiring Dual Analog Inputs (Rare)\nIn rare cases, some third-party sinusoidal drives require two analog signals to perform commutation. In this case, the BA command configures the\ncontroller axes for sinusoidal commutation and reconfigures the controller to reflect the actual number of motors that can be controlled. In this\nconfiguration, each axis requires 2 motor command signals. The second motor command signals will always be associated with the highest axis on the\ncontroller. For example a 3 axis controller with A and C configured for sinusoidal commutation will require 5 command outputs (a 5 axis controller), where\nthe second outputs for A and C will be the D and E axes respectively."
+    },
+    {
+        "Command": "BB",
+        "Usage": {
+            "Example": "BBm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BB function describes the position offset between the Hall transition point and theta = 0, for a sinusoidally commutated motor. This is used when\ndoing hall initialization of a sine commutated drive."
+    },
+    {
+        "Command": "BC",
+        "Usage": {
+            "Example": "BC mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The BC command is used to initialize a motor for sine commutation using hall sensors.\nThe function BC monitors the status of the Hall sensors of a sinusoidally commutated motor, and resets the commutation phase upon detecting the first\nhall sensor. This procedure replaces the estimated commutation phase value with a more precise value determined by the hall sensors."
+    },
+    {
+        "Command": "BD",
+        "Usage": {
+            "Example": "BDm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BD command sets the commutation phase of a sinusoidally commutated motor manually. When using hall effect sensors, a more accurate value for\nthis parameter can be set by using the command, BC. This command should not be used except when the user is creating a specialized phase initialization\nprocedure."
+    },
+    {
+        "Command": "BG",
+        "Usage": {
+            "Example": "BG mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The BG command starts a motion on the specified axis or sequence."
+    },
+    {
+        "Command": "BI",
+        "Usage": {
+            "Example": "BIm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BI command is used to define the inputs which are used when Hall sensors have been wired for sinusoidally commutated motors. See the BC\ncommand for more information about initialization of sine amplifiers via hall inputs"
+    },
+    {
+        "Command": "BK",
+        "Usage": {
+            "Example": "BK n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The BK command causes the controller to pause execution of the given thread at the given program line number. When that line is reached, program\nexecution halts before the line is executed, while all other threads continue running. After a breakpoint is encountered, a new breakpoint can be armed (to\ncontinue execution to the new breakpoint) or BK will resume program execution. The SL command can be used to single step from the breakpoint."
+    },
+    {
+        "Command": "BL",
+        "Usage": {
+            "Example": "BLm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BL command sets the reverse software limit. If this limit is exceeded during motion, motion on that axis will decelerate to a stop. Reverse motion\nbeyond this limit is not permitted."
+    },
+    {
+        "Command": "BM",
+        "Usage": {
+            "Example": "BMm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BM command defines the length of the magnetic cycle in encoder counts."
+    },
+    {
+        "Command": "BN",
+        "Usage": {
+            "Example": "BN",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The BN command saves certain board parameters in non-volatile EEPROM memory. Once written to the memory, all parameters which can be burned will\npersist through a software reset (RS command), hardware reset (reset button) or power cycle. This command typically takes 1 second to execute and\nmust not be interrupted. The controller returns a colon (:) when the Burn is complete. All parameters which have been burned into memory can be\nrestored to their factory defaults through a master reset.\nThis command reference will denote comands that can and cannot be burned with BN with the following usage icons.\nBurnable with BN icon\nNot burnable with BN icon"
+    },
+    {
+        "Command": "BO",
+        "Usage": {
+            "Example": "BOm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BO command sets a fixed offset on the command signal for sinusoidally commutated motors. This may be used to offset any bias in the amplifier, or\ncan be used for phase initialization."
+    },
+    {
+        "Command": "BP",
+        "Usage": {
+            "Example": "BP",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The BP command saves the application program in non-volatile EEPROM memory. This command may take several seconds to execute and must not be\ninterrupted. The controller returns a : when the Burn is complete."
+    },
+    {
+        "Command": "BQ",
+        "Usage": {
+            "Example": "BQm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BQ command sets a fixed offset on the command signal for sinusoidally commutated motors when using an internal Galil sine drive. This may be used\nto offset any bias in the amplifier, or can be used for phase initialization."
+    },
+    {
+        "Command": "BR",
+        "Usage": {
+            "Example": "BRm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BR command configures the motor configuration and type for an axis.\nThe BR command is used with internal Galil amplifiers to enable which axes will be set as brush-type servos or to configure the firmware to use external\ndrives instead of the internal channel."
+    },
+    {
+        "Command": "BT",
+        "Usage": {
+            "Example": "BT mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The BT command begins PVT motion on the specified axes. All axes specified will begin at the same time. For more details on PVT mode see the user\nmanual."
+    },
+    {
+        "Command": "BV",
+        "Usage": {
+            "Example": "BV",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The BV command saves the controller variables and arrays in non-volatile EEPROM memory. This command typically takes up to 2 seconds to execute\nand must not be interrupted. The controller returns a : when the Burn is complete."
+    },
+    {
+        "Command": "BW",
+        "Usage": {
+            "Example": "BWm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BW command sets the delay between when the brake is turned on and when the amp is turned off. When the controller goes into a motor-off (MO)\nstate, this is the time (in samples) between when the brake digital output changes state and when the amp enable digital output changes state. The brake\nis actuated immediately upon MO and the delay is to account for the time it takes for the brake to engage mechanically once it is energized electrically. The\nbrake is released immediately upon SH.\nBrake Wait Timing\nBrake Wait Timing Diagram"
+    },
+    {
+        "Command": "BX",
+        "Usage": {
+            "Example": "BXm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BX command uses a method to initialize an axis with limited movement of the hardware. The BX uses a limited motion algorithm to determine the\nproper location of the motor within the magnetic cycle. It is expected to move no greater than 10 degrees of the magnetic cycle. The last stage of the BX\ncommand will lock the motor into the nearest 15 degree increment."
+    },
+    {
+        "Command": "~a",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "BZ",
+        "Usage": {
+            "Example": "BZm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The BZ command is used to initialize axes which use sinusoidal commutation. To do this, the command drives the motor to two different magnetic\npositions and sets the magnetic position."
+    },
+    {
+        "Command": ". ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "CA",
+        "Usage": {
+            "Example": "CA mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The CA command specifies the coordinate system to apply proceeding vector commands. The following commands apply to the active coordinate\nsystem as set by the CA command:\nCR\nES\nLE\nLI\nLM\nTN\nVE\nVM\nVP"
+    },
+    {
+        "Command": "CB",
+        "Usage": {
+            "Example": "CB n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The CB command clears a particular digital output. The SB and CB (Clear Bit) instructions can be used to control the state of output lines."
+    },
+    {
+        "Command": "CC",
+        "Usage": {
+            "Example": "CC n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The CC command configures baud rate, handshake, mode, and echo for the AUX SERIAL PORT, referred to as Port 2. This command must be given\nbefore using the MG, or CI commands with Port 2."
+    },
+    {
+        "Command": "CD",
+        "Usage": {
+            "Example": "CDm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The CD command specifies the incremental position on contour axes. This command is used only in the Contour Mode (CM). The incremental position will\nbe executed over the time period specified by the command DT (ranging from 2 to 256 servo updates)"
+    },
+    {
+        "Command": "CE",
+        "Usage": {
+            "Example": "CEm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The CE command configures the encoder to quadrature type or pulse and direction type. It also allows inverting the polarity of the encoders which\nreverses the direction of the feedback. The configuration applies independently to the main axes encoders and the auxiliary encoders."
+    },
+    {
+        "Command": "CF",
+        "Usage": {
+            "Example": "CF mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The CF command sets the port for unsolicited messages. The CF command directs the controller to send unsolicited responses to the Main or Aux Serial\nPort (If equipped), or to an Ethernet handle. An unsolicited message is data generated by the controller which is not in response to a command sent by\nthe host."
+    },
+    {
+        "Command": "CI",
+        "Usage": {
+            "Example": "CI n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The CI command configures program interrupts based on input of characters over the communication port.\nThe command configures a program interrupt based on characters received on communications port 2, the AUX serial port. An interrupt causes program\nflow to jump to the #COMINT subroutine. If multiple program threads are used, the #COMINT subroutine runs in thread 0 and the remaining threads\ncontinue to run without interruption. The characters received can be accessed via the operands P2CH, P2ST, P2NM, P2CD."
+    },
+    {
+        "Command": "CM",
+        "Usage": {
+            "Example": "CM mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "Contour Mode is initiated by the instruction CM. This mode allows the generation of an arbitrary motion trajectory with any of the axes. The CD command\nspecifies the position interval between subsequent contour segments. The DT command specifies the time interval between subsequent contour\nsegments."
+    },
+    {
+        "Command": "CN",
+        "Usage": {
+            "Example": "CN n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The CN command configures the polarity of the limit switches, home switches, latch inputs, the selective abort function, and the program termination\nbehavior of the abort input."
+    },
+    {
+        "Command": "CO",
+        "Usage": {
+            "Example": "CO n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The CO command configures which banks are inputs and which are outputs on the extended I/O. The extended I/O points of the controller can be\nconfigured in banks of 8.\nThe extended I/O is denoted as bits 17-48 and banks 2-5."
+    },
+    {
+        "Command": "CP",
+        "Usage": {
+            "Example": "CPm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The CP command sets the deadband within which the motor is shut off. After a move is complete (_BGn = 0) and the absolute value of the position error\nTE becomes less than the dead band CP, the motor is turned off. SH must be issued before further motion can be commanded. CT can be used to\nincrement the integrator limit to ensure that the motor reaches the dead band."
+    },
+    {
+        "Command": "CR",
+        "Usage": {
+            "Example": "CR n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "When using the vector mode (VM), the CR command specifies a 2-dimensional arc segment. The VE command must be used to denote the end of the\nmotion sequence after all CR and VP segments are specified. The BG (Begin Sequence) command is used to start the motion sequence. Parameters for\nradius, starting angle and traverse angle must all be entered for each CR command."
+    },
+    {
+        "Command": "VM ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "CS",
+        "Usage": {
+            "Example": "CS mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The CS command will remove VP, CR or LI commands stored in a motion sequence for a coordinated axis. After a sequence has been executed, the CS\ncommand is not necessary to put in a new sequence. This command is useful when you have incorrectly specified VP, CR or LI commands."
+    },
+    {
+        "Command": "CW",
+        "Usage": {
+            "Example": "CW n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The CW command will return the copyright information when the argument, n, is 0 or is omitted. Otherwise, the CW command is used as a\ncommunications enhancement for use by the Galil terminal software programs. When turned on, the most significant bit of unsolicited ASCII characters is\nset to 1. Unsolicited ASCII characters are characters that are returned from a program running on the controller (usually from the MG command). This\ncommand does not affect solicited characters, which are characters that are returned as a response to a command sent from a host PC (e.g. TP)."
+    },
+    {
+        "Command": "DA",
+        "Usage": {
+            "Example": "DA n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The DA command frees the array and/or variable memory space. In this command, more than one array or variable can be specified for memory de-\nallocation. Different arrays and variables are separated by comma when specified in one command."
+    },
+    {
+        "Command": "DB",
+        "Usage": {
+            "Example": "DBm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "When the absolute value of the error TE is greater than DB, the torque output TT will be set back to normal (reflecting KP, KD, KI, ZP, and ZN). This is\nused to avoid oscillation when holding position."
+    },
+    {
+        "Command": "DC",
+        "Usage": {
+            "Example": "DCm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The Deceleration command (DC) sets the linear deceleration rate of the motors for independent moves such as PR, PA, and JG moves. The parameters\nwill be rounded down to the nearest factor of 1024 and have units of counts per second squared."
+    },
+    {
+        "Command": "DE",
+        "Usage": {
+            "Example": "DEm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The DE command defines the position of the auxiliary (dual) encoders.\nDual encoders are useful when you need an encoder on the motor and on the load. The encoder on the load is typically the auxiliary encoder and is used\nto verify the true load position. Any error in load position is used to correct the motor position."
+    },
+    {
+        "Command": "DF",
+        "Usage": {
+            "Example": "DFm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The DF command allows configuration of BiSS or SSI feedback in Dual Loop mode as the load encoder. For users wishing to operate with SSI or BiSS in\nDual Loop mode (DV), the DF command can be used to configure a load-side serial encoder and a motor-side incremental encoder with DV1."
+    },
+    {
+        "Command": "DH",
+        "Usage": {
+            "Example": "DH n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The DH command configures the DHCP or BOOT-P functionality on the controller for Server IP addressing."
+    },
+    {
+        "Command": "DL",
+        "Usage": {
+            "Example": "DL n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The DL command transfers a data file from the host computer to the controller. Instructions in the file will be accepted as a data stream without line\nnumbers. The file is terminated using <control> Z, <control> Q, <control> D, or \\."
+    },
+    {
+        "Command": "DM",
+        "Usage": {
+            "Example": "DM n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The DM command defines a single-dimensional array with a name and n total elements. The first element of the defined array starts with element number\n0 and the last element is at n-1."
+    },
+    {
+        "Command": "DP",
+        "Usage": {
+            "Example": "DPm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The DP command sets the current motor position and current command positions to a user specified value. The units are in quadrature counts. This\ncommand will set both the TP and RP values."
+    },
+    {
+        "Command": "DR",
+        "Usage": {
+            "Example": "DR n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "DR specifies and enables the rate for the controller to output its data record.\nFor ethernet-based controllers, the controller creates a QR record and sends it to the unsolicited UDP Ethernet Handle at the specified rate. See the User\nManual for the data record map."
+    },
+    {
+        "Command": "DS",
+        "Usage": {
+            "Example": "DSm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "When the absolute value of the error TE is less than DS, the torque output TT will be set to the offset OF (the contributions of KP, KD, KI, ZP, and ZN are\nset to zero). This is used to avoid oscillation when holding position."
+    },
+    {
+        "Command": "DT",
+        "Usage": {
+            "Example": "DT n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The DT command sets the time interval for Contour Mode. The time interval is 2\nN\n samples. With TM 1000, there are 1024 samples per second.\nSending the DT command once will set the time interval for all contour data until a new DT command (or CDm=n) is sent."
+    },
+    {
+        "Command": "\u00a92017 Galil Motion Control. Corrections, Feedback: ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "DV",
+        "Usage": {
+            "Example": "DVm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The DV function changes the operation of the PID filter to work off of dual encoders. DV enabled causes the KD (derivative) term to operate on the dual\nencoder instead of the main encoder. This results in improved stability in the cases where there is a backlash between the motor and the main encoder,\nand where the dual encoder is mounted on the motor."
+    },
+    {
+        "Command": "EA",
+        "Usage": {
+            "Example": "EA mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The EA command selects the master axis for the electronic cam mode. Any axis may be chosen."
+    },
+    {
+        "Command": "EB",
+        "Usage": {
+            "Example": "EB n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EB function enables or disables the cam mode. In this mode, the starting position of the master axis is specified within the cycle."
+    },
+    {
+        "Command": "EC",
+        "Usage": {
+            "Example": "EC n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EC function sets the index into the ECAM table. This command is only useful when entering ECAM table values without index values and is most useful\nwhen sending commands in binary. See the command, ET."
+    },
+    {
+        "Command": "ED",
+        "Usage": {
+            "Example": "ED n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ED command puts the controller into the Edit subsystem. The ED command is used when using Telnet style interface (not Galil Software). In the Edit\nsubsystem, programs can be created, changed, or destroyed."
+    },
+    {
+        "Command": "' This message is from thread 2 ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "EG",
+        "Usage": {
+            "Example": "EGm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The EG command engages an ECAM slave axis at a specified position of the master. Once a slave motor is engaged, its position is redefined to fit within the\ncycle."
+    },
+    {
+        "Command": "EI",
+        "Usage": {
+            "Example": "EI n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EI command is used to enable interrupts on events. EI enables interrupts for the predefined event conditions in the table below. When a condition\n(e.g. Axis A profiled motion complete) occurs after EI is armed, a particular status byte value (e.g. $D0 or 208) is delivered to the host PC along with the\ninterrupt.\nInterrupts are issued as automatically dispatched UDP packets. GalilTools version 1.2.1.0 or newer required for software support."
+    },
+    {
+        "Command": "$80 (128)",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "ELSE",
+        "Usage": {
+            "Example": "ELSE n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ELSE command is an optional part of an IF conditional statement. The ELSE command must occur after an IF command and it has no arguments. It\nallows for the execution of a command only when the argument of the IF command evaluates False. If the argument of the IF command evaluates false,\nthe controller will skip commands until the ELSE command. If the argument for the IF command evaluates true, the controller will execute the commands\nbetween the IF and ELSE command."
+    },
+    {
+        "Command": "EM",
+        "Usage": {
+            "Example": "EMm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The EM command defines the change in position over one complete cycle of the master.\nThe field for the master axis is the cycle of the master position. For the slaves, the field defines the net change in one cycle."
+    },
+    {
+        "Command": "EN",
+        "Usage": {
+            "Example": "EN n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EN command is used to designate the end of a program or subroutine. If a subroutine was called by the JS command, the EN command ends the\nsubroutine and returns program flow to the point just after the JS command.\nA return parameter can be specified to EN from a subroutine to return a value from the subroutine to the calling stack."
+    },
+    {
+        "Command": "ENDIF",
+        "Usage": {
+            "Example": "ENDIF n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ENDIF command is used to designate the end of an IF conditional statement. An IF conditional statement is formed by the combination of an IF and\nENDIF command. An ENDIF command must always be executed for every IF command that has been executed. It is recommended that the user not\ninclude jump commands inside IF conditional statements since this causes re-direction of command execution. In this case, the command interpreter may\nnot execute an ENDIF command."
+    },
+    {
+        "Command": "EO",
+        "Usage": {
+            "Example": "EO n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EO command turns the echo on or off. If the echo is off, characters input over the bus will not be echoed back."
+    },
+    {
+        "Command": "EP",
+        "Usage": {
+            "Example": "EP n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EP command defines the ECAM table intervals and offset. The offset is the master position of the first ECAM table entry. The interval is the difference\nof the master position between 2 consecutive table entries. This command effectively defines the size of the ECAM table. Up to 257 points may be\nspecified."
+    },
+    {
+        "Command": "EQ",
+        "Usage": {
+            "Example": "EQm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The EQ command disengages an electronic cam slave axis at the specified master position. Separate points can be specified for each axis. If a value is\nspecified outside of the master's range, the slave will disengage immediately."
+    },
+    {
+        "Command": "ER",
+        "Usage": {
+            "Example": "ERm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The ER command sets the magnitude of the position errors for each axis that will trigger an error condition. When the limit is exceeded, the Error output\nwill go low (true) and the controller's red light will be turned on. If the Off On Error (OE1) command is active, the motors will be disabled."
+    },
+    {
+        "Command": "ES",
+        "Usage": {
+            "Example": "ES n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ES command divides the resolution of one of the axes in a vector mode (VM). This function allows for the generation of circular motion when encoder\nresolutions differ. It also allows for the generation of an ellipse instead of a circle. The resolution change applies for the purpose of generating the VP and\nCR commands, effectively changing the axis with the higher resolution to match the coarser resolution."
+    },
+    {
+        "Command": "ET",
+        "Usage": {
+            "Example": "ET n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ET command sets the ECAM table entries for the slave axes.. The values of the master axes are not required. The slave entry (n) is the position of the\nslave axes when the master is at the point (m i) + o, where i is the interval and o is the offset as determined by the EP command."
+    },
+    {
+        "Command": "EW",
+        "Usage": {
+            "Example": "EW n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EW command allows widening the length of one or two ECAM segments beyond the width specified by EP. For ECAM tables with one or two long\nlinear sections, this allows placing more points in the curved sections of the table. There are only two widened segments, and if used they are common for\nall ECAM axes."
+    },
+    {
+        "Command": "EY",
+        "Usage": {
+            "Example": "EY n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The EY command sets or gets the ECAM cycle count. This is the number of times that the ECAM axes have exceeded their modulus as defined by the EM\ncommand. EY will increment by one each time the master exceeds its modulus in the positive direction, and EY will decrement by one each time the\nmaster exceeds its modulus in the negative direction."
+    },
+    {
+        "Command": "FA",
+        "Usage": {
+            "Example": "FAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The FA command sets the acceleration feedforward coefficient. This coefficient is scaled by the set acceleration and adds a torque bias voltage during the\nacceleration phase and subtracts the bias during the deceleration phase of a motion."
+    },
+    {
+        "Command": "FC",
+        "Usage": {
+            "Example": "FCm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "Adds a bias to the torque output TT proportional to the commanded velocity if the distance from the end of the move is less than FN. FC is the same as\nFV but activated FN counts from the end of the move and both positive and negative values are allowed."
+    },
+    {
+        "Command": "FE",
+        "Usage": {
+            "Example": "FE mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The FE command moves a motor until a transition is seen on the homing input for that axis. The direction of motion depends on the initial state of the\nhoming input (use the CN command to configure the polarity of the home input). Once the transition is detected, the motor decelerates to a stop.\nThis command is useful for creating your own homing sequences."
+    },
+    {
+        "Command": "FI",
+        "Usage": {
+            "Example": "FI mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The FI and BG commands move the motor until an encoder index pulse is detected."
+    },
+    {
+        "Command": "FL",
+        "Usage": {
+            "Example": "FLm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The FL command sets the forward software position limit. If this limit is exceeded during motion, motion on that axis will decelerate to a stop. Forward\nmotion beyond this limit is not permitted."
+    },
+    {
+        "Command": "FN",
+        "Usage": {
+            "Example": "FNm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "Adds a bias to the torque output TT proportional to the commanded velocity if the distance from the end of the move is less than FN. FC is the same as\nFV but activated FN counts from the end of the move and both positive and negative values are allowed."
+    },
+    {
+        "Command": "FV",
+        "Usage": {
+            "Example": "FVm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The FV command sets the velocity feedforward coefficient. This coefficient generates an output bias signal in proportions to the sample to sample change\nin reference position (RP)."
+    },
+    {
+        "Command": "GA",
+        "Usage": {
+            "Example": "GAm0= m",
+            "Explanation": "Arguments are single axis masks and are specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The GA command specifies the master axes for electronic gearing. Multiple masters for gearing may be specified. A slave axis may have only one master.\nThe masters may be the main encoder input, auxiliary encoder input, or the commanded position of any axis. The master may also be the commanded\nvector move in a coordinated motion of LM or VM type. When the master is a simple axis, it may move in any direction and the slave follows. When the\nmaster is a commanded vector move, the vector move is considered positive and the slave will move forward if the gear ratio is positive, and backward if\nthe gear ratio is negative. The slave axes and ratios are specified with the GR command and gearing is turned off by the command GR0."
+    },
+    {
+        "Command": "GD",
+        "Usage": {
+            "Example": "GD n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The GD command sets the distance of the master axis over which the specified slave will be engaged, disengaged or changed to a new gear setting."
+    },
+    {
+        "Command": "GM",
+        "Usage": {
+            "Example": "GMm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The GM command specifies the axes in which the gearing function is performed in the Gantry mode. In this mode, the geared slaves will not be stopped\nby the ST command or by limit switches."
+    },
+    {
+        "Command": "GR",
+        "Usage": {
+            "Example": "GRm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "GR specifies the Gear Ratios for the geared axes in the electronic gearing mode. The master axis is defined by the GA command."
+    },
+    {
+        "Command": "HM",
+        "Usage": {
+            "Example": "HM mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The HM command performs a three stage homing sequence for servo systems and a two stage sequence for stepper motors."
+    },
+    {
+        "Command": "HS",
+        "Usage": {
+            "Example": "HSm0= m",
+            "Explanation": "Arguments are single axis masks and are specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The HS command is used to switch the ethernet handle assignments between two handles. Handles are opened when a connection is established by an\nexternal client (TCP or UDP), or when a handle is assigned explicitly with the IH command. Should those assignments need modifications, the HS\ncommand allows the handles to be reassigned."
+    },
+    {
+        "Command": "HV",
+        "Usage": {
+            "Example": "HVm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "Sets the slew speed for the FI final move to the index and all but the first stage of HM."
+    },
+    {
+        "Command": "HX",
+        "Usage": {
+            "Example": "HX n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The HX command halts the execution of any program that is running.The parameter n specifies the thread to be halted."
+    },
+    {
+        "Command": "IA",
+        "Usage": {
+            "Example": "IA n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The IA command assigns the controller IP address and the TCP time out. The IP address can also be assigned via Galil software or from an external server.\nThe controller defaults to DHCP and will receive an IP address from a DHCP server if present. To manually set an IP address over the serial connection,\nsend DH0 to disable DHCP prior to setting the new IP address with IA.\nGalilTools and GalilSuite software packages feature a DHCP/BOOTP capability to assign the IP address to the controller. Please refer to the user manuals for\nthose products for more information."
+    },
+    {
+        "Command": "ID",
+        "Usage": {
+            "Example": "ID",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The ID command is used to query the controller for the hardware configuration and factory programming."
+    },
+    {
+        "Command": "ID",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "IF",
+        "Usage": {
+            "Example": "IF n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The IF command is used in conjunction with an ENDIF command to form an IF conditional statement. The arguments consist of one or more conditional\nstatements and each condition must be enclosed with parenthesis (). If the conditional statement(s) evaluates true, the command interpreter will continue\nexecuting commands which follow the IF command. If the conditional statement evaluates false, the controller will ignore commands until the associated\nENDIF command or an ELSE command occurs in the program."
+    },
+    {
+        "Command": "documentation@galilmc.com",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "IH",
+        "Usage": {
+            "Example": "IHm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The IH command is used when the controller is operated as a master (client) to open a handle and connect to a slave (server)."
+    },
+    {
+        "Command": "Attempting to establish UDP handle",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "II",
+        "Usage": {
+            "Example": "II n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The II command enables the input interrupt function for the specified inputs.\nIf any of the specified inputs are activated during program execution, the program will jump to the subroutine with label #ININT. Any trippoints set by the\nprogram will be cleared but can be re-enabled by the proper termination of the interrupt subroutine using RI."
+    },
+    {
+        "Command": "IK",
+        "Usage": {
+            "Example": "IK n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The IK command blocks client connections to the controller on most ports below port number 1000. Specific port numbers and ports above 1000 are\nunaffected."
+    },
+    {
+        "Command": "IL",
+        "Usage": {
+            "Example": "ILm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The IL command limits the effect of the integrator gain in the filter to a certain voltage."
+    },
+    {
+        "Command": "IN",
+        "Usage": {
+            "Example": "IN n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The IN command allows a variable to be input from a keyboard. When the IN command is executed in a program, the prompt message is displayed. The\noperator then enters the variable value followed by a carriage return. The entered value is assigned to the specified variable name. The IN command holds\nup execution of following commands in a program until a carriage return or semicolon is detected. If no value is given prior to a semicolon or carriage\nreturn, the previous variable value is kept."
+    },
+    {
+        "Command": "IP",
+        "Usage": {
+            "Example": "IPm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The IP command allows for a change in the command position while the motor is moving. This command does not require a BG."
+    },
+    {
+        "Command": "IT",
+        "Usage": {
+            "Example": "ITm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The IT command filters the acceleration and deceleration functions of independent moves such as JG, PR, PA to produce a smooth velocity profile. The\nresulting profile, known as smoothing, has continuous acceleration and results in reduced mechanical vibrations. IT sets the bandwidth of the filter where 1\nmeans no filtering and 0.004 means maximum filtering.\nThe IT command also filters the individual axes during Vector Mode (VM) and Linear Interpolation Mode (LM)."
+    },
+    {
+        "Command": "JG",
+        "Usage": {
+            "Example": "JGm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The JG command sets the jog mode and the jog slew speed of the axes."
+    },
+    {
+        "Command": "JP",
+        "Usage": {
+            "Example": "JP n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The JP command causes a jump to a program location on a specified condition. The program location may be any program line number or label. A jump\nis taken if the specified condition is true. Multiple conditions can be used in a single jump statement.\nJP can be used for relative jumps and for jump tables, see Examples."
+    },
+    {
+        "Command": "' spacing in following text",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "JS",
+        "Usage": {
+            "Example": "JS n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "Allows the program to jump to a subroutine and return back after completion. This command is often used to call reusable code."
+    },
+    {
+        "Command": "Examples of valid args (see examples for demo of each concept)",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "REM Controller Response",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "K1",
+        "Usage": {
+            "Example": "K1m= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "K1 is the proportional gain in effect when the profiler is commanding motion (RP is changing). When no motion is commanded (RP constant), KP is in\neffect. Some systems will oscillate when holding position unless the gains are lowered."
+    },
+    {
+        "Command": "K2",
+        "Usage": {
+            "Example": "K2m= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "K2 is the integral gain in effect when the profiler is commanding motion (RP is changing). When no motion is commanded (RP constant), KI is in effect.\nSome systems will oscillate when holding position unless the gains are lowered."
+    },
+    {
+        "Command": "K3",
+        "Usage": {
+            "Example": "K3m= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "K3 is the derivative gain in effect when the profiler is commanding motion (RP is changing). When no motion is commanded (RP constant), KD is in effect.\nSome systems will oscillate when holding position unless the gains are lowered."
+    },
+    {
+        "Command": "KD",
+        "Usage": {
+            "Example": "KDm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "KD designates the derivative constant in the control filter. The derivative gain outputs a voltage based on the rate of change of the error. The filter\ntransfer function follows:"
+    },
+    {
+        "Command": "KI",
+        "Usage": {
+            "Example": "KIm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The KI command sets the integral gain of the control loop. The integrator term will reduce the position error at rest to zero. It fits in the control equation\nas follows:"
+    },
+    {
+        "Command": "KP",
+        "Usage": {
+            "Example": "KPm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "KP designates the proportional constant in the controller filter. The proportional gain outputs a control signal proportional to the amount of error. The filter\ntransfer function follows."
+    },
+    {
+        "Command": "KS",
+        "Usage": {
+            "Example": "KSm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The KS parameter sets the amount of smoothing of stepper motor pulses. Larger values of KS provide greater smoothness. KS adds a single pole low pass\nfilter onto the output of the motion profiler."
+    },
+    {
+        "Command": "LA",
+        "Usage": {
+            "Example": "LA",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The LA command returns a list of all arrays in memory. The size of each array will be included next to each array name in square brackets."
+    },
+    {
+        "Command": "LB",
+        "Usage": {
+            "Example": "LB n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The LB command sets the Bias contrast on the LCD."
+    },
+    {
+        "Command": "LC",
+        "Usage": {
+            "Example": "LCm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The LC command enables low current mode for stepper motors. Low current mode reduces the holding torque of the stepper motors while at rest."
+    },
+    {
+        "Command": "LD",
+        "Usage": {
+            "Example": "LDm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "Allows user to disables forward and/or reverse limit switches."
+    },
+    {
+        "Command": "LE",
+        "Usage": {
+            "Example": "LE",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The LE command indicates to the controller that the end of the sequence is coming up. This allows the controller to slow down through multiple\nsegments, if required. LE is required to exit the linear interpolation mode gracefully (stop code, SC, 101)."
+    },
+    {
+        "Command": "LI",
+        "Usage": {
+            "Example": "LIm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The LI command specifies the incremental distance of travel for each axis in the Linear Interpolation (LM) mode. LI parameters are relative distances given\nwith respect to the current axis positions."
+    },
+    {
+        "Command": "'Galil DMC Code Example",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "LL",
+        "Usage": {
+            "Example": "LL",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The LL command returns a listing of all of the program labels in memory."
+    },
+    {
+        "Command": "LM",
+        "Usage": {
+            "Example": "LM mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The LM command specifies the linear interpolation mode and specifies the axes for linear interpolation."
+    },
+    {
+        "Command": "LS",
+        "Usage": {
+            "Example": "LS n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The LS command returns a listing of the programs in memory."
+    },
+    {
+        "Command": "LU",
+        "Usage": {
+            "Example": "LU n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The LU command turns the automatic axes status update on the LCD on or off."
+    },
+    {
+        "Command": "LV",
+        "Usage": {
+            "Example": "LV",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The LV command returns a listing of all of the program variables in memory. The listing will be in alphabetical order."
+    },
+    {
+        "Command": "LZ",
+        "Usage": {
+            "Example": "LZ n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The LZ command is used for formatting the values returned from interrogation commands, variables, and arrays. By enabling the LZ function, all leading\nzeros of returned values will be removed."
+    },
+    {
+        "Command": "MB",
+        "Usage": {
+            "Example": "MBm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The MB command is used to communicate with I/O devices using the Modbus TCP/IP protocol. The MB command supports the first two levels of Modbus\ncommands. The function code -1 designates that the first level of Modbus is used (creates raw packets and receives raw data). The other codes are the\n10 major function codes of the second level. The format of the command varies depending on each function code.\nGalil Modbus supports one master per slave."
+    },
+    {
+        "Command": "MB",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "example",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "MC",
+        "Usage": {
+            "Example": "MC mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The MC command is a trippoint command that holds up execution until motion is complete on any one of a specified group of axes. The MC command,\nunlike the AM (after motion command) requires that both the motion profiler has completed motion AND that the motor encoder has reached the\nspecified position before continuing execution."
+    },
+    {
+        "Command": "ME",
+        "Usage": {
+            "Example": "ME n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ME command enables the ability for Modbus masters to write to array locations in the hardware's array table. When enabled, array locations can be\nwritten to as 16 bit integers or as 32 bit floating point by a modbus master by specifying different address ranges. ME is not required to read array\nlocations, reads are always supported."
+    },
+    {
+        "Command": "\"Integer=\"",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "MF",
+        "Usage": {
+            "Example": "MFm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "This command will hold up the execution of the following command until the specified motor moves forward and crosses the position specified."
+    },
+    {
+        "Command": "MG",
+        "Usage": {
+            "Example": "MG n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The MG command is used to send strings, operands, variables, and array values to a specified destination."
+    },
+    {
+        "Command": ":",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "MO",
+        "Usage": {
+            "Example": "MO mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The MO command turns off the motor command line and toggles the amplifier enable signal."
+    },
+    {
+        "Command": "MR",
+        "Usage": {
+            "Example": "MRm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "This command will hold up the execution of subsequent code specified motor moves backward and crosses the position specified."
+    },
+    {
+        "Command": "MT",
+        "Usage": {
+            "Example": "MTm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The MT command selects the type of the motor and the polarity of the drive signal. Motor types include standard servomotors, which require a voltage in\nthe range of +/- 10 Volts, and step motors, which require pulse and direction signals. The polarity reversal inverts the analog signals for servomotors, or\ninverts logic level of the pulse train for step motors."
+    },
+    {
+        "Command": "MU",
+        "Usage": {
+            "Example": "MU n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "MU sets the controller's multicast address. This address is used by Galil software to detect an available Ethernet controller on the network."
+    },
+    {
+        "Command": "MW",
+        "Usage": {
+            "Example": "MW n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "Enabling the MW command causes the controller to hold up execution of the program after sending a Modbus command until a response from the\nModbus device has been received. The MW command ensures that the command that was sent to the Modbus device was successfully received before\ncontinuing program execution."
+    },
+    {
+        "Command": "0.0000",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "NB",
+        "Usage": {
+            "Example": "NBm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The NB command sets real part of the notch poles. In other words, the NB controls the range of frequencies that will be attenuated."
+    },
+    {
+        "Command": "NF",
+        "Usage": {
+            "Example": "NFm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The NF command sets the frequency of the notch filter, which is placed either in series with the PID compensation, or applied to the profiled position."
+    },
+    {
+        "Command": "NO",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "The NO command performs no action in a sequence and can be used as a comment in a program."
+    },
+    {
+        "Command": "NZ",
+        "Usage": {
+            "Example": "NZm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The NZ command sets the real part of the notch zero. In other words, the NB/NZ ratio controls the amount of attenuation, or depth, of the notch filter."
+    },
+    {
+        "Command": "OA",
+        "Usage": {
+            "Example": "OAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The OA command turns on or off encoder failure detection. The controller can detect a failure on either or both channels of the encoder. This is\naccomplished by checking on whether motion of less than 4 counts is detected whenever the torque exceeds a preset level (OV) for a specified time (OT)."
+    },
+    {
+        "Command": "OB",
+        "Usage": {
+            "Example": "OB n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The OB command allows variable control of an output bit based on logical expressions. The OB n, logical expression command defines output bit i as either\n0 or 1 depending on the result from the logical expression."
+    },
+    {
+        "Command": "OC",
+        "Usage": {
+            "Example": "OCm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The OC command sets up the Output Compare feature, also known as Pulse on Position. The controller has a special digital output which can be\nconfigured to pulse on a specified absolute encoder position, and optionally on a delta encoder change after that. These operations are known as one-\nshot and circular compare, respectively.\nEach set of 4 axes, ABCD and EFGH, has one digital output which can be configured to this mode of operation"
+    },
+    {
+        "Command": "\u00a92017 Galil Motion Control. Corrections, Feedback: ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "OE",
+        "Usage": {
+            "Example": "OEm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The OE command sets the Off On Error function for the controller. The OE command causes the controller to shut off the motor command if a position\nerror exceeds the limit specified by the ER command, an abort occurs from either the abort input or on AB command, or an amplifier error occurs based\non the description of the TA command."
+    },
+    {
+        "Command": "documentation@galilmc.com",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "OF",
+        "Usage": {
+            "Example": "OFm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The OF command sets a bias voltage in the command output or returns a previously set value."
+    },
+    {
+        "Command": "OP",
+        "Usage": {
+            "Example": "OP n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The OP command sets the output ports of the controller in a bank using bitmasks. Arguments to the OP command are bit patterns (decimal or hex) to\nset entire banks (bytes) of digital outputs. Use SB, CB or OB to set bits individually."
+    },
+    {
+        "Command": "OT",
+        "Usage": {
+            "Example": "OTm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The OT command sets the timeout time for the encoder failure routine. The command sets the time in samples that the encoder failure will wait for motion\nafter the OV threshold has been exceeded. The controller can detect a failure on either or both channels of the encoder."
+    },
+    {
+        "Command": "OV",
+        "Usage": {
+            "Example": "OVm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The OV command sets the threshold voltage for detecting an encoder failure. The controller can detect a failure on either or both channels of the\nencoder."
+    },
+    {
+        "Command": "P2CD",
+        "Usage": {
+            "Example": "variable= P2CD",
+            "Explanation": "Holds a value"
+        },
+        "Description": "P2CD returns the status of the auxiliary serial port (port 2). The value of P2CD returns zero after the corresponding string or number is read."
+    },
+    {
+        "Command": "P2CH",
+        "Usage": {
+            "Example": "variable= P2CH",
+            "Explanation": "Holds a value"
+        },
+        "Description": "P2CH returns the last character sent to the auxiliary serial port (port 2)"
+    },
+    {
+        "Command": "P2NM",
+        "Usage": {
+            "Example": "variable= P2NM",
+            "Explanation": "Holds a value"
+        },
+        "Description": "P2NM returns the last number (followed by carriage return) sent to auxiliary serial port (port 2)."
+    },
+    {
+        "Command": "P2ST",
+        "Usage": {
+            "Example": "variable= P2ST",
+            "Explanation": "Holds a value"
+        },
+        "Description": "P2ST returns the last string (followed by carriage return) sent to auxiliary serial port (port 2)"
+    },
+    {
+        "Command": "PA",
+        "Usage": {
+            "Example": "PAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The PA command sets the end target of the Position Absolute Mode of Motion."
+    },
+    {
+        "Command": "PF",
+        "Usage": {
+            "Example": "PF n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The PF command allows the user to format the position numbers such as those returned by TP. The number of digits of integers and the number of digits\nof decimal can be selected with this command. An extra digit for sign and a digit for decimal point will be added to the total number of digits."
+    },
+    {
+        "Command": "PL",
+        "Usage": {
+            "Example": "PLm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The PL command adds a low-pass filter in series with the PID compensation.\nThe crossover frequency is entered directly as an argument to PL. To maintain compatibility with earlier versions, a value less than 1 may also be specified."
+    },
+    {
+        "Command": "PR",
+        "Usage": {
+            "Example": "PRm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The PR command sets the incremental distance and direction of the next move. The move is referenced with respect to the current position. ."
+    },
+    {
+        "Command": "PT",
+        "Usage": {
+            "Example": "PTm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The PT command will place the controller in the position tracking mode. In this mode, the controller will allow the user to issue absolute position commands\nthat begin motion immediately without requiring a BG command. The absolute position may be specified such that the axis will begin motion, continue in\nthe same direction, reverse directions, or decelerate to a stop"
+    },
+    {
+        "Command": "PV",
+        "Usage": {
+            "Example": "PVm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The PV command is used to enter PVT data into the PVT buffer. Data is entered by specifying the target delta position, target velocity, and delta time for\nthe segment duration."
+    },
+    {
+        "Command": "PW",
+        "Usage": {
+            "Example": "PW n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The PW command sets the password used to lock the controller. Locking the controller prevents interrogation of the controller program space."
+    },
+    {
+        "Command": "QD",
+        "Usage": {
+            "Example": "QD n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The QD command transfers array data from the host computer to the controller. QD array[], start, end requires that the array name be specified along\nwith the index of the first element of the array and the index of the last element of the array."
+    },
+    {
+        "Command": "QH",
+        "Usage": {
+            "Example": "QH mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The QH command transmits the state of the Hall sensor inputs. The value is decimal and represented by a 3 bit value (see Remarks)."
+    },
+    {
+        "Command": "QP",
+        "Usage": {
+            "Example": "QP",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "Returns memory information for the controller."
+    },
+    {
+        "Command": "QR",
+        "Usage": {
+            "Example": "QR mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The QR command causes the controller to return a record of information regarding controller status.\nThis status information includes 4 bytes of header information and specific blocks of information as specified by the command arguments. The details of\nthe status information is described in Chapter 4 of the user's manual."
+    },
+    {
+        "Command": "QS",
+        "Usage": {
+            "Example": "QS mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The QS command reports the magnitude of error, in drive step counts, for axes in Stepper Position Maintenance mode. A step count is directly\nproportional to the micro-stepping resolution of the stepper drive."
+    },
+    {
+        "Command": "QU",
+        "Usage": {
+            "Example": "QU n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The QU command transfers array data from the controller to a host computer. The QU requires that the array name be specified along with the first\nelement of the array and last element of the array."
+    },
+    {
+        "Command": "QZ",
+        "Usage": {
+            "Example": "QZ",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The QZ command is an interrogation command that returns information regarding the data record. The controller's response to this command will be the\nreturn of 4 integers separated by commas."
+    },
+    {
+        "Command": "RA",
+        "Usage": {
+            "Example": "RA n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The RA command selects the user arrays to be populated by the Record Array function. The data to be captured is specified by the RD command and\ntime interval by the RC command."
+    },
+    {
+        "Command": "RC",
+        "Usage": {
+            "Example": "RC n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The RC command begins recording for the Automatic Record Array Mode. RC 0 stops recording. The record array mode loads source data specified by\nthe RD command into the arrays defined by the RA command. The address for the array element for the next recording can be interrogated with _RD."
+    },
+    {
+        "Command": "RD",
+        "Usage": {
+            "Example": "variable= RD",
+            "Explanation": "Holds a value"
+        },
+        "Description": "The RD command specifies the data type to be captured for the Record Array (RA) mode. The data defined in this command is stored in arrays defined\nby the RA command at the time interval specified with the RC command."
+    },
+    {
+        "Command": "RE",
+        "Usage": {
+            "Example": "RE n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The RE command is used to end subroutines in application code. An RE at the end of these routines causes a return to the main program. Specific\nautomatic error subroutines require the use of the RE command to end the code correctly."
+    },
+    {
+        "Command": "REM",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": "REM is used for comment lines. The REM statement is NOT a controller command. Rather, it is recognized by Galil PC software, which strips away the REM\nlines before downloading the DMC file to the controller."
+    },
+    {
+        "Command": "RI",
+        "Usage": {
+            "Example": "RI n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The RI command is used to end the input interrupt subroutine.\nThe input interrupt subroutine begins with the label #ININT. An RI at the end of this routine causes a return to the main program."
+    },
+    {
+        "Command": "RL",
+        "Usage": {
+            "Example": "RL mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The RL command will return the last position captured by the latch. The latch must first be armed by the AL command and then the appropriate input\nmust be activated. Each axis uses a specific general input for the latch input; see the AL command for information on latch inputs."
+    },
+    {
+        "Command": "RP",
+        "Usage": {
+            "Example": "RP mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The RP command returns the commanded reference position of the motor(s). RP command is useful when operating step motors since it provides the\ncommanded position in steps when operating in stepper mode."
+    },
+    {
+        "Command": "RS",
+        "Usage": {
+            "Example": "RS n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The RS command resets the state of the processor to its power-on condition. The previously saved state of the hardware, along with parameter values\nand saved program, are restored."
+    },
+    {
+        "Command": "SA",
+        "Usage": {
+            "Example": "SAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "SA sends a command, and optionally receives a response, from one controller to another via Ethernet."
+    },
+    {
+        "Command": "SB",
+        "Usage": {
+            "Example": "SB n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The SB command sets a particular digital output. The SB and CB (Clear Bit) instructions can be used to control the state of output lines."
+    },
+    {
+        "Command": "SC",
+        "Usage": {
+            "Example": "SC mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The Stop Code command returns a number indicating why a motor has stopped."
+    },
+    {
+        "Command": "SD",
+        "Usage": {
+            "Example": "SDm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The Limit Switch Deceleration command (SD) sets the linear deceleration rate of the motors when a limit switch has been reached."
+    },
+    {
+        "Command": "SH",
+        "Usage": {
+            "Example": "SH mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The SH commands tells the controller to use the current motor position as the command position and to enable servo control at the current position."
+    },
+    {
+        "Command": "SI",
+        "Usage": {
+            "Example": "SIm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The SI command enables and configures the controller to read SSI encoder data. Synchronous Serial Interface (SSI) allows for serial transmission of\nabsolute position data (either binary or Gray code) from the encoder based on a timed clock pulse train from the controller. Connection between the\ncontroller and encoder is based on two signal lines, clock and data, which are usually differential for increased noise immunity. For each sequential clock\npulse of the controller, the encoder transmits one data bit from shift registers on the encoder.\nSSI Timing\nDuring the controller's control loop, a clock will be transmitted for encoders configured for SSI. \nThe SSI encoder responds by transmitting a serial data\nstream synchronized to the controller's clock. \nThe data stream has 2 important features as described below.\n1\n. \nData.\n \nShown in the above timing diagrams, \nData\n contains the absolute position of the SSI encoder. \nData\n is used for the n\n2\n argument of the SI\ncommand\n2\n. \nStatus\n \n(if applicable)\n. \nShown above in the latter two timing diagrams, \nStatus\n is used for the n\n3\n argument of the SI command. \nThe meaning of the\nStatus\n and the is defined by the encoder manufacturer. \nThe controller provides access to this value via the _SIm operand.\nThe sign of argument n\n3\n selects if the \nStatus\n are at the beginning of the SSI data or at the end. \nThis is shown in the above timing diagrams and\nis based on the encoder's manufacturer."
+    },
+    {
+        "Command": "option.",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "SL",
+        "Usage": {
+            "Example": "SL n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The SL command is used to single-step through a program for debugging purposes. SL can be used after execution has paused at a breakpoint (BK). The\nargument n allows user to specify the number of lines to execute before pausing again."
+    },
+    {
+        "Command": "SM",
+        "Usage": {
+            "Example": "SM n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The SM command assigns a subnet mask to the controller. All packets sent to the controller whose source IP address is not on the subnet will be ignored\nby the controller. For example, for SM 255,255,0,0 and IA 10,0,51,1, only packets from IP addresses of the form 10.0.xxx.xxx will be accepted."
+    },
+    {
+        "Command": "SP",
+        "Usage": {
+            "Example": "SPm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The SP command sets the slew speed of any or all axes for independent moves."
+    },
+    {
+        "Command": "SS",
+        "Usage": {
+            "Example": "SSm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The SS command enables and configures the controller to read BiSS encoder data. BiSS is an open-source, digital interface for encoders. BiSS is hardware\ncompatible to the industrial standard SSI (Serial Synchronous Interface) but offers additional features and options.\nBiSS Timing\nDuring the controller's servo interrupt, a clock will be transmitted for encoders configured for BiSS. The BiSS encoder responds by transmitting a serial\ndata stream synchronized to the controllers's clock. The data stream has five important features as described below.\n1\n. \nData\n. Shown in the above timing diagram as the bit stream between \na\n and \nb\n, \nData\n contains the absolute position of the BiSS encoder. The length of\nthe \nData\n, in bits, is used for both the n\n1\n and n\n2\n arguments of the SS command.\n2\n. \nZero Padding\n. Some encoder manufacturers (Hengstler and possibly others) pad the encoder data with trailing zero bits in the \nData\n stream. This bit\nsegment is shown between \nc\n and \nd\n above. The number of zero padding bits is the n\n3\n argument of the SS command.\n3\n. \nError Bit\n. Shown above as \nE\n, BiSS defines an Error bit that is transmitted by the encoder. It can be active high or low, depending on the\nmanufacturer. The controller provides access to the Error bit via the _SSm operand.\n4\n. \nWarning Bit\n. Shown above as \nW\n, BiSS also defines a Warning bit that is transmitted by the encoder. It is also active high or low based on the\nencoder. \nThe controller provides access to the Warning bit via the _SSm operand.\n5\n. \nCRC\n. The \nData\n, \nE\n and \nW\n bits are all checked for validity via a 6-bit cyclic redundancy check, shown above as \nCRC\n. The controller provides access to\nthe CRC validity via the _SSm operand."
+    },
+    {
+        "Command": "Required Hardware and Firmware",
+        "Usage": {
+            "Example": "_SSm Returns 4 bits of axis status data where m is the axis.",
+            "Explanation": "_SSm Bit Map"
+        },
+        "Description": ""
+    },
+    {
+        "Command": "#logwarn",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "ST",
+        "Usage": {
+            "Example": "ST mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The ST command stops motion on the specified axis. Motors will come to a decelerated stop."
+    },
+    {
+        "Command": "SY",
+        "Usage": {
+            "Example": "SYm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "This command is used to designate the active level of the Error and Warning bits when using the Galil BiSS upgrade. The BiSS protocol defines two bits\nwhich can be used by the encoder to signal various events."
+    },
+    {
+        "Command": ";",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "TA",
+        "Usage": {
+            "Example": "TA n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The command returns the amplifier error status. The value is decimal and represents an 8 bit value. Bit 7 is most significant bit, 0 is least."
+    },
+    {
+        "Command": "TB",
+        "Usage": {
+            "Example": "TB",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The TB command returns status information from the controller as a decimal number. Each bit of the status byte denotes an active condition when the\nbit is set (high):"
+    },
+    {
+        "Command": "TC",
+        "Usage": {
+            "Example": "TC n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The TC command reports programming or command errors detected by the controller. The TC command returns a number between 1 and 255. This\nnumber is a code that reflects why a command was not accepted by the controller. This command is useful when the controller halts execution of a\nprogram or when the response to a command is a question mark."
+    },
+    {
+        "Command": "Download error - line too long or too many lines",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "Invalid EtherCAT configuration",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "TD",
+        "Usage": {
+            "Example": "TD mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The TD command returns the current position of the dual (auxiliary) encoder input. When operating with stepper motors, the TD command returns the\nnumber of counts that have been output by the controller."
+    },
+    {
+        "Command": "TE",
+        "Usage": {
+            "Example": "TE mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The TE command returns the current error in the control loop.\nThe command returns the position error of the motor(s), which is the difference between commanded (RP) and actual (TP) position."
+    },
+    {
+        "Command": "TH",
+        "Usage": {
+            "Example": "TH",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The TH command returns a list of data pertaining to the Galil's Ethernet connection. This list begins with the IP address and Ethernet address (physical\naddress), followed by the status of each handle indicating connection type and IP address."
+    },
+    {
+        "Command": "TI",
+        "Usage": {
+            "Example": "TI n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The TI command returns the state of the inputs in banks of 8 bits, or 1 byte. The value returned by this command is decimal and represents an 8 bit\nvalue (decimal value ranges from 0 to 255). Each bit represents one input where the LSB is the lowest input number and the MSB is the highest input bit."
+    },
+    {
+        "Command": "TIME",
+        "Usage": {
+            "Example": "variable= TIME",
+            "Explanation": "Holds a value"
+        },
+        "Description": "The TIME operand returns the value of the internal free running, real time clock.\nThe returned value represents the number of servo loop updates and is based on the TM command. The default value for the TM command is 1000. With\nthis update rate, the operand TIME will increase by 1 count every update of approximately 1000usec. The clock is reset to 0 with a standard reset or a\nmaster reset."
+    },
+    {
+        "Command": "TK",
+        "Usage": {
+            "Example": "TKm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The TK command sets the peak torque limit on the motor command output. This command works with the TL command which sets the continuous\ntorque limit. When the average torque is below TL, the motor command signal can go up to the TK (Peak Torque) limit for a short amount of time."
+    },
+    {
+        "Command": "TL",
+        "Usage": {
+            "Example": "TLm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The TL command sets the limit on the motor command output. This limit is designed to prevent over current to motors with lower current rating than the\ndrive.\nTL works along with the TK (Peak torque) command to control output current to the motor."
+    },
+    {
+        "Command": "TM",
+        "Usage": {
+            "Example": "TM n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The TM command sets the sampling period of the control loop. The units of this command are microseconds. A negative number turns off the servo loop."
+    },
+    {
+        "Command": "TN",
+        "Usage": {
+            "Example": "TN n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The TN command describes the tangent axis to the coordinated motion path. n\n0\n is the scale factor in counts/degree of the tangent axis. n\n1\n is the\nabsolute position of the tangent axis where the tangent axis is aligned with zero degrees in the coordinated motion plane. The tangent function is useful\nfor cutting applications where a cutting tool must remain tangent to the part."
+    },
+    {
+        "Command": "TP",
+        "Usage": {
+            "Example": "TP mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The TP command returns the current position of the motor."
+    },
+    {
+        "Command": "TR",
+        "Usage": {
+            "Example": "TR n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The TR command causes each instruction in a program to be sent out the communications port prior to execution. The trace command is useful in\ndebugging programs."
+    },
+    {
+        "Command": "TS",
+        "Usage": {
+            "Example": "TS mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The TS command returns information including axis-specific IO status, error conditions, motor condition and state. The value returned by this command is\ndecimal and represents an 8 bit value (decimal value ranges from 0 to 255)."
+    },
+    {
+        "Command": "TT",
+        "Usage": {
+            "Example": "TT mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The TT command reports the value of the analog output signal, which is a number between -9.998 and 9.998 volts."
+    },
+    {
+        "Command": "TV",
+        "Usage": {
+            "Example": "TV mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The TV command returns the actual velocity of the axes in units of encoder count/s. The value returned includes the sign bit for direction."
+    },
+    {
+        "Command": "TW",
+        "Usage": {
+            "Example": "TWm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The TW command sets the timeout time for the MC trippoint. The TW command sets the timeout in msec to declare an error if the MC command is active\nand the motor is not at or beyond the actual position within n msec after the completion of the motion profile. If a timeout occurs, then the MC trippoint\nwill clear and the stopcode will be set to 99. A running program will jump to the special label #MCTIME, if located in the application code."
+    },
+    {
+        "Command": "TZ",
+        "Usage": {
+            "Example": "TZ",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The TZ command is used to request the I/O status of the controller. This is returned to the user as a human-readable text string."
+    },
+    {
+        "Command": "UI",
+        "Usage": {
+            "Example": "UI n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The UI command allows user-defined interrupts to be created. UI can generate 16 different status bytes, $F0 to $FF (240-255), corresponding to UI0 to\nUI15.\nUI pushes a user-defined status byte into the EI queue. When the UI command (e.g. UI5) is executed, the status byte value (e.g. $F5 or 245) is queued\nup for transmission to the host, along with any other interrupts."
+    },
+    {
+        "Command": "UL",
+        "Usage": {
+            "Example": "UL",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The UL command transfers data from the controller to a host computer. Programs are sent without line numbers. The Uploaded program will be followed\nby a <control>Z or a '\\' as an end of text marker."
+    },
+    {
+        "Command": "VA",
+        "Usage": {
+            "Example": "VAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The VA command sets the acceleration rate of the vector in a coordinated motion sequence."
+    },
+    {
+        "Command": "VD",
+        "Usage": {
+            "Example": "VDm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The VD command sets the deceleration rate of the vector in a coordinated motion sequence."
+    },
+    {
+        "Command": "VE",
+        "Usage": {
+            "Example": "VE n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The VE command indicates to the controller that the end of the vector is coming up. This allows the controller to slow down through multiple segments, if\nrequired. VE is required to exit the vector mode gracefully (stop code, SC, 101)."
+    },
+    {
+        "Command": "VF",
+        "Usage": {
+            "Example": "VF n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The VF command formats the number of digits to be displayed when interrogating the controller. If a number exceeds the format, the number will be\ndisplayed as the maximum possible positive or negative number (i.e. 999.99, -999, $8000 or $7FF)."
+    },
+    {
+        "Command": "VM",
+        "Usage": {
+            "Example": "VM mm",
+            "Explanation": "Argument is an axis mask"
+        },
+        "Description": "The VM command enables the coordinated motion mode and specifies the plane of motion. This mode may be specified for motion on any set of two\naxes, including a combination of real and virtual axes for single-axis operation. The motion is specified by the instructions VP and CR, which specify linear\nand circular segments.\nUp to 511 segments may be given before the Begin Sequence (BGS or BGT) command. The number of available segments is queriable via the _LMm\noperand."
+    },
+    {
+        "Command": "\u00a92017 Galil Motion Control. Corrections, Feedback: ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "VP",
+        "Usage": {
+            "Example": "VP n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The VP command defines a vector move segment for the VM mode of motion. The VP command defines the target coordinates of a straight line segment\nin a 2 axis motion sequence. The units are in quadrature counts, and are a function of the elliptical scale factor set using the command ES. For three or\nmore axes in linear interpolation mode, use the LI command."
+    },
+    {
+        "Command": " ",
+        "Usage": {
+            "Example": "",
+            "Explanation": ""
+        },
+        "Description": ""
+    },
+    {
+        "Command": "VR",
+        "Usage": {
+            "Example": "VR n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The VR sets a ratio to be used as a multiplier of the current vector speed. The vector speed can be set by the command VS or the operators < and >\nused with CR, VP and LI commands. VR takes effect immediately and will ratio all the previous vector speed commands."
+    },
+    {
+        "Command": "VS",
+        "Usage": {
+            "Example": "VSm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The VS command specifies the speed of the vector in a coordinated motion sequence in either the LM or VM modes. This speed is in place when individual\nsegment speeds for VP, LI and CR are not specified."
+    },
+    {
+        "Command": "VV",
+        "Usage": {
+            "Example": "VVm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The VV command sets the speed of the vector variable in a coordinated motion sequence in either the LM or VM modes. The VV command is used to set\nthe \"o\" vector speed argument for segments that exist in the vector buffer for LI, CR and VP commands. By defining a vector segment begin speed as a\nnegative 1 (i.e. \"<-1\"), the controller will utilize the current vector variable speed as the segment is profiled from the buffer."
+    },
+    {
+        "Command": "WH",
+        "Usage": {
+            "Example": "WH",
+            "Explanation": "Command takes no arguments"
+        },
+        "Description": "The WH command is used to identify the handle from which the command was received. This is useful for determining what interface or handle you are\nconnected to."
+    },
+    {
+        "Command": "WT",
+        "Usage": {
+            "Example": "WT n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The WT command is a trippoint used to time events.When this command is executed, the controller will wait for the amout of time specified before\nexecuting the next command.\nThe amount of time in the WT command is specified to be either samples or milliseconds, depending on the second argument of WT"
+    },
+    {
+        "Command": "XQ",
+        "Usage": {
+            "Example": "XQ n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The XQ command begins execution of a program residing in the program memory of the controller. Execution will start at the label or line number\nspecified.\nUp to 8 programs may be executed simultaneously to perform multitasking."
+    },
+    {
+        "Command": "YA",
+        "Usage": {
+            "Example": "YAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "Specifies the microstepping resolution of the step drive for Stepper Position Maintenance (SPM) mode in microsteps per full motor step. Consult your drive\ndocumentation to determine its microstepping setting. See the table below for internal Galil stepper drives.\nWhen using the SDM-44040, YA will also configure the drive hardware for microstepping resolution. The SDM-44140 is \nnot\n configurable with YA."
+    },
+    {
+        "Command": "YB",
+        "Usage": {
+            "Example": "YBm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The YB command specifies the resolution of the step motor, in full steps per full revolution, for Stepper Position Maintenance (SPM) mode."
+    },
+    {
+        "Command": "YC",
+        "Usage": {
+            "Example": "YCm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The YC command specifies the resolution of the encoder, in counts per revolution, for Stepper Position Maintenance (SPM) mode."
+    },
+    {
+        "Command": "YR",
+        "Usage": {
+            "Example": "YRm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The YR command allows the user to correct for position error in Stepper Position Maintenance mode. This correction acts like an IP command, moving the\naxis or axes the specified quantity of step counts. YR will typically be used in conjunction with QS."
+    },
+    {
+        "Command": "YS",
+        "Usage": {
+            "Example": "YSm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "The YS command enables and disables the Stepper Position Maintenance Mode function. YS also reacts to excessive position error condition as defined by\nthe QS command."
+    },
+    {
+        "Command": "ZA",
+        "Usage": {
+            "Example": "ZAm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "ZA sets the user variables in the data record. The user variables (one per axis) are automatically sent as part of the status record from the controller to the\nhost computer. These variables provide a method for specific controller information to be passed to the host automatically."
+    },
+    {
+        "Command": "ZN",
+        "Usage": {
+            "Example": "ZNm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "ZN adds a negative open loop voltage to the controller?s command signal when the position error is negative."
+    },
+    {
+        "Command": "ZP",
+        "Usage": {
+            "Example": "ZPm= n",
+            "Explanation": "Arguments specified with a single axis mask and an assignment (=)"
+        },
+        "Description": "ZP adds a positive open loop voltage to the controller?s command signal when the position error is positive."
+    },
+    {
+        "Command": "ZS",
+        "Usage": {
+            "Example": "ZS n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ZS command is used to clear the stack when finishing or leaving a subroutine. This command is used to avoid returning from an interrupt (either input\nor error). This turns the jump to subroutine into a jump. The status of the stack can be interrogated with the operand _ZS, see Remarks."
+    },
+    {
+        "Command": "ZS",
+        "Usage": {
+            "Example": "ZS n ...",
+            "Explanation": "Arguments specified with an implicit, comma-separated order"
+        },
+        "Description": "The ZS command is used to clear the stack when finishing or leaving a subroutine. This command is used to avoid returning from an interrupt (either input\nor error). This turns the jump to subroutine into a jump. The status of the stack can be interrogated with the operand _ZS, see Remarks."
+    }
+]

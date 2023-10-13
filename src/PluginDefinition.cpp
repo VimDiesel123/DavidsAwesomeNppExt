@@ -24,6 +24,8 @@
 #include <Windows.h>
 #include <wininet.h>
 #include "../lib/json.hpp"
+#include <fstream>
+#include <sstream>
 
 //
 // The plugin data that Notepad++ needs
@@ -35,13 +37,19 @@ FuncItem funcItem[nbFunc];
 //
 NppData nppData;
 
+// JSON data with commands
+nlohmann::json commandData;
+
+const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.json";
+
+
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
 void pluginInit(HANDLE /*hModule*/)
 {
-    
-
+    std::ifstream f(PATH_TO_MANUAL_DATA);
+    f >> commandData;
 }
 
 //
@@ -244,12 +252,14 @@ void onDwellStart(SCNotification* pNotify) {
 }
 
 std::string buildCallTip(const std::string& word) {
-    return
-        word +
-        "\nThis is a test \n"
-        "I am testing \n"
-        "Creating a larger calltip\n"
-        "THis is a really really long line of text so that I can see what it looks like in the calltip.";
+    for(const auto& entry : commandData) {
+        if (entry["Command"] == word) {
+            return
+                std::string(entry["Command"]) + "\n" +
+                std::string(entry["Description"]);
+        }
+    }
+    return "";
 }
 
 void onDwellEnd(SCNotification* pNotify) {

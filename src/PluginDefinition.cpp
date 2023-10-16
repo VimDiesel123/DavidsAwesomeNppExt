@@ -245,10 +245,21 @@ void onDwellStart(SCNotification* pNotify) {
    if (!result || result > 256) {
        return;
    }
+   const auto command = extractCommand(word);
 
-   const auto calltip = buildCallTip(std::string(word));
+   const auto calltip = buildCallTip(command);
     ::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)calltip.c_str());
 
+}
+
+std::string extractCommand(const std::string& word) {
+    auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})[A-Z0-9\\[]{1}");
+    std::smatch match;
+    std::regex_search(word, match, commandRegex);
+    if (!match.ready()) {
+        return "";
+    }
+    return match[1];
 }
 
 std::string buildCallTip(const std::string& word) {

@@ -82,6 +82,7 @@ void showFunny();
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
 std::string buildCallTip(const std::string& word);
+std::string extractCommand(const std::string& word);
 
 void handleError();
 

@@ -23,9 +23,9 @@
 #include <map>
 #include <Windows.h>
 #include <wininet.h>
-#include "../lib/json.hpp"
 #include <fstream>
 #include <sstream>
+#include "../lib/tabulate.hpp"
 
 //
 // The plugin data that Notepad++ needs
@@ -253,7 +253,7 @@ void onDwellStart(SCNotification* pNotify) {
 }
 
 std::string extractCommand(const std::string& word) {
-    auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})[A-Z0-9\\[]{1}");
+    auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})[A-Z0-9\\[]?");
     std::smatch match;
     std::regex_search(word, match, commandRegex);
     if (!match.ready()) {
@@ -266,11 +266,53 @@ std::string buildCallTip(const std::string& word) {
     for(const auto& entry : commandData) {
         if (entry["Command"] == word) {
             return
-                std::string(entry["Command"]) + "\n" +
-                std::string(entry["Description"]);
+                extractDataFromJson(entry);
         }
     }
     return "";
+}
+
+std::string extractDataFromJson(const nlohmann::json& entry) {
+    std::string result;
+
+    // Extract the "Command" and "Description" fields
+    result += "Command: " + entry["Command"].get<std::string>() + "\n";
+    result += "Description: " + entry["Description"].get<std::string>() + "\n";
+
+
+    tabulate::Table usageAndArgumentsTable;
+
+    // Extract the "Usage" array
+    if (!entry["Usage"].empty()) {
+        for (const auto& usageEntry : entry["Usage"]) {
+            usageAndArgumentsTable.add_row({ "Usage", usageEntry["Example"].get<std::string>(), usageEntry["Explanation"].get<std::string>() });
+        }
+    }
+
+    // Extract the "Operands" object
+    if (!entry["Operands"].empty()) {
+        std::string operands;
+        for (const std::string operand : entry["Operands"]["Operands"]) {
+            operands += operand;
+        }
+        usageAndArgumentsTable.add_row({ "Operands", operands, entry["Operands"]["Explanation"].get<std::string>()});
+    }
+
+    result += usageAndArgumentsTable.str() + "\n";
+
+    // Extract the "Arguments" array
+    if (!entry["Arguments"].empty()) {
+        result += "Arguments:\n";
+        tabulate::Table argumentsTable;
+        argumentsTable.add_row({ "Argument", "Description" });
+        argumentsTable[0].format().font_style({ tabulate::FontStyle::bold });
+        for (const auto& argEntry : entry["Arguments"]) {
+            argumentsTable.add_row({ argEntry["Argument"].get<std::string>(), argEntry["Description"].get<std::string>() });
+        }
+        result += argumentsTable.str();
+    }
+
+    return result;
 }
 
 void onDwellEnd(SCNotification* pNotify) {

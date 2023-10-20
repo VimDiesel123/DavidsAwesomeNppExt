@@ -23,6 +23,7 @@
 //
 #include "PluginInterface.h"
 #include <string>
+#include "../lib/json.hpp"
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
@@ -83,6 +84,7 @@ void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
 std::string buildCallTip(const std::string& word);
 std::string extractCommand(const std::string& word);
+std::string extractDataFromJson(const nlohmann::json& entry);
 
 void handleError();
 

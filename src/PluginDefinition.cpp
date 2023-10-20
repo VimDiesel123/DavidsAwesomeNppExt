@@ -26,6 +26,7 @@
 #include <fstream>
 #include <sstream>
 #include "../lib/tabulate.hpp"
+#include <thread>
 
 //
 // The plugin data that Notepad++ needs
@@ -316,10 +317,11 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 }
 
 void onDwellEnd(SCNotification* pNotify) {
-    const auto result = ::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
-    if (!result) {
-        //DO something
-    }
+    std::thread([=] {
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+        // Code to cancel the call tip.
+        ::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
+    }).detach();
 }
 
 void handleError()

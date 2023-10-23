@@ -57,6 +57,7 @@
     <None Include="manual.json">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </None>
+    <None Include="manual.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Update="data.json">

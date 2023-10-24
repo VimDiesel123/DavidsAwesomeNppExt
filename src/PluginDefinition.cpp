@@ -49,8 +49,8 @@ const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.jso
 // It will be called while plugin loading   
 void pluginInit(HANDLE /*hModule*/)
 {
-    std::ifstream f(PATH_TO_MANUAL_DATA);
-    f >> commandData;
+	std::ifstream f(PATH_TO_MANUAL_DATA);
+	f >> commandData;
 }
 
 //
@@ -66,18 +66,18 @@ void pluginCleanUp()
 void commandMenuInit()
 {
 
-    //--------------------------------------------//
-    //-- STEP 3. CUSTOMIZE YOUR PLUGIN COMMANDS --//
-    //--------------------------------------------//
-    // with function :
-    // setCommand(int index,                      // zero based number to indicate the order of command
-    //            TCHAR *commandName,             // the command name that you want to see in plugin menu
-    //            PFUNCPLUGINCMD functionPointer, // the symbol of function (function pointer) associated with this command. The body should be defined below. See Step 4.
-    //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
-    //            bool check0nInit                // optional. Make this menu item be checked visually
-    //            );
-    setCommand(0, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
-    setCommand(1, TEXT("GIVE FUNNY"), showFunny, NULL, 0);
+	//--------------------------------------------//
+	//-- STEP 3. CUSTOMIZE YOUR PLUGIN COMMANDS --//
+	//--------------------------------------------//
+	// with function :
+	// setCommand(int index,                      // zero based number to indicate the order of command
+	//            TCHAR *commandName,             // the command name that you want to see in plugin menu
+	//            PFUNCPLUGINCMD functionPointer, // the symbol of function (function pointer) associated with this command. The body should be defined below. See Step 4.
+	//            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
+	//            bool check0nInit                // optional. Make this menu item be checked visually
+	//            );
+	setCommand(0, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
+	setCommand(1, TEXT("GIVE FUNNY"), showFunny, NULL, 0);
 
 }
 
@@ -91,254 +91,275 @@ void commandMenuCleanUp()
 
 void callTipInit()
 {
-    // Set the dwell time (in milliseconds) and the styler for dwell events
-    ::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000, 0); // Set a 1-second dwell time
-
+	// Set the dwell time (in milliseconds) and the styler for dwell events
+	::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000, 0); // Set a 1-second dwell time
 }
 
 
 //
 // This function help you to initialize your plugin commands
 //
-bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk, bool check0nInit) 
+bool setCommand(size_t index, TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey* sk, bool check0nInit)
 {
-    if (index >= nbFunc)
-        return false;
+	if (index >= nbFunc)
+		return false;
 
-    if (!pFunc)
-        return false;
+	if (!pFunc)
+		return false;
 
-    lstrcpy(funcItem[index]._itemName, cmdName);
-    funcItem[index]._pFunc = pFunc;
-    funcItem[index]._init2Check = check0nInit;
-    funcItem[index]._pShKey = sk;
+	lstrcpy(funcItem[index]._itemName, cmdName);
+	funcItem[index]._pFunc = pFunc;
+	funcItem[index]._init2Check = check0nInit;
+	funcItem[index]._pShKey = sk;
 
-    return true;
+	return true;
 }
 
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
-void fixSetupTreeItems() 
+void fixSetupTreeItems()
 {
-    // Get the current scintilla
-    int which = -1;
-    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+	// Get the current scintilla
+	int which = -1;
+	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
 
 
-    if (which == -1)
-        return;
-    HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+	if (which == -1)
+		return;
+	HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
 
-    // Get filename of current document
-    std::wstring filename;
-    filename.resize(MAX_PATH);
-    ::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, MAX_PATH, (LPARAM)filename.data());
+	// Get filename of current document
+	std::wstring filename;
+	filename.resize(MAX_PATH);
+	::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, MAX_PATH, (LPARAM)filename.data());
 
-    const std::wregex treeItemsPattern(L"TreeItems.*\\.ini.*");
+	const std::wregex treeItemsPattern(L"TreeItems.*\\.ini.*");
 
-    const auto isTreeItemsFile = std::regex_match(filename.c_str(), treeItemsPattern);
+	const auto isTreeItemsFile = std::regex_match(filename.c_str(), treeItemsPattern);
 
-    if (!isTreeItemsFile) {
-        std::wstring errormessage = std::wstring(filename.c_str()) + std::wstring(L" is not a TreeItems file.");
-        ::MessageBox(NULL, errormessage.c_str(), L"Wrong file!", MB_OK);
-        return;
-    }
-    
-    // Get the length of the current document.
-    const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
+	if (!isTreeItemsFile) {
+		std::wstring errormessage = std::wstring(filename.c_str()) + std::wstring(L" is not a TreeItems file.");
+		::MessageBox(NULL, errormessage.c_str(), L"Wrong file!", MB_OK);
+		return;
+	}
 
-    std::string treeItems;
-    treeItems.resize(length + 1);
-    ::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)treeItems.data());
+	// Get the length of the current document.
+	const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
 
-    // Define the regex pattern to match tags like <P1=...> within sections
-    const std::regex pattern("\\[([^\\]]+)\\]|(<P\\d+=)(.*?)\r\n|([^\\[<]+)");
+	std::string treeItems;
+	treeItems.resize(length + 1);
+	::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)treeItems.data());
 
-    // Create a regex iterator to iterate through matches
-    std::sregex_iterator it(treeItems.begin(), treeItems.end(), pattern);
-    std::sregex_iterator end;
+	// Define the regex pattern to match tags like <P1=...> within sections
+	const std::regex pattern("\\[([^\\]]+)\\]|(<P\\d+=)(.*?)\r\n|([^\\[<]+)");
 
-    std::string result;
-    int tagNumber = 1;
+	// Create a regex iterator to iterate through matches
+	std::sregex_iterator it(treeItems.begin(), treeItems.end(), pattern);
+	std::sregex_iterator end;
 
-    // Iterate through matches
-    while (it != end) {
-        std::smatch match = *it;
+	std::string result;
+	int tagNumber = 1;
 
-        if (match[1].matched) {
-            // Matched a section header, reset the tag number
-            tagNumber = 1;
-            result += match.str();
-        }
-        else if (match[2].matched) {
-            // Matched the beginning of a tag, update the tag number
-            const std::string tagContent = match[3].str();
-            result += "<P" + std::to_string(tagNumber++) + "=" + tagContent + "\r\n";
-        }
-        else if (match[4].matched) {
-            // Matched text that is not a header or a tag, such as blank lines
-            result += match[4].str();
-        }
+	// Iterate through matches
+	while (it != end) {
+		std::smatch match = *it;
 
-        ++it;
-    }
+		if (match[1].matched) {
+			// Matched a section header, reset the tag number
+			tagNumber = 1;
+			result += match.str();
+		}
+		else if (match[2].matched) {
+			// Matched the beginning of a tag, update the tag number
+			const std::string tagContent = match[3].str();
+			result += "<P" + std::to_string(tagNumber++) + "=" + tagContent + "\r\n";
+		}
+		else if (match[4].matched) {
+			// Matched text that is not a header or a tag, such as blank lines
+			result += match[4].str();
+		}
 
-    
-    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
+		++it;
+	}
+
+
+	::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
 }
 
 void showFunny()
 {
-    HINTERNET hInternet = InternetOpen(L"David's Awesome Tools", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
-    if (hInternet == NULL) {
-        OutputDebugStringA("Failed to intialize internet handle.");
-        handleError();
-        return;
-    }
+	HINTERNET hInternet = InternetOpen(L"David's Awesome Tools", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
+	if (hInternet == NULL) {
+		OutputDebugStringA("Failed to intialize internet handle.");
+		handleError();
+		return;
+	}
 
-    HINTERNET hRequest = InternetOpenUrl(hInternet, L"https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    if (hRequest == NULL) {
-        OutputDebugStringA("Failed to create request.");
-        handleError();
-        return;
-    }
+	HINTERNET hRequest = InternetOpenUrl(hInternet, L"https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit", NULL, 0, INTERNET_FLAG_RELOAD, 0);
+	if (hRequest == NULL) {
+		OutputDebugStringA("Failed to create request.");
+		handleError();
+		return;
+	}
 
-    DWORD bytesRead;
-    char buffer[1024];
-    InternetReadFile(hRequest, buffer, sizeof(buffer), &bytesRead);
-    buffer[bytesRead] = '\0';
-    const auto JSONResponse = std::string(buffer);
+	DWORD bytesRead;
+	char buffer[1024];
+	InternetReadFile(hRequest, buffer, sizeof(buffer), &bytesRead);
+	buffer[bytesRead] = '\0';
+	const auto JSONResponse = std::string(buffer);
 
-    // Parse the JSON response using JSON for Modern C++
-    try {
-        nlohmann::json jsonData = nlohmann::json::parse(JSONResponse);
+	// Parse the JSON response using JSON for Modern C++
+	try {
+		nlohmann::json jsonData = nlohmann::json::parse(JSONResponse);
 
-        std::string category = jsonData["category"];
-        std::string type = jsonData["type"];
-        std::string joke = type == "twopart" ? std::string(jsonData["setup"]) + "\n\n" + std::string(jsonData["delivery"]) : jsonData["joke"];
+		std::string category = jsonData["category"];
+		std::string type = jsonData["type"];
+		std::string joke = type == "twopart" ? std::string(jsonData["setup"]) + "\n\n" + std::string(jsonData["delivery"]) : jsonData["joke"];
 
-        ::MessageBoxA(NULL, joke.c_str(), "FUNNY", MB_OK);
+		::MessageBoxA(NULL, joke.c_str(), "FUNNY", MB_OK);
 
-    }
-    catch (const nlohmann::json::parse_error& e) {
-        OutputDebugStringA(e.what());
-    }
+	}
+	catch (const nlohmann::json::parse_error& e) {
+		OutputDebugStringA(e.what());
+	}
 
-    InternetCloseHandle(hRequest);
-    InternetCloseHandle(hInternet);
+	InternetCloseHandle(hRequest);
+	InternetCloseHandle(hInternet);
 
 }
 
 void onDwellStart(SCNotification* pNotify) {
-    const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
-    int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
-    int wordEnd = ::SendMessage(handle, SCI_WORDENDPOSITION, pNotify->position, true);
+	const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
+	int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
+	int wordEnd = ::SendMessage(handle, SCI_WORDENDPOSITION, pNotify->position, true);
 
-    char word[256];
-    Sci_TextRange tr = {
-        { wordStart, wordEnd },
-        word
-    };
+	char word[256];
+	Sci_TextRange tr = {
+		{ wordStart, wordEnd },
+		word
+	};
 
-   const auto result = ::SendMessage(handle, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
+	const auto result = ::SendMessage(handle, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
 
-   if (!result || result > 256) {
-       return;
-   }
-   const auto command = extractCommand(word);
+	if (!result || result > 256) {
+		return;
+	}
+	const auto command = extractCommand(word);
 
-   const auto calltip = buildCallTip(command);
-    ::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)calltip.c_str());
+	const auto calltip = buildCallTip(command);
+
+	::SendMessage(handle, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
+	::SendMessage(handle, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
+	/*::SendMessage(handle, SCI_CALLTIPUSESTYLE, 0, 0);*/
+	::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)calltip.c_str());
 
 }
 
+int lighten_color(int color) {
+	//Extract RGB components
+	int red = (color >> 16) & 0xFF;
+	int green = (color >> 8) & 0xFF;
+	int blue = color & 0xFF;
+
+	// Lighten the color by adding the specified amount
+	red = std::min(255, (int)((red + 10) * 1.4));
+	green = std::min(255, (int)((green + 10) * 1.4));
+	blue = std::min(255, (int)((blue + 10) * 1.4));
+
+	// Recombine the RGB components to get the new color
+	int new_color = (red << 16) | (green << 8) | blue;
+
+	return new_color;
+}
+
+
 std::string extractCommand(const std::string& word) {
-    auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})[A-Z0-9\\[]?");
-    std::smatch match;
-    std::regex_search(word, match, commandRegex);
-    if (!match.ready()) {
-        return "";
-    }
-    return match[1];
+	auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})[A-Z0-9\\[]?");
+	std::smatch match;
+	std::regex_search(word, match, commandRegex);
+	if (!match.ready()) {
+		return "";
+	}
+	return match[1];
 }
 
 std::string buildCallTip(const std::string& word) {
-    for(const auto& entry : commandData) {
-        if (entry["Command"] == word) {
-            return
-                extractDataFromJson(entry);
-        }
-    }
-    return "";
+	for (const auto& entry : commandData) {
+		if (entry["Command"] == word) {
+			return
+				extractDataFromJson(entry);
+		}
+	}
+	return "";
 }
 
 std::string extractDataFromJson(const nlohmann::json& entry) {
-    std::string result;
+	std::string result;
 
-    // Extract the "Command" and "Description" fields
-    result += "Command: " + entry["Command"].get<std::string>() + "\n";
-    result += "Description: " + entry["Description"].get<std::string>() + "\n";
+	// Extract the "Command" and "Description" fields
+	result += "Command: " + entry["Command"].get<std::string>() + "\n";
+	result += "Description: " + entry["Description"].get<std::string>() + "\n";
 
 
-    tabulate::Table usageAndArgumentsTable;
+	tabulate::Table usageAndArgumentsTable;
 
-    // Extract the "Usage" array
-    if (!entry["Usage"].empty()) {
-        for (const auto& usageEntry : entry["Usage"]) {
-            usageAndArgumentsTable.add_row({ "Usage", usageEntry["Example"].get<std::string>(), usageEntry["Explanation"].get<std::string>() });
-        }
-    }
+	// Extract the "Usage" array
+	if (!entry["Usage"].empty()) {
+		for (const auto& usageEntry : entry["Usage"]) {
+			usageAndArgumentsTable.add_row({ "Usage", usageEntry["Example"].get<std::string>(), usageEntry["Explanation"].get<std::string>() });
+		}
+	}
 
-    // Extract the "Operands" object
-    if (!entry["Operands"].empty()) {
-        std::string operands;
-        for (const std::string operand : entry["Operands"]["Operands"]) {
-            operands += operand;
-        }
-        usageAndArgumentsTable.add_row({ "Operands", operands, entry["Operands"]["Explanation"].get<std::string>()});
-    }
+	// Extract the "Operands" object
+	if (!entry["Operands"].empty()) {
+		std::string operands;
+		for (const std::string operand : entry["Operands"]["Operands"]) {
+			operands += operand;
+		}
+		usageAndArgumentsTable.add_row({ "Operands", operands, entry["Operands"]["Explanation"].get<std::string>() });
+	}
 
-    result += usageAndArgumentsTable.str() + "\n";
+	result += usageAndArgumentsTable.str() + "\n";
 
-    // Extract the "Arguments" array
-    if (!entry["Arguments"].empty()) {
-        result += "Arguments:\n";
-        tabulate::Table argumentsTable;
-        argumentsTable.add_row({ "Argument", "Description" });
-        argumentsTable[0].format().font_style({ tabulate::FontStyle::bold });
-        for (const auto& argEntry : entry["Arguments"]) {
-            argumentsTable.add_row({ argEntry["Argument"].get<std::string>(), argEntry["Description"].get<std::string>() });
-        }
-        result += argumentsTable.str();
-    }
+	// Extract the "Arguments" array
+	if (!entry["Arguments"].empty()) {
+		result += "Arguments:\n";
+		tabulate::Table argumentsTable;
+		argumentsTable.add_row({ "Argument", "Description" });
+		argumentsTable[0].format().font_style({ tabulate::FontStyle::bold });
+		for (const auto& argEntry : entry["Arguments"]) {
+			argumentsTable.add_row({ argEntry["Argument"].get<std::string>(), argEntry["Description"].get<std::string>() });
+		}
+		result += argumentsTable.str();
+	}
 
-    return result;
+	return result;
 }
 
 void onDwellEnd(SCNotification* pNotify) {
-    std::thread([=] {
-        std::this_thread::sleep_for(std::chrono::seconds(3));
-        // Code to cancel the call tip.
-        ::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
-    }).detach();
+	std::thread([=] {
+		std::this_thread::sleep_for(std::chrono::seconds(3));
+		// Code to cancel the call tip.
+		::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
+		}).detach();
 }
 
 void handleError()
 {
-    const auto errorCode = GetLastError();
-    LPVOID lpMsgBuf;
+	const auto errorCode = GetLastError();
+	LPVOID lpMsgBuf;
 
-    FormatMessage(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER |
-        FORMAT_MESSAGE_FROM_SYSTEM |
-        FORMAT_MESSAGE_IGNORE_INSERTS,
-        NULL,
-        errorCode,
-        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-        (LPTSTR)&lpMsgBuf,
-        0, NULL);
+	FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM |
+		FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		errorCode,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		(LPTSTR)&lpMsgBuf,
+		0, NULL);
 
-    ::MessageBox(NULL, (LPCTSTR)lpMsgBuf, TEXT("Error"), MB_OK);
+	::MessageBox(NULL, (LPCTSTR)lpMsgBuf, TEXT("Error"), MB_OK);
 }
 

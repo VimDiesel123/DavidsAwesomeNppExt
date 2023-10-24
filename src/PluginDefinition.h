@@ -85,6 +85,7 @@ void onDwellEnd(SCNotification* pNotify);
 std::string buildCallTip(const std::string& word);
 std::string extractCommand(const std::string& word);
 std::string extractDataFromJson(const nlohmann::json& entry);
+int lighten_color(int color);
 
 void handleError();
 

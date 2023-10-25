@@ -338,11 +338,7 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 }
 
 void onDwellEnd(SCNotification* pNotify) {
-	std::thread([=] {
-		std::this_thread::sleep_for(std::chrono::seconds(3));
-		// Code to cancel the call tip.
-		::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
-		}).detach();
+	::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
 }
 
 void handleError()

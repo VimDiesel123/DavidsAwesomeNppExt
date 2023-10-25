@@ -275,7 +275,7 @@ int lighten_color(int color) {
 
 
 std::string extractCommand(const std::string& word) {
-	auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})(?:[A-H0-9]+=?|#|$)");
+	auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})(?:[A-HW-Z0-9]+=?|#|$)");
 	std::smatch match;
 	std::regex_search(word, match, commandRegex);
 	if (!match.ready()) {

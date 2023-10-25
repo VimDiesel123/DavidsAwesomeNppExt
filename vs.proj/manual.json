@@ -361,16 +361,8 @@
         "Description": "The @COM[] operation performs the bitwise complement (NOT) operation to the given number.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Value to perform bitwise complement"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "operation."
+                "Description": "Value to perform bitwise complement\roperation."
             }
         ]
     },
@@ -446,15 +438,7 @@
             },
             {
                 "Argument": "",
-                "Description": "Aux encoder input to"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "query"
+                "Description": "Aux encoder input to\rquery"
             },
             {
                 "Argument": "n",
@@ -567,16 +551,8 @@
         "Description": "The @SQR operation takes the square root of the given number.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Value to use in square root"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "operation"
+                "Description": "Value to use in square root\roperation"
             }
         ]
     },
@@ -623,28 +599,12 @@
         "Description": "Locks user access to the application program. When locked, the ED, UL, LS, and TR commands will give privilege error #106. The application program will\nstill run when locked. Once the program is unlocked, it will remain accessible until a lock command or a reset (with the locked condition burned in) occurs.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Controller password"
-            },
-            {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "string"
-            },
-            {
-                "Argument": "",
-                "Description": "Set lock/unlock state for"
+                "Description": "Controller password\rstring"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "controller"
+                "Description": "Set lock/unlock state for\rcontroller"
             }
         ]
     },
@@ -760,7 +720,36 @@
         "Usage": [],
         "Operands": {},
         "Description": "Variable axis designator. Each variable can be assigned an indivudal axis, a vector plane, or a virtual axis. Motion commands on the variable will then apply\nto the assigned axis.\nCommands supporting variable axes are denoted in this command reference with the following icon.\nVariable axis supported icon",
-        "Arguments": []
+        "Arguments": [
+            {
+                "Argument": "s",
+                "Description": "Variable axis name"
+            },
+            {
+                "Argument": "str",
+                "Description": "Name of axis"
+            },
+            {
+                "Argument": "",
+                "Description": "Virtual axis"
+            },
+            {
+                "Argument": "",
+                "Description": "Coordinate System"
+            },
+            {
+                "Argument": "n",
+                "Description": "Index of the axis"
+            },
+            {
+                "Argument": "",
+                "Description": "Coordinate System"
+            },
+            {
+                "Argument": "",
+                "Description": "Virtual Axis"
+            }
+        ]
     },
     {
         "Command": "+",
@@ -938,27 +927,11 @@
             },
             {
                 "Argument": "",
-                "Description": "Virtual axis to assign"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "value"
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Virtual axis to assign\rvalue"
             },
             {
                 "Argument": "n",
                 "Description": "Acceleration rate"
-            },
-            {
-                "Argument": "",
-                "Description": ""
             }
         ]
     },
@@ -1006,36 +979,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The AF command configures analog feedback mode for the PID filter.\nThe controller ADC can be used as position feedback for the axis control law. The analog input used for feedback is fixed and uses the input that\ncorresponds with the axis letter. For example, Analog input 1 is used for the A axis.\nSinusoidal feedback encoders are also configured by the AF command.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "AG",
@@ -1056,16 +1000,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The AG command sets the amplifier current/voltage gain for the internal amplifier. \nNote: some Galil internal amplifiers have fixed gains. \nPlease reference the\nmanual or data-sheet for more details.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Gain setting"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "AI",
@@ -1079,40 +1014,16 @@
         "Description": "The AI command is a trippoint used in motion programs to wait until after a specified input has changed state. This command can be configured such that\nthe controller will wait until the input goes high or the input goes low.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "General input to use for"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
+                "Description": "General input to use for\rtrippoint"
             },
             {
                 "Argument": "",
-                "Description": "trippoint"
+                "Description": "Extended input to use for\rtrippoint"
             },
             {
                 "Argument": "",
-                "Description": "Extended input to use for"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "trippoint"
-            },
-            {
-                "Argument": "",
-                "Description": "Aux encoder input to use"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "for trippoint"
+                "Description": "Aux encoder input to use\rfor trippoint"
             }
         ]
     },
@@ -1133,40 +1044,16 @@
         "Description": "The AL command enables the latch function (high speed main or auxiliary position capture) of the controller. When the position latch is armed, the main\nor auxiliary encoder position will be captured upon a low going signal from the specified digital input.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
+                "Argument": "mm",
+                "Description": "Encoder to latch"
             },
             {
                 "Argument": "mm",
                 "Description": "Encoder to latch"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "mm",
-                "Description": "Encoder to latch"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Index input to"
-            },
-            {
-                "Argument": "mm",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "trigger latch"
+                "Description": "Index input to\rtrigger latch"
             }
         ]
     },
@@ -1189,20 +1076,8 @@
         "Description": "The AM command is a trippoint used to control the timing of events. This command will hold up execution of the following commands until the current\nmove on the specified axis or axes is completed. Any combination of axes or a motion sequence may be specified with the AM command.\nFor example, AM AB waits for motion on both the A and B axis to be complete. AM with no parameter specifies that motion on all axes to be complete.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "mm",
                 "Description": "Axes to wait for profiled motion to complete"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
             },
             {
                 "Argument": "",
@@ -1210,19 +1085,7 @@
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Firmware Rev 1.2a and later. Virtual axis to wait for"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "profiled motion to complete"
+                "Description": "Firmware Rev 1.2a and later. Virtual axis to wait for\rprofiled motion to complete"
             }
         ]
     },
@@ -1238,16 +1101,8 @@
         "Description": "The AO command sets the analog outputs on the Galil or for a Modbus Slave.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Set Analog Output on Modbus"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Slave"
+                "Description": "Set Analog Output on Modbus\rSlave"
             },
             {
                 "Argument": "n1",
@@ -1302,20 +1157,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The AQ command is used to set the behavior of the analog inputs. This command will set the analog range and operation for the specified input.",
-        "Arguments": [
-            {
-                "Argument": "n0",
-                "Description": "Analog input channel"
-            },
-            {
-                "Argument": "n1",
-                "Description": "Analog range setting"
-            },
-            {
-                "Argument": "",
-                "Description": "Specify analog input is differential"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "AR",
@@ -1399,24 +1241,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The AU command sets the amplifier current loop gain for internal amplifiers.\nFor Galil Trap amplifiers, the current loop is available in one of two settings. AU also sets the switching mode where available, Chopper vs. Inverter.\nFor Galil Sine amplifiers, the optimal current loop gain setting is determined by the bus voltage supplied to the amplifier and the phase to phase inductance\nof the motor. The table in the Arguments section provides ideal AU settings for common bus voltages and phase to phase inductance.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Set amplifier current loop gain"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "setting"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "AU ",
@@ -1469,28 +1294,12 @@
         "Description": "BA is used to configure the controller for sinusoidal operation.\nGalil Sine Drive Use\nFor axes equipped with a Galil sine drive, BA is used to configure the axis for sinusoidal operation. In addition to BA, BM and BX or BZ must be used to\ninitialize the drive commutation. When using a Galil sine drive, one axis of control is required for one axis of drive. This is in contrast to the paired behavior\nbelow.\nThird-Party Sine Drives Requiring Dual Analog Inputs (Rare)\nIn rare cases, some third-party sinusoidal drives require two analog signals to perform commutation. In this case, the BA command configures the\ncontroller axes for sinusoidal commutation and reconfigures the controller to reflect the actual number of motors that can be controlled. In this\nconfiguration, each axis requires 2 motor command signals. The second motor command signals will always be associated with the highest axis on the\ncontroller. For example a 3 axis controller with A and C configured for sinusoidal commutation will require 5 command outputs (a 5 axis controller), where\nthe second outputs for A and C will be the D and E axes respectively.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "mm",
                 "Description": "Axes to initialize for sine amps"
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Disable sine initialization for all"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "axes."
+                "Description": "Disable sine initialization for all\raxes."
             }
         ]
     },
@@ -1513,16 +1322,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BB function describes the position offset between the Hall transition point and theta = 0, for a sinusoidally commutated motor. This is used when\ndoing hall initialization of a sine commutated drive.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Phase offset of hall sensors"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BC",
@@ -1565,16 +1365,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The BD command sets the commutation phase of a sinusoidally commutated motor manually. When using hall effect sensors, a more accurate value for\nthis parameter can be set by using the command, BC. This command should not be used except when the user is creating a specialized phase initialization\nprocedure.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Brushless motor angle in degrees"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BG",
@@ -1593,40 +1384,16 @@
         "Description": "The BG command starts a motion on the specified axis or sequence.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "mm",
                 "Description": "Axes to begin motion"
             },
             {
                 "Argument": "",
-                "Description": ""
+                "Description": "Vector plane axes to\rbegin motion"
             },
             {
                 "Argument": "",
-                "Description": "Vector plane axes to"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "begin motion"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis to begin"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "motion"
+                "Description": "Virtual axis to begin\rmotion"
             }
         ]
     },
@@ -1649,56 +1416,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BI command is used to define the inputs which are used when Hall sensors have been wired for sinusoidally commutated motors. See the BC\ncommand for more information about initialization of sine amplifiers via hall inputs",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Select starting General"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "input for hall sensor use"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Select starting extended"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "input for hall sensor use"
-            },
-            {
-                "Argument": "",
-                "Description": "Select starting auxiliary"
-            },
-            {
-                "Argument": "",
-                "Description": "encoder input for hall"
-            },
-            {
-                "Argument": "",
-                "Description": "sensor use."
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BK",
@@ -1717,40 +1435,16 @@
         "Description": "The BK command causes the controller to pause execution of the given thread at the given program line number. When that line is reached, program\nexecution halts before the line is executed, while all other threads continue running. After a breakpoint is encountered, a new breakpoint can be armed (to\ncontinue execution to the new breakpoint) or BK will resume program execution. The SL command can be used to single step from the breakpoint.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Line number to set"
+                "Argument": "n0",
+                "Description": "Line number to set\rbreakpoint"
             },
             {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "breakpoint"
-            },
-            {
-                "Argument": "",
-                "Description": "Line number to set"
-            },
-            {
-                "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "breakpoint"
-            },
-            {
-                "Argument": "",
-                "Description": "Thread number to set"
+                "Description": "Line number to set\rbreakpoint"
             },
             {
                 "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "breakpoint"
+                "Description": "Thread number to set\rbreakpoint"
             }
         ]
     },
@@ -1773,16 +1467,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BL command sets the reverse software limit. If this limit is exceeded during motion, motion on that axis will decelerate to a stop. Reverse motion\nbeyond this limit is not permitted.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Position for reverse soft limit"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BM",
@@ -1803,16 +1488,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BM command defines the length of the magnetic cycle in encoder counts.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Encoder counts per magnetic cycle"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BN",
@@ -1850,16 +1526,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BO command sets a fixed offset on the command signal for sinusoidally commutated motors. This may be used to offset any bias in the amplifier, or\ncan be used for phase initialization.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Offset applied to DAC output in volts"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BP",
@@ -1892,16 +1559,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BQ command sets a fixed offset on the command signal for sinusoidally commutated motors when using an internal Galil sine drive. This may be used\nto offset any bias in the amplifier, or can be used for phase initialization.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Offset applied to DAC output in volts."
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BR",
@@ -1922,28 +1580,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BR command configures the motor configuration and type for an axis.\nThe BR command is used with internal Galil amplifiers to enable which axes will be set as brush-type servos or to configure the firmware to use external\ndrives instead of the internal channel.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "Argument",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": "Use for external drives with internal sine amps -D3640, -D3540 and -D3520"
-            },
-            {
-                "Argument": "",
-                "Description": "Default"
-            },
-            {
-                "Argument": "",
-                "Description": "Use for axes with external drives on -D3040 and -D3020 to avoid hall errors"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BT",
@@ -1998,16 +1635,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The BW command sets the delay between when the brake is turned on and when the amp is turned off. When the controller goes into a motor-off (MO)\nstate, this is the time (in samples) between when the brake digital output changes state and when the amp enable digital output changes state. The brake\nis actuated immediately upon MO and the delay is to account for the time it takes for the brake to engage mechanically once it is energized electrically. The\nbrake is released immediately upon SH.\nBrake Wait Timing\nBrake Wait Timing Diagram",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Specify brake wait time, in samples."
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "BX",
@@ -2028,36 +1656,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The BX command uses a method to initialize an axis with limited movement of the hardware. The BX uses a limited motion algorithm to determine the\nproper location of the motor within the magnetic cycle. It is expected to move no greater than 10 degrees of the magnetic cycle. The last stage of the BX\ncommand will lock the motor into the nearest 15 degree increment.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Voltage to be applied during amp"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "initialization"
-            },
-            {
-                "Argument": "",
-                "Description": "Number of samples for BX to hold final"
-            },
-            {
-                "Argument": "o",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "torque pulse."
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "~a",
@@ -2085,48 +1684,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The BZ command is used to initialize axes which use sinusoidal commutation. To do this, the command drives the motor to two different magnetic\npositions and sets the magnetic position.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": "Voltage to be applied during amp initialization"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Time in milliseconds for BZ to hold at second"
-            },
-            {
-                "Argument": "o",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "magnetic position"
-            },
-            {
-                "Argument": "",
-                "Description": "Time in milliseconds for BZ to hold at first"
-            },
-            {
-                "Argument": "p",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "magnetic position"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": ". ",
@@ -2168,16 +1726,8 @@
                 "Description": "General output bit to be cleared"
             },
             {
-                "Argument": "",
-                "Description": "Extended I/O output bit to be"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cleared"
+                "Description": "Extended I/O output bit to be\rcleared"
             },
             {
                 "Argument": "n",
@@ -2230,64 +1780,24 @@
         "Description": "The CD command specifies the incremental position on contour axes. This command is used only in the Contour Mode (CM). The incremental position will\nbe executed over the time period specified by the command DT (ranging from 2 to 256 servo updates)",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Axis to assign"
-            },
-            {
                 "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "value"
-            },
-            {
-                "Argument": "",
-                "Description": "Contour position"
+                "Description": "Axis to assign\rvalue"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "segment"
-            },
-            {
-                "Argument": "",
-                "Description": "Time override"
+                "Description": "Contour position\rsegment"
             },
             {
                 "Argument": "t",
-                "Description": ""
+                "Description": "Time override\roption"
             },
             {
                 "Argument": "",
-                "Description": "option"
+                "Description": "Time override\roption"
             },
             {
                 "Argument": "",
-                "Description": "Time override"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "option"
-            },
-            {
-                "Argument": "",
-                "Description": "Time override"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "option"
+                "Description": "Time override\roption"
             }
         ]
     },
@@ -2310,40 +1820,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The CE command configures the encoder to quadrature type or pulse and direction type. It also allows inverting the polarity of the encoders which\nreverses the direction of the feedback. The configuration applies independently to the main axes encoders and the auxiliary encoders.",
-        "Arguments": [
-            {
-                "Argument": "",
-                "Description": "Axis to assign"
-            },
-            {
-                "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "value"
-            },
-            {
-                "Argument": "",
-                "Description": "Encoder"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": "configuration"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "setting"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "CF",
@@ -2362,40 +1839,16 @@
         "Description": "The CF command sets the port for unsolicited messages. The CF command directs the controller to send unsolicited responses to the Main or Aux Serial\nPort (If equipped), or to an Ethernet handle. An unsolicited message is data generated by the controller which is not in response to a command sent by\nthe host.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Ethernet Handle to assign as unsolicited"
-            },
-            {
                 "Argument": "m",
-                "Description": ""
+                "Description": "Ethernet Handle to assign as unsolicited\rmessage port"
             },
             {
                 "Argument": "",
-                "Description": "message port"
-            },
-            {
-                "Argument": "",
-                "Description": "Set the port that sent the command as the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "unsolicited message port"
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Set the port that sent the command as the\runsolicited message port"
             },
             {
                 "Argument": "",
                 "Description": "Set serial port as unsolicited message port"
-            },
-            {
-                "Argument": "",
-                "Description": ""
             }
         ]
     },
@@ -2469,72 +1922,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The CN command configures the polarity of the limit switches, home switches, latch inputs, the selective abort function, and the program termination\nbehavior of the abort input.",
-        "Arguments": [
-            {
-                "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n2",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n3",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n4",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "CO",
@@ -2553,16 +1941,8 @@
         "Description": "The CO command configures which banks are inputs and which are outputs on the extended I/O. The extended I/O points of the controller can be\nconfigured in banks of 8.\nThe extended I/O is denoted as bits 17-48 and banks 2-5.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Bitmask to configure extended IO as"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "inputs or outputs"
+                "Description": "Bitmask to configure extended IO as\rinputs or outputs"
             }
         ]
     },
@@ -2585,16 +1965,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The CP command sets the deadband within which the motor is shut off. After a move is complete (_BGn = 0) and the absolute value of the position error\nTE becomes less than the dead band CP, the motor is turned off. SH must be issued before further motion can be commanded. CT can be used to\nincrement the integrator limit to ensure that the motor reaches the dead band.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Set the position deadband for motor off."
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "CR",
@@ -2609,102 +1980,34 @@
         "Arguments": [
             {
                 "Argument": "n0",
-                "Description": ""
+                "Description": "Radius of circle segment"
             },
             {
                 "Argument": "n1",
-                "Description": ""
+                "Description": "Starting angle of circle segment"
             },
             {
                 "Argument": "n2",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Degrees to traverse for circle segment"
             },
             {
                 "Argument": "o",
-                "Description": ""
+                "Description": "Specifies the vector speed to be commanded at the beginning of\rthe segment. The controller will start accelerating or decelerating at\rthe start of the sequence to this speed."
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Specifies the vector speed to be commanded at the beginning of\rthe segment. The controller will start accelerating or decelerating at\rthe start of the sequence to this speed."
             },
             {
                 "Argument": "p",
-                "Description": ""
+                "Description": "Specifies the vector speed to be achieved at the end of the\rsegment. The controller will decelerate or accelerate during the\rsegment and will reach the specified speed at the end of the\rsegment."
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Specifies the vector speed to be achieved at the end of the\rsegment. The controller will decelerate or accelerate during the\rsegment and will reach the specified speed at the end of the\rsegment."
             },
             {
                 "Argument": "Argument",
-                "Description": ""
-            },
-            {
-                "Argument": "o",
                 "Description": ""
             }
         ]
@@ -2759,39 +2062,15 @@
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
                 "Description": "Controller will not set the MSB of unsolicited message characters"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Controller will pause program execution when hardware handshaking"
-            },
-            {
                 "Argument": "n1",
-                "Description": ""
+                "Description": "Controller will pause program execution when hardware handshaking\rdisables character transmissions"
             },
             {
                 "Argument": "",
-                "Description": "disables character transmissions"
-            },
-            {
-                "Argument": "",
-                "Description": "Controller will continue program execution when hardware"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "handshaking disables character transmissions"
+                "Description": "Controller will continue program execution when hardware\rhandshaking disables character transmissions"
             }
         ]
     },
@@ -2840,16 +2119,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "When the absolute value of the error TE is greater than DB, the torque output TT will be set back to normal (reflecting KP, KD, KI, ZP, and ZN). This is\nused to avoid oscillation when holding position.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Position setpoint for PID deadband"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "DC",
@@ -2870,20 +2140,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The Deceleration command (DC) sets the linear deceleration rate of the motors for independent moves such as PR, PA, and JG moves. The parameters\nwill be rounded down to the nearest factor of 1024 and have units of counts per second squared.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Deceleration rate"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "DE",
@@ -2904,20 +2161,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The DE command defines the position of the auxiliary (dual) encoders.\nDual encoders are useful when you need an encoder on the motor and on the load. The encoder on the load is typically the auxiliary encoder and is used\nto verify the true load position. Any error in load position is used to correct the motor position.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Position set for auxiliary encoders"
-            },
-            {
-                "Argument": "",
-                "Description": "Position set for main encoders"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "DF",
@@ -2938,16 +2182,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The DF command allows configuration of BiSS or SSI feedback in Dual Loop mode as the load encoder. For users wishing to operate with SSI or BiSS in\nDual Loop mode (DV), the DF command can be used to configure a load-side serial encoder and a motor-side incremental encoder with DV1.",
-        "Arguments": [
-            {
-                "Argument": "n",
-                "Description": "Disable feedback swap"
-            },
-            {
-                "Argument": "",
-                "Description": "Enable feedback swap"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "DH",
@@ -2982,52 +2217,20 @@
         "Description": "The DL command transfers a data file from the host computer to the controller. Instructions in the file will be accepted as a data stream without line\nnumbers. The file is terminated using <control> Z, <control> Q, <control> D, or \\.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Line number to begin program"
+                "Argument": "n",
+                "Description": "Line number to begin program\rdownload"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "download"
-            },
-            {
-                "Argument": "",
-                "Description": "Line number to begin program"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "download"
-            },
-            {
-                "Argument": "",
-                "Description": "Name of label in RAM to begin"
+                "Description": "Line number to begin program\rdownload"
             },
             {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "download from."
-            },
-            {
-                "Argument": "",
-                "Description": "Begins download at end of"
+                "Description": "Name of label in RAM to begin\rdownload from."
             },
             {
                 "Argument": "s",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "program in RAM"
+                "Description": "Begins download at end of\rprogram in RAM"
             }
         ]
     },
@@ -3047,28 +2250,12 @@
                 "Description": "Name of array to dimension"
             },
             {
-                "Argument": "",
-                "Description": "Number of array elements to assign to dimensioned"
+                "Argument": "n",
+                "Description": "Number of array elements to assign to dimensioned\rarray"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "array"
-            },
-            {
-                "Argument": "",
-                "Description": "Number of array elements to assign to dimensioned"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "array"
+                "Description": "Number of array elements to assign to dimensioned\rarray"
             }
         ]
     },
@@ -3094,35 +2281,19 @@
         "Arguments": [
             {
                 "Argument": "m",
-                "Description": ""
+                "Description": "Axis to assign value"
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Virtual axis to assign value"
             },
             {
                 "Argument": "n",
-                "Description": ""
+                "Description": "Value assigned to motor/commanded position (RP and\rTP registers)"
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Value assigned to step/commanded position (RP and TD\rregisters)"
             }
         ]
     },
@@ -3144,32 +2315,16 @@
         "Description": "DR specifies and enables the rate for the controller to output its data record.\nFor ethernet-based controllers, the controller creates a QR record and sends it to the unsolicited UDP Ethernet Handle at the specified rate. See the User\nManual for the data record map.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Data update rate specified in samples"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "between packets."
+                "Description": "Data update rate specified in samples\rbetween packets."
             },
             {
                 "Argument": "",
                 "Description": "Turn off data record output"
             },
             {
-                "Argument": "",
-                "Description": "Ethernet handle to output data record"
-            },
-            {
                 "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "packet"
+                "Description": "Ethernet handle to output data record\rpacket"
             }
         ]
     },
@@ -3192,16 +2347,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "When the absolute value of the error TE is less than DS, the torque output TT will be set to the offset OF (the contributions of KP, KD, KI, ZP, and ZN are\nset to zero). This is used to avoid oscillation when holding position.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Position range for PID deadband"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "DT",
@@ -3250,16 +2396,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The DV function changes the operation of the PID filter to work off of dual encoders. DV enabled causes the KD (derivative) term to operate on the dual\nencoder instead of the main encoder. This results in improved stability in the cases where there is a backlash between the motor and the main encoder,\nand where the dual encoder is mounted on the motor.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "State of dual loop mode"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "EA",
@@ -3347,32 +2484,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The ED command puts the controller into the Edit subsystem. The ED command is used when using Telnet style interface (not Galil Software). In the Edit\nsubsystem, programs can be created, changed, or destroyed.",
-        "Arguments": [
-            {
-                "Argument": "",
-                "Description": "Line number to"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "begin editing"
-            },
-            {
-                "Argument": "",
-                "Description": "Line number to"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "begin editing"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "' This message is from thread 2 ",
@@ -3400,24 +2512,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The EG command engages an ECAM slave axis at a specified position of the master. Once a slave motor is engaged, its position is redefined to fit within the\ncycle.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Master position to"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "engage ECAM slave"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "EI",
@@ -3440,28 +2535,12 @@
                 "Description": "16-bit interrupt mask"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "n2",
                 "Description": "8-bit input mask"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Preconfigured UDP handle"
-            },
-            {
                 "Argument": "n3",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "for interrupt transmission"
+                "Description": "Preconfigured UDP handle\rfor interrupt transmission"
             }
         ]
     },
@@ -3503,20 +2582,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The EM command defines the change in position over one complete cycle of the master.\nThe field for the master axis is the cycle of the master position. For the slaves, the field defines the net change in one cycle.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Position change over one full ECAM cycle"
-            },
-            {
-                "Argument": "",
-                "Description": "Position change over one full ECAM cycle"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "EN",
@@ -3530,32 +2596,16 @@
         "Description": "The EN command is used to designate the end of a program or subroutine. If a subroutine was called by the JS command, the EN command ends the\nsubroutine and returns program flow to the point just after the JS command.\nA return parameter can be specified to EN from a subroutine to return a value from the subroutine to the calling stack.",
         "Arguments": [
             {
-                "Argument": "n0=1 restores trippoints. n0=0 does notn0 0",
-                "Description": "Specify trippoint status when"
+                "Argument": "n0",
+                "Description": "Specify trippoint status when\rreturning from subroutine"
             },
             {
-                "Argument": "",
-                "Description": "returning from subroutine"
-            },
-            {
-                "Argument": "n1=1 restores CI interrupt. n1=0 doesn1 0",
-                "Description": "Set status of CI interrupt when"
-            },
-            {
-                "Argument": "",
-                "Description": "returning from #COMINT"
-            },
-            {
-                "Argument": "-",
-                "Description": "Return a value from a"
+                "Argument": "n1",
+                "Description": "Set status of CI interrupt when\rreturning from #COMINT"
             },
             {
                 "Argument": "n2",
-                "Description": ""
-            },
-            {
-                "Argument": "2,147,483,648",
-                "Description": "subroutine."
+                "Description": "Return a value from a\rsubroutine."
             }
         ]
     },
@@ -3642,24 +2692,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The EQ command disengages an electronic cam slave axis at the specified master position. Separate points can be specified for each axis. If a value is\nspecified outside of the master's range, the slave will disengage immediately.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Master position to disengage"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "the slave axis specified."
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "ER",
@@ -3686,16 +2719,8 @@
                 "Description": "Axis to assign value"
             },
             {
-                "Argument": "",
-                "Description": "Set the position error limit in"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "counts"
+                "Description": "Set the position error limit in\rcounts"
             }
         ]
     },
@@ -3759,48 +2784,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The EW command allows widening the length of one or two ECAM segments beyond the width specified by EP. For ECAM tables with one or two long\nlinear sections, this allows placing more points in the curved sections of the table. There are only two widened segments, and if used they are common for\nall ECAM axes.",
-        "Arguments": [
-            {
-                "Argument": "n0",
-                "Description": "Index of first widened segment"
-            },
-            {
-                "Argument": "",
-                "Description": "Length of first widened"
-            },
-            {
-                "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "segment"
-            },
-            {
-                "Argument": "",
-                "Description": "Index of second widened"
-            },
-            {
-                "Argument": "n2",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "segment"
-            },
-            {
-                "Argument": "",
-                "Description": "Length of second widened"
-            },
-            {
-                "Argument": "n3",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "segment"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "EY",
@@ -3843,16 +2827,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The FA command sets the acceleration feedforward coefficient. This coefficient is scaled by the set acceleration and adds a torque bias voltage during the\nacceleration phase and subtracts the bias during the deceleration phase of a motion.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of proportional term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "FC",
@@ -3873,16 +2848,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "Adds a bias to the torque output TT proportional to the commanded velocity if the distance from the end of the move is less than FN. FC is the same as\nFV but activated FN counts from the end of the move and both positive and negative values are allowed.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of distance selectable feedforward gain"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "FE",
@@ -3937,16 +2903,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The FL command sets the forward software position limit. If this limit is exceeded during motion, motion on that axis will decelerate to a stop. Forward\nmotion beyond this limit is not permitted.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of software forward limit"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "FN",
@@ -3967,16 +2924,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "Adds a bias to the torque output TT proportional to the commanded velocity if the distance from the end of the move is less than FN. FC is the same as\nFV but activated FN counts from the end of the move and both positive and negative values are allowed.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Distance from end of move for FC to engage"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "FV",
@@ -3997,20 +2945,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The FV command sets the velocity feedforward coefficient. This coefficient generates an output bias signal in proportions to the sample to sample change\nin reference position (RP).",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of proportional term"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of proportional term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "GA",
@@ -4032,40 +2967,16 @@
                 "Description": "Slave axis to assign master"
             },
             {
-                "Argument": "",
-                "Description": "Master axis main encoder as the slave's"
-            },
-            {
                 "Argument": "m",
-                "Description": ""
+                "Description": "Master axis main encoder as the slave's\rmaster"
             },
             {
                 "Argument": "",
-                "Description": "master"
+                "Description": "Master axis commanded position as the\rslave's master"
             },
             {
                 "Argument": "",
-                "Description": "Master axis commanded position as the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "slave's master"
-            },
-            {
-                "Argument": "",
-                "Description": "Master axis aux encoder as the slave's"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "master"
+                "Description": "Master axis aux encoder as the slave's\rmaster"
             },
             {
                 "Argument": "",
@@ -4122,16 +3033,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The GM command specifies the axes in which the gearing function is performed in the Gantry mode. In this mode, the geared slaves will not be stopped\nby the ST command or by limit switches.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of GM command"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "GR",
@@ -4152,16 +3054,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "GR specifies the Gear Ratios for the geared axes in the electronic gearing mode. The master axis is defined by the GA command.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Slave axis to assign gear ratio"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of Gear Ratio of Slave"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "HM",
@@ -4206,39 +3099,15 @@
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
                 "Description": "First handle to switch"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Second handle to"
-            },
-            {
                 "Argument": "m",
-                "Description": ""
+                "Description": "Second handle to\rswitch"
             },
             {
                 "Argument": "",
-                "Description": "switch"
-            },
-            {
-                "Argument": "",
-                "Description": "Second handle to"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "switch"
+                "Description": "Second handle to\rswitch"
             }
         ]
     },
@@ -4261,36 +3130,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "Sets the slew speed for the FI final move to the index and all but the first stage of HM.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of Homing Velocity in"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of Homing Velocity in"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "HX",
@@ -4314,12 +3154,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The HX command halts the execution of any program that is running.The parameter n specifies the thread to be halted.",
-        "Arguments": [
-            {
-                "Argument": "n",
-                "Description": "Thread number to halt"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "IA",
@@ -4341,48 +3176,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The IA command assigns the controller IP address and the TCP time out. The IP address can also be assigned via Galil software or from an external server.\nThe controller defaults to DHCP and will receive an IP address from a DHCP server if present. To manually set an IP address over the serial connection,\nsend DH0 to disable DHCP prior to setting the new IP address with IA.\nGalilTools and GalilSuite software packages feature a DHCP/BOOTP capability to assign the IP address to the controller. Please refer to the user manuals for\nthose products for more information.",
-        "Arguments": [
-            {
-                "Argument": "n0",
-                "Description": "Byte 3 of the IP address"
-            },
-            {
-                "Argument": "n1",
-                "Description": "Byte 2 of the IP address"
-            },
-            {
-                "Argument": "n2",
-                "Description": "Byte 1 of the IP address"
-            },
-            {
-                "Argument": "n3",
-                "Description": "Byte 0 of the IP address"
-            },
-            {
-                "Argument": "",
-                "Description": "The full IP address specified as a signed 32 bit two's"
-            },
-            {
-                "Argument": "n4",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "complement integer"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "o",
-                "Description": "The time in update samples between TCP retries"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "ID",
@@ -4446,88 +3240,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The IH command is used when the controller is operated as a master (client) to open a handle and connect to a slave (server).",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Handle to assign connection"
-            },
-            {
-                "Argument": "",
-                "Description": "Special handle designator used"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "when closing handles"
-            },
-            {
-                "Argument": "n0",
-                "Description": "Byte 3 of the slave IP address"
-            },
-            {
-                "Argument": "n1",
-                "Description": "Byte 2 of the slave IP address"
-            },
-            {
-                "Argument": "n2",
-                "Description": "Byte 1 of the slave IP address"
-            },
-            {
-                "Argument": "n3",
-                "Description": "Byte 0 of the slave IP address"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": "Slave IP address as a 32 bit value"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Specify the slave port to connect"
-            },
-            {
-                "Argument": "o",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "over"
-            },
-            {
-                "Argument": "",
-                "Description": "Specify the connection type to"
-            },
-            {
-                "Argument": "p",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "open"
-            },
-            {
-                "Argument": "",
-                "Description": "Specify the connection type to"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "close when closing a handle"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "Attempting to establish UDP handle",
@@ -4548,32 +3261,20 @@
         "Description": "The II command enables the input interrupt function for the specified inputs.\nIf any of the specified inputs are activated during program execution, the program will jump to the subroutine with label #ININT. Any trippoints set by the\nprogram will be cleared but can be re-enabled by the proper termination of the interrupt subroutine using RI.",
         "Arguments": [
             {
-                "Argument": "n0 0",
+                "Argument": "n0",
                 "Description": "Lowest input to use for interrupt trigger"
             },
             {
-                "Argument": "n1 1",
+                "Argument": "n1",
                 "Description": "Highest input to use for interrupt trigger"
             },
             {
-                "Argument": "If n0 and n1 used, n2 is ignored, seen2 1",
-                "Description": "Use bitmask as alternative selection of"
+                "Argument": "n2",
+                "Description": "Use bitmask as alternative selection of\rinput interrupt triggers"
             },
             {
-                "Argument": "",
-                "Description": "input interrupt triggers"
-            },
-            {
-                "Argument": "",
-                "Description": "Bitmask specifying required input state for"
-            },
-            {
-                "Argument": "n3 0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "interrupt trigger"
+                "Argument": "n3",
+                "Description": "Bitmask specifying required input state for\rinterrupt trigger"
             }
         ]
     },
@@ -4617,24 +3318,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The IL command limits the effect of the integrator gain in the filter to a certain voltage.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of Integrator limit"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "in volts"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "IN",
@@ -4705,24 +3389,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The IT command filters the acceleration and deceleration functions of independent moves such as JG, PR, PA to produce a smooth velocity profile. The\nresulting profile, known as smoothing, has continuous acceleration and results in reduced mechanical vibrations. IT sets the bandwidth of the filter where 1\nmeans no filtering and 0.004 means maximum filtering.\nThe IT command also filters the individual axes during Vector Mode (VM) and Linear Interpolation Mode (LM).",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of independent smoothing"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "function"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "JG",
@@ -4743,52 +3410,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The JG command sets the jog mode and the jog slew speed of the axes.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of jog speed in"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of jog speed in"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Vale of jog speed in cnts/second"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "JP",
@@ -4802,40 +3424,16 @@
         "Description": "The JP command causes a jump to a program location on a specified condition. The program location may be any program line number or label. A jump\nis taken if the specified condition is true. Multiple conditions can be used in a single jump statement.\nJP can be used for relative jumps and for jump tables, see Examples.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "str",
                 "Description": "Label name for jump destination"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
             },
             {
                 "Argument": "n",
                 "Description": "Line number for jump destination"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Conditional statement/s that must"
-            },
-            {
                 "Argument": "ex",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "evaluate true for jump to occur"
+                "Description": "Conditional statement/s that must\revaluate true for jump to occur"
             }
         ]
     },
@@ -4863,72 +3461,24 @@
         "Description": "Allows the program to jump to a subroutine and return back after completion. This command is often used to call reusable code.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Label Name for jump"
-            },
-            {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "destination"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Line number for jump"
+                "Description": "Label Name for jump\rdestination"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "destination"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Line number for jump"
+                "Description": "Line number for jump\rdestination"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "destination"
-            },
-            {
-                "Argument": "",
-                "Description": "Conditional statement/s that"
+                "Description": "Line number for jump\rdestination"
             },
             {
                 "Argument": "ex",
-                "Description": "must evaluate true for jump"
-            },
-            {
-                "Argument": "",
-                "Description": "to occur"
-            },
-            {
-                "Argument": "",
-                "Description": "A value, variable, or array to"
+                "Description": "Conditional statement/s that\rmust evaluate true for jump\rto occur"
             },
             {
                 "Argument": "arg",
-                "Description": "pass to the subroutine being"
-            },
-            {
-                "Argument": "",
-                "Description": "called"
+                "Description": "A value, variable, or array to\rpass to the subroutine being\rcalled"
             }
         ]
     },
@@ -4965,16 +3515,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "K1 is the proportional gain in effect when the profiler is commanding motion (RP is changing). When no motion is commanded (RP constant), KP is in\neffect. Some systems will oscillate when holding position unless the gains are lowered.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of proportional term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "K2",
@@ -4995,16 +3536,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "K2 is the integral gain in effect when the profiler is commanding motion (RP is changing). When no motion is commanded (RP constant), KI is in effect.\nSome systems will oscillate when holding position unless the gains are lowered.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of integrator term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "K3",
@@ -5025,16 +3557,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "K3 is the derivative gain in effect when the profiler is commanding motion (RP is changing). When no motion is commanded (RP constant), KD is in effect.\nSome systems will oscillate when holding position unless the gains are lowered.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of derivative term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "KD",
@@ -5055,16 +3578,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "KD designates the derivative constant in the control filter. The derivative gain outputs a voltage based on the rate of change of the error. The filter\ntransfer function follows:",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of derivative term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "KI",
@@ -5085,16 +3599,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The KI command sets the integral gain of the control loop. The integrator term will reduce the position error at rest to zero. It fits in the control equation\nas follows:",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of Integral term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "KP",
@@ -5115,16 +3620,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "KP designates the proportional constant in the controller filter. The proportional gain outputs a control signal proportional to the amount of error. The filter\ntransfer function follows.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of proportional term"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "KS",
@@ -5145,16 +3641,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The KS parameter sets the amount of smoothing of stepper motor pulses. Larger values of KS provide greater smoothness. KS adds a single pole low pass\nfilter onto the output of the motion profiler.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of smoothing constant"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "LA",
@@ -5209,36 +3696,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The LC command enables low current mode for stepper motors. Low current mode reduces the holding torque of the stepper motors while at rest.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "LD",
@@ -5259,36 +3717,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "Allows user to disables forward and/or reverse limit switches.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Sets limit disable state"
-            },
-            {
-                "Argument": "Argument",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "LE",
@@ -5324,91 +3753,27 @@
         "Arguments": [
             {
                 "Argument": "m",
-                "Description": ""
+                "Description": "Axis to assign value"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Assigns linear interpolation point for that axis"
             },
             {
                 "Argument": "o",
-                "Description": ""
+                "Description": "Specifies the vector speed to be commanded at the beginning of\rthe linear segment. The controller will start accelerating or\rdecelerating at the start of the sequence to this speed."
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Specifies the vector speed to be commanded at the beginning of\rthe linear segment. The controller will start accelerating or\rdecelerating at the start of the sequence to this speed."
             },
             {
                 "Argument": "p",
-                "Description": ""
+                "Description": "Specifies the vector speed to be achieved at the end of the linear\rsegment. The controller will decelerate or accelerate during the\rsegment and will reach the specified speed at the end of the\rsegment."
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Specifies the vector speed to be achieved at the end of the linear\rsegment. The controller will decelerate or accelerate during the\rsegment and will reach the specified speed at the end of the\rsegment."
             },
             {
                 "Argument": "Argument",
@@ -5473,16 +3838,8 @@
         "Description": "The LS command returns a listing of the programs in memory.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Firmware Rev 1.2a and later. Specifies the line in the program for"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "which the listing will start"
+                "Description": "Firmware Rev 1.2a and later. Specifies the line in the program for\rwhich the listing will start"
             },
             {
                 "Argument": "n0",
@@ -5575,64 +3932,14 @@
         "Usage": [],
         "Operands": {},
         "Description": "",
-        "Arguments": [
-            {
-                "Argument": "m A",
-                "Description": "Handle to send Modbus command"
-            },
-            {
-                "Argument": "n0 0",
-                "Description": "Unit ID"
-            },
-            {
-                "Argument": "n2 0",
-                "Description": "Address of coil"
-            },
-            {
-                "Argument": "n3 0",
-                "Description": "Set coil status"
-            },
-            {
-                "Argument": "'Galil DMC Code Example",
-                "Description": ""
-            },
-            {
-                "Argument": "MBB= ,5,11,1;'  Set coil 11 high",
-                "Description": ""
-            },
-            {
-                "Argument": "'equivalent to setting a Digital Output (SB/CB)",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "example",
         "Usage": [],
         "Operands": {},
         "Description": "",
-        "Arguments": [
-            {
-                "Argument": "m A",
-                "Description": "Handle to send Modbus command"
-            },
-            {
-                "Argument": "n0 0",
-                "Description": "Unit ID"
-            },
-            {
-                "Argument": "str 1 char",
-                "Description": "Name of array to receive data"
-            },
-            {
-                "Argument": "'Galil DMC Code Example",
-                "Description": ""
-            },
-            {
-                "Argument": "MBB= ,17,example[];'",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "MC",
@@ -5646,16 +3953,8 @@
         "Description": "The MC command is a trippoint command that holds up execution until motion is complete on any one of a specified group of axes. The MC command,\nunlike the AM (after motion command) requires that both the motion profiler has completed motion AND that the motor encoder has reached the\nspecified position before continuing execution.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Axis to assign"
-            },
-            {
                 "Argument": "mm",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "value"
+                "Description": "Axis to assign\rvalue"
             }
         ]
     },
@@ -5704,19 +4003,11 @@
         "Arguments": [
             {
                 "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Axis to assign value"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Position required to be crossed before subsequent\rcommands will be executed."
             }
         ]
     },
@@ -5918,19 +4209,11 @@
         "Arguments": [
             {
                 "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Axis to assign value"
             },
             {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Value of position that must be crossed in the reverse\rdirection"
             }
         ]
     },
@@ -5953,48 +4236,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The MT command selects the type of the motor and the polarity of the drive signal. Motor types include standard servomotors, which require a voltage in\nthe range of +/- 10 Volts, and step motors, which require pulse and direction signals. The polarity reversal inverts the analog signals for servomotors, or\ninverts logic level of the pulse train for step motors.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "Argument",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "MU",
@@ -6083,24 +4325,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The NB command sets real part of the notch poles. In other words, the NB controls the range of frequencies that will be attenuated.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of the notch bandwidth"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "in Hz"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "NF",
@@ -6121,16 +4346,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The NF command sets the frequency of the notch filter, which is placed either in series with the PID compensation, or applied to the profiled position.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Sets the frequency of the notch filter"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "NO",
@@ -6144,16 +4360,8 @@
         "Description": "The NO command performs no action in a sequence and can be used as a comment in a program.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "A no action sequence used to document a"
-            },
-            {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "program"
+                "Description": "A no action sequence used to document a\rprogram"
             }
         ]
     },
@@ -6176,24 +4384,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The NZ command sets the real part of the notch zero. In other words, the NB/NZ ratio controls the amount of attenuation, or depth, of the notch filter.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of Notch Frequency in"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Hz"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "OA",
@@ -6214,16 +4405,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The OA command turns on or off encoder failure detection. The controller can detect a failure on either or both channels of the encoder. This is\naccomplished by checking on whether motion of less than 4 counts is detected whenever the torque exceeds a preset level (OV) for a specified time (OT).",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Status of encoder failure detection"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "OB",
@@ -6237,32 +4419,16 @@
         "Description": "The OB command allows variable control of an output bit based on logical expressions. The OB n, logical expression command defines output bit i as either\n0 or 1 depending on the result from the logical expression.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "n",
                 "Description": "Output bit specified"
-            },
-            {
-                "Argument": "",
-                "Description": ""
             },
             {
                 "Argument": "n",
                 "Description": "Modbus output bit specified"
             },
             {
-                "Argument": "",
-                "Description": "Expression that defines"
-            },
-            {
                 "Argument": "ex",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "status of output"
+                "Description": "Expression that defines\rstatus of output"
             }
         ]
     },
@@ -6283,40 +4449,16 @@
         "Description": "The OC command sets up the Output Compare feature, also known as Pulse on Position. The controller has a special digital output which can be\nconfigured to pulse on a specified absolute encoder position, and optionally on a delta encoder change after that. These operations are known as one-\nshot and circular compare, respectively.\nEach set of 4 axes, ABCD and EFGH, has one digital output which can be configured to this mode of operation",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Axis to enable"
-            },
-            {
                 "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "output compare"
-            },
-            {
-                "Argument": "",
-                "Description": "Absolute encoder"
+                "Description": "Axis to enable\routput compare"
             },
             {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "position of first pulse"
-            },
-            {
-                "Argument": "",
-                "Description": "Incremental"
+                "Description": "Absolute encoder\rposition of first pulse"
             },
             {
                 "Argument": "n1",
-                "Description": "encoder distance"
-            },
-            {
-                "Argument": "",
-                "Description": "between pulses"
+                "Description": "Incremental\rencoder distance\rbetween pulses"
             }
         ]
     },
@@ -6346,36 +4488,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The OE command sets the Off On Error function for the controller. The OE command causes the controller to shut off the motor command if a position\nerror exceeds the limit specified by the ER command, an abort occurs from either the abort input or on AB command, or an amplifier error occurs based\non the description of the TA command.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "documentation@galilmc.com",
@@ -6403,16 +4516,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The OF command sets a bias voltage in the command output or returns a previously set value.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Offset voltage applied to MCMD"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "OP",
@@ -6431,44 +4535,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The OP command sets the output ports of the controller in a bank using bitmasks. Arguments to the OP command are bit patterns (decimal or hex) to\nset entire banks (bytes) of digital outputs. Use SB, CB or OB to set bits individually.",
-        "Arguments": [
-            {
-                "Argument": "",
-                "Description": "Decimal representation: General"
-            },
-            {
-                "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Outputs 1-16"
-            },
-            {
-                "Argument": "",
-                "Description": "Decimal representation: Extended"
-            },
-            {
-                "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Output (Bank 2,3)"
-            },
-            {
-                "Argument": "",
-                "Description": "Decimal representation: Extended"
-            },
-            {
-                "Argument": "n2",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Output (Bank 4,5)"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "OT",
@@ -6489,16 +4556,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The OT command sets the timeout time for the encoder failure routine. The command sets the time in samples that the encoder failure will wait for motion\nafter the OV threshold has been exceeded. The controller can detect a failure on either or both channels of the encoder.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Number of samples for error detection"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "OV",
@@ -6519,16 +4577,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The OV command sets the threshold voltage for detecting an encoder failure. The controller can detect a failure on either or both channels of the\nencoder.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Torque voltage to trigger encoder error detection"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "P2CD",
@@ -6617,28 +4666,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The PA command sets the end target of the Position Absolute Mode of Motion.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Absolute position target for"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "independant move"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "PF",
@@ -6657,28 +4685,12 @@
         "Description": "The PF command allows the user to format the position numbers such as those returned by TP. The number of digits of integers and the number of digits\nof decimal can be selected with this command. An extra digit for sign and a digit for decimal point will be added to the total number of digits.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Number of places displayed"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "preceding the decimal point"
-            },
-            {
-                "Argument": "",
-                "Description": "Number of places displayed after the"
+                "Description": "Number of places displayed\rpreceding the decimal point"
             },
             {
                 "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "decimal point"
+                "Description": "Number of places displayed after the\rdecimal point"
             }
         ]
     },
@@ -6701,36 +4713,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The PL command adds a low-pass filter in series with the PID compensation.\nThe crossover frequency is entered directly as an argument to PL. To maintain compatibility with earlier versions, a value less than 1 may also be specified.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Crossover frequency created by"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "the PL command"
-            },
-            {
-                "Argument": "",
-                "Description": "Value used to generate pole filter"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "crossover frequency"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "PR",
@@ -6751,28 +4734,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The PR command sets the incremental distance and direction of the next move. The move is referenced with respect to the current position. .",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Incremental distance for"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "independent move"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "PT",
@@ -6793,24 +4755,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The PT command will place the controller in the position tracking mode. In this mode, the controller will allow the user to issue absolute position commands\nthat begin motion immediately without requiring a BG command. The absolute position may be specified such that the axis will begin motion, continue in\nthe same direction, reverse directions, or decelerate to a stop",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Setting for position tracking mode of"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "motion"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "PV",
@@ -6829,40 +4774,20 @@
         "Description": "The PV command is used to enter PVT data into the PVT buffer. Data is entered by specifying the target delta position, target velocity, and delta time for\nthe segment duration.",
         "Arguments": [
             {
-                "Argument": "m A",
+                "Argument": "m",
                 "Description": "Axis to assign value"
             },
             {
-                "Argument": "-",
-                "Description": "Position target for PVT"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "44,000,000",
-                "Description": "segment"
-            },
-            {
-                "Argument": "-",
-                "Description": "Velocity target for PVT"
+                "Description": "Position target for PVT\rsegment"
             },
             {
                 "Argument": "n1",
-                "Description": ""
+                "Description": "Velocity target for PVT\rsegment"
             },
             {
-                "Argument": "22,000,000",
-                "Description": "segment"
-            },
-            {
-                "Argument": "n2 = -1 clears the PVT buffer, n2 = 0 exits PVTn2 0",
-                "Description": "Number of samples for PVT"
-            },
-            {
-                "Argument": "",
-                "Description": "segment"
+                "Argument": "n2",
+                "Description": "Number of samples for PVT\rsegment"
             }
         ]
     },
@@ -6878,16 +4803,8 @@
         "Description": "The PW command sets the password used to lock the controller. Locking the controller prevents interrogation of the controller program space.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "String to be used for"
-            },
-            {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "password"
+                "Description": "String to be used for\rpassword"
             }
         ]
     },
@@ -6903,32 +4820,16 @@
         "Description": "The QD command transfers array data from the host computer to the controller. QD array[], start, end requires that the array name be specified along\nwith the index of the first element of the array and the index of the last element of the array.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Name of array to receive data"
-            },
-            {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "via download."
+                "Description": "Name of array to receive data\rvia download."
             },
             {
                 "Argument": "n0",
                 "Description": "Index of the first array element."
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "n1",
                 "Description": "Index of the last array element."
-            },
-            {
-                "Argument": "",
-                "Description": ""
             }
         ]
     },
@@ -6978,16 +4879,8 @@
         "Description": "The QR command causes the controller to return a record of information regarding controller status.\nThis status information includes 4 bytes of header information and specific blocks of information as specified by the command arguments. The details of\nthe status information is described in Chapter 4 of the user's manual.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "mm",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Axes/Coordinated/IO data specified to\rdisplay in the data record"
             },
             {
                 "Argument": "Argument",
@@ -7028,16 +4921,8 @@
         "Description": "The QS command reports the magnitude of error, in drive step counts, for axes in Stepper Position Maintenance mode. A step count is directly\nproportional to the micro-stepping resolution of the stepper drive.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Axes to query for step motor error"
-            },
-            {
                 "Argument": "mm",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "magnitude"
+                "Description": "Axes to query for step motor error\rmagnitude"
             },
             {
                 "Argument": "m",
@@ -7055,7 +4940,24 @@
         ],
         "Operands": {},
         "Description": "The QU command transfers array data from the controller to a host computer. The QU requires that the array name be specified along with the first\nelement of the array and last element of the array.",
-        "Arguments": []
+        "Arguments": [
+            {
+                "Argument": "str",
+                "Description": "Name of array to be uploaded"
+            },
+            {
+                "Argument": "n0",
+                "Description": "Index of first array element"
+            },
+            {
+                "Argument": "n1",
+                "Description": "Index of last array element"
+            },
+            {
+                "Argument": "n2",
+                "Description": "Selects character delimiter\rbetween array elements"
+            }
+        ]
     },
     {
         "Command": "QZ",
@@ -7081,16 +4983,8 @@
         "Description": "The RA command selects the user arrays to be populated by the Record Array function. The data to be captured is specified by the RD command and\ntime interval by the RC command.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Valid array name to use in"
-            },
-            {
                 "Argument": "str",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "record array function"
+                "Description": "Valid array name to use in\rrecord array function"
             }
         ]
     },
@@ -7111,24 +5005,12 @@
         "Description": "The RC command begins recording for the Automatic Record Array Mode. RC 0 stops recording. The record array mode loads source data specified by\nthe RD command into the arrays defined by the RA command. The address for the array element for the next recording can be interrogated with _RD.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Specify the record array time interval"
+                "Argument": "n0",
+                "Description": "Specify the record array time interval\ras 2^n samples."
             },
             {
-                "Argument": "n0 0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "as 2^n samples."
-            },
-            {
-                "Argument": "n1 has special rules for the maximumn1 see Notes",
-                "Description": "Specify the number of records to"
-            },
-            {
-                "Argument": "",
-                "Description": "perform"
+                "Argument": "n1",
+                "Description": "Specify the number of records to\rperform"
             }
         ]
     },
@@ -7149,168 +5031,32 @@
         "Description": "The RD command specifies the data type to be captured for the Record Array (RA) mode. The data defined in this command is stored in arrays defined\nby the RA command at the time interval specified with the RC command.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Time in"
-            },
-            {
                 "Argument": "arg",
-                "Description": "servo"
+                "Description": "Time in\rservo\rsamples"
             },
             {
                 "Argument": "",
-                "Description": "samples"
+                "Description": "Analog input\rdigital value"
             },
             {
                 "Argument": "",
-                "Description": ""
+                "Description": "Auxiliary\rencoder\rposition"
             },
             {
                 "Argument": "",
-                "Description": "Analog input"
+                "Description": "Encoder\rposition"
             },
             {
                 "Argument": "",
-                "Description": ""
+                "Description": "Position\rerror"
             },
             {
                 "Argument": "",
-                "Description": "digital value"
+                "Description": "Commanded\rposition"
             },
             {
                 "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Auxiliary"
-            },
-            {
-                "Argument": "",
-                "Description": "encoder"
-            },
-            {
-                "Argument": "",
-                "Description": "position"
-            },
-            {
-                "Argument": "",
-                "Description": "Encoder"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "position"
-            },
-            {
-                "Argument": "",
-                "Description": "Position"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "error"
-            },
-            {
-                "Argument": "",
-                "Description": "Commanded"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "position"
-            },
-            {
-                "Argument": "",
-                "Description": "Commanded"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "position"
-            },
-            {
-                "Argument": "",
-                "Description": "Latched"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "position"
-            },
-            {
-                "Argument": "",
-                "Description": "Input status"
-            },
-            {
-                "Argument": "",
-                "Description": "Output"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "status"
-            },
-            {
-                "Argument": "",
-                "Description": "Switches"
-            },
-            {
-                "Argument": "",
-                "Description": "Stop code"
-            },
-            {
-                "Argument": "",
-                "Description": "Torque"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "command"
-            },
-            {
-                "Argument": "",
-                "Description": "Filtered"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "velocity"
-            },
-            {
-                "Argument": "",
-                "Description": "Auxiliary"
-            },
-            {
-                "Argument": "",
-                "Description": "encoder"
-            },
-            {
-                "Argument": "",
-                "Description": "position"
+                "Description": "Commanded\rposition"
             }
         ]
     },
@@ -7326,16 +5072,8 @@
         "Description": "The RE command is used to end subroutines in application code. An RE at the end of these routines causes a return to the main program. Specific\nautomatic error subroutines require the use of the RE command to end the code correctly.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Determines state of interrupted trippoint"
-            },
-            {
                 "Argument": "n",
-                "Description": "when returning from an automatic"
-            },
-            {
-                "Argument": "",
-                "Description": "subroutine."
+                "Description": "Determines state of interrupted trippoint\rwhen returning from an automatic\rsubroutine."
             }
         ]
     },
@@ -7358,24 +5096,8 @@
         "Description": "The RI command is used to end the input interrupt subroutine.\nThe input interrupt subroutine begins with the label #ININT. An RI at the end of this routine causes a return to the main program.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Determines state of interrupted trippoint"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "n",
-                "Description": "when returning from an automatic"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "subroutine."
+                "Description": "Determines state of interrupted trippoint\rwhen returning from an automatic\rsubroutine."
             }
         ]
     },
@@ -7444,16 +5166,8 @@
         "Description": "The RS command resets the state of the processor to its power-on condition. The previously saved state of the hardware, along with parameter values\nand saved program, are restored.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Set behavior of RS"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "command"
+                "Description": "Set behavior of RS\rcommand"
             }
         ]
     },
@@ -7498,16 +5212,8 @@
                 "Description": "General output bit to be set"
             },
             {
-                "Argument": "",
-                "Description": "Extended I/O output bit to be"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "set"
+                "Description": "Extended I/O output bit to be\rset"
             },
             {
                 "Argument": "n",
@@ -7556,16 +5262,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The Limit Switch Deceleration command (SD) sets the linear deceleration rate of the motors when a limit switch has been reached.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of switch deceleration"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "SH",
@@ -7599,60 +5296,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The SI command enables and configures the controller to read SSI encoder data. Synchronous Serial Interface (SSI) allows for serial transmission of\nabsolute position data (either binary or Gray code) from the encoder based on a timed clock pulse train from the controller. Connection between the\ncontroller and encoder is based on two signal lines, clock and data, which are usually differential for increased noise immunity. For each sequential clock\npulse of the controller, the encoder transmits one data bit from shift registers on the encoder.\nSSI Timing\nDuring the controller's control loop, a clock will be transmitted for encoders configured for SSI. \nThe SSI encoder responds by transmitting a serial data\nstream synchronized to the controller's clock. \nThe data stream has 2 important features as described below.\n1\n. \nData.\n \nShown in the above timing diagrams, \nData\n contains the absolute position of the SSI encoder. \nData\n is used for the n\n2\n argument of the SI\ncommand\n2\n. \nStatus\n \n(if applicable)\n. \nShown above in the latter two timing diagrams, \nStatus\n is used for the n\n3\n argument of the SI command. \nThe meaning of the\nStatus\n and the is defined by the encoder manufacturer. \nThe controller provides access to this value via the _SIm operand.\nThe sign of argument n\n3\n selects if the \nStatus\n are at the beginning of the SSI data or at the end. \nThis is shown in the above timing diagrams and\nis based on the encoder's manufacturer.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to configure for SSI"
-            },
-            {
-                "Argument": "n0",
-                "Description": "Position register to use"
-            },
-            {
-                "Argument": "",
-                "Description": "Total number of SSI bits"
-            },
-            {
-                "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "(including status bits)"
-            },
-            {
-                "Argument": "n2",
-                "Description": "Number of single turn bits"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "n3",
-                "Description": "Number of status bits"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Clock divider, defines"
-            },
-            {
-                "Argument": "o",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Clock frequency"
-            },
-            {
-                "Argument": "p",
-                "Description": "Data Encoding"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "option.",
@@ -7757,16 +5401,8 @@
                 "Description": "Byte 0 of the Subnet mask"
             },
             {
-                "Argument": "",
-                "Description": "The full subnet mask specified as a signed 32 bit two's"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "complement integer"
+                "Description": "The full subnet mask specified as a signed 32 bit two's\rcomplement integer"
             }
         ]
     },
@@ -7789,60 +5425,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The SP command sets the slew speed of any or all axes for independent moves.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis to assign"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "value"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of jog speed in"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            },
-            {
-                "Argument": "",
-                "Description": "Value of jog speed in"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            },
-            {
-                "Argument": "",
-                "Description": "Vale of jog speed in"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "cnts/second"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "SS",
@@ -7859,40 +5442,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The SS command enables and configures the controller to read BiSS encoder data. BiSS is an open-source, digital interface for encoders. BiSS is hardware\ncompatible to the industrial standard SSI (Serial Synchronous Interface) but offers additional features and options.\nBiSS Timing\nDuring the controller's servo interrupt, a clock will be transmitted for encoders configured for BiSS. The BiSS encoder responds by transmitting a serial\ndata stream synchronized to the controllers's clock. The data stream has five important features as described below.\n1\n. \nData\n. Shown in the above timing diagram as the bit stream between \na\n and \nb\n, \nData\n contains the absolute position of the BiSS encoder. The length of\nthe \nData\n, in bits, is used for both the n\n1\n and n\n2\n arguments of the SS command.\n2\n. \nZero Padding\n. Some encoder manufacturers (Hengstler and possibly others) pad the encoder data with trailing zero bits in the \nData\n stream. This bit\nsegment is shown between \nc\n and \nd\n above. The number of zero padding bits is the n\n3\n argument of the SS command.\n3\n. \nError Bit\n. Shown above as \nE\n, BiSS defines an Error bit that is transmitted by the encoder. It can be active high or low, depending on the\nmanufacturer. The controller provides access to the Error bit via the _SSm operand.\n4\n. \nWarning Bit\n. Shown above as \nW\n, BiSS also defines a Warning bit that is transmitted by the encoder. It is also active high or low based on the\nencoder. \nThe controller provides access to the Warning bit via the _SSm operand.\n5\n. \nCRC\n. The \nData\n, \nE\n and \nW\n bits are all checked for validity via a 6-bit cyclic redundancy check, shown above as \nCRC\n. The controller provides access to\nthe CRC validity via the _SSm operand.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to configure for BiSS"
-            },
-            {
-                "Argument": "n0",
-                "Description": "Position register to use"
-            },
-            {
-                "Argument": "n1",
-                "Description": "Number of Data bits"
-            },
-            {
-                "Argument": "n2",
-                "Description": "Number of Data bits"
-            },
-            {
-                "Argument": "n3",
-                "Description": "Number of zero padding bits"
-            },
-            {
-                "Argument": "",
-                "Description": "Clock divider, defines Clock"
-            },
-            {
-                "Argument": "o",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "frequency"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "Required Hardware and Firmware",
@@ -7957,12 +5507,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "This command is used to designate the active level of the Error and Warning bits when using the Galil BiSS upgrade. The BiSS protocol defines two bits\nwhich can be used by the encoder to signal various events.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": ";",
@@ -7989,12 +5534,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The command returns the amplifier error status. The value is decimal and represents an 8 bit value. Bit 7 is most significant bit, 0 is least.",
-        "Arguments": [
-            {
-                "Argument": "n",
-                "Description": "Selects amp status byte to return"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "TB",
@@ -8131,40 +5671,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The TI command returns the state of the inputs in banks of 8 bits, or 1 byte. The value returned by this command is decimal and represents an 8 bit\nvalue (decimal value ranges from 0 to 255). Each bit represents one input where the LSB is the lowest input number and the MSB is the highest input bit.",
-        "Arguments": [
-            {
-                "Argument": "n",
-                "Description": "Report status of Inputs 1-8"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 9-16"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 17-24"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 25-32"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 31-40"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 41-48"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 81-88"
-            },
-            {
-                "Argument": "",
-                "Description": "Report status of Inputs 89-96"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "TIME",
@@ -8202,16 +5709,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The TK command sets the peak torque limit on the motor command output. This command works with the TL command which sets the continuous\ntorque limit. When the average torque is below TL, the motor command signal can go up to the TK (Peak Torque) limit for a short amount of time.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of peak torque limit"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "TL",
@@ -8232,16 +5730,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The TL command sets the limit on the motor command output. This limit is designed to prevent over current to motors with lower current rating than the\ndrive.\nTL works along with the TK (Peak torque) command to control output current to the motor.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of torque limit"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "TM",
@@ -8260,16 +5749,8 @@
         "Description": "The TM command sets the sampling period of the control loop. The units of this command are microseconds. A negative number turns off the servo loop.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Set the sample time"
-            },
-            {
                 "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "in usecs"
+                "Description": "Set the sample time\rin usecs"
             }
         ]
     },
@@ -8333,24 +5814,12 @@
         "Description": "The TR command causes each instruction in a program to be sent out the communications port prior to execution. The trace command is useful in\ndebugging programs.",
         "Arguments": [
             {
-                "Argument": "n0 = 0 or null disables Trace. n0 = 1 enablesn0 0",
+                "Argument": "n0",
                 "Description": "Set status of trace function"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Set threads to trace by"
-            },
-            {
-                "Argument": "n1 0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "bitmask"
+                "Argument": "n1",
+                "Description": "Set threads to trace by\rbitmask"
             }
         ]
     },
@@ -8439,16 +5908,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The TW command sets the timeout time for the MC trippoint. The TW command sets the timeout in msec to declare an error if the MC command is active\nand the motor is not at or beyond the actual position within n msec after the completion of the motion profile. If a timeout occurs, then the MC trippoint\nwill clear and the stopcode will be set to 99. A running program will jump to the special label #MCTIME, if located in the application code.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Set the timeout in msec for the MC command"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "TZ",
@@ -8474,44 +5934,44 @@
         "Description": "The UI command allows user-defined interrupts to be created. UI can generate 16 different status bytes, $F0 to $FF (240-255), corresponding to UI0 to\nUI15.\nUI pushes a user-defined status byte into the EI queue. When the UI command (e.g. UI5) is executed, the status byte value (e.g. $F5 or 245) is queued\nup for transmission to the host, along with any other interrupts.",
         "Arguments": [
             {
-                "Argument": "n 0",
-                "Description": ""
+                "Argument": "n",
+                "Description": "Set the status byte for the interrupt"
             },
             {
                 "Argument": "Status Byte (dec)",
-                "Description": "Condition"
+                "Description": ""
             },
             {
                 "Argument": "$F0 (240)",
-                "Description": "UI8 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F1 (241)",
-                "Description": "UI9 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F2 (242)",
-                "Description": "UI10 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F3 (243)",
-                "Description": "UI11 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F4 (244)",
-                "Description": "UI12 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F5 (245)",
-                "Description": "UI13 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F6 (246)",
-                "Description": "UI14 was executed"
+                "Description": ""
             },
             {
                 "Argument": "$F7 (247)",
-                "Description": "UI15 was executed"
+                "Description": ""
             }
         ]
     },
@@ -8551,16 +6011,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The VA command sets the acceleration rate of the vector in a coordinated motion sequence.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Coordinate plane to be specified"
-            },
-            {
-                "Argument": "n",
-                "Description": "Vector acceleration for the coordinate system"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "VD",
@@ -8581,16 +6032,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The VD command sets the deceleration rate of the vector in a coordinated motion sequence.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Coordinate plane to be specified"
-            },
-            {
-                "Argument": "n",
-                "Description": "Vector deceleration for the coordinate system"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "VE",
@@ -8635,28 +6077,12 @@
         "Description": "The VF command formats the number of digits to be displayed when interrogating the controller. If a number exceeds the format, the number will be\ndisplayed as the maximum possible positive or negative number (i.e. 999.99, -999, $8000 or $7FF).",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Specify the number of digits displayed"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "before the decimal point"
-            },
-            {
-                "Argument": "",
-                "Description": "Specify the number of digits displayed"
+                "Description": "Specify the number of digits displayed\rbefore the decimal point"
             },
             {
                 "Argument": "n1",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "after the decimal point"
+                "Description": "Specify the number of digits displayed\rafter the decimal point"
             }
         ]
     },
@@ -8677,64 +6103,24 @@
         "Description": "The VM command enables the coordinated motion mode and specifies the plane of motion. This mode may be specified for motion on any set of two\naxes, including a combination of real and virtual axes for single-axis operation. The motion is specified by the instructions VP and CR, which specify linear\nand circular segments.\nUp to 511 segments may be given before the Begin Sequence (BGS or BGT) command. The number of available segments is queriable via the _LMm\noperand.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "First axis specified for"
-            },
-            {
                 "Argument": "m0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "vector motion"
-            },
-            {
-                "Argument": "",
-                "Description": "Second axis specified for"
+                "Description": "First axis specified for\rvector motion"
             },
             {
                 "Argument": "m1",
-                "Description": ""
+                "Description": "Second axis specified for\rvector motion"
             },
             {
                 "Argument": "",
-                "Description": "vector motion"
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis specified for"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "vector mode"
-            },
-            {
-                "Argument": "",
-                "Description": "Tangent axis specified for"
+                "Description": "Virtual axis specified for\rvector mode"
             },
             {
                 "Argument": "m2",
-                "Description": ""
+                "Description": "Tangent axis specified for\rvector mode."
             },
             {
                 "Argument": "",
-                "Description": "vector mode."
-            },
-            {
-                "Argument": "",
-                "Description": "Virtual axis specified for"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "vector mode."
+                "Description": "Virtual axis specified for\rvector mode."
             }
         ]
     },
@@ -8762,148 +6148,24 @@
         "Description": "The VP command defines a vector move segment for the VM mode of motion. The VP command defines the target coordinates of a straight line segment\nin a 2 axis motion sequence. The units are in quadrature counts, and are a function of the elliptical scale factor set using the command ES. For three or\nmore axes in linear interpolation mode, use the LI command.",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
                 "Argument": "n0",
                 "Description": "Specify the target position for the first vector axis"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": ""
             },
             {
                 "Argument": "n1",
                 "Description": "Specify the target postion for the second vector axis"
             },
             {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Specifies the vector speed to be commanded at the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "beginning of the linear segment. The controller will start"
-            },
-            {
                 "Argument": "o",
-                "Description": ""
+                "Description": "Specifies the vector speed to be commanded at the\rbeginning of the linear segment. The controller will start\raccelerating or decelerating at the start of the sequence to\rthis speed."
             },
             {
                 "Argument": "",
-                "Description": "accelerating or decelerating at the start of the sequence to"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "this speed."
-            },
-            {
-                "Argument": "",
-                "Description": "Specifies the vector speed to be commanded at the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "beginning of the linear segment. The controller will start"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "accelerating or decelerating at the start of the sequence to"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "this speed."
-            },
-            {
-                "Argument": "",
-                "Description": "Specifies the vector speed to be achieved at the end of the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "linear segment. The controller will decelerate or accelerate"
+                "Description": "Specifies the vector speed to be commanded at the\rbeginning of the linear segment. The controller will start\raccelerating or decelerating at the start of the sequence to\rthis speed."
             },
             {
                 "Argument": "p",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "during the segment and will reach the specified speed at the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "end of the segment."
-            },
-            {
-                "Argument": "",
-                "Description": "Specifies the vector speed to be achieved at the end of the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "linear segment. The controller will decelerate or accelerate"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "during the segment and will reach the specified speed at the"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "end of the segment."
-            },
-            {
-                "Argument": "Argument",
-                "Description": ""
-            },
-            {
-                "Argument": "o",
-                "Description": ""
+                "Description": "Specifies the vector speed to be achieved at the end of the\rlinear segment. The controller will decelerate or accelerate\rduring the segment and will reach the specified speed at the\rend of the segment."
             }
         ]
     },
@@ -8959,16 +6221,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The VS command specifies the speed of the vector in a coordinated motion sequence in either the LM or VM modes. This speed is in place when individual\nsegment speeds for VP, LI and CR are not specified.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Coordinate plane to be specified"
-            },
-            {
-                "Argument": "n",
-                "Description": "Vector speed applied to the coordinate system"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "VV",
@@ -8989,20 +6242,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The VV command sets the speed of the vector variable in a coordinated motion sequence in either the LM or VM modes. The VV command is used to set\nthe \"o\" vector speed argument for segments that exist in the vector buffer for LI, CR and VP commands. By defining a vector segment begin speed as a\nnegative 1 (i.e. \"<-1\"), the controller will utilize the current vector variable speed as the segment is profiled from the buffer.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Coordinate plane to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Variable vector speed"
-            },
-            {
-                "Argument": "",
-                "Description": "Variable vector speed"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "WH",
@@ -9033,28 +6273,12 @@
         "Description": "The WT command is a trippoint used to time events.When this command is executed, the controller will wait for the amout of time specified before\nexecuting the next command.\nThe amount of time in the WT command is specified to be either samples or milliseconds, depending on the second argument of WT",
         "Arguments": [
             {
-                "Argument": "",
-                "Description": "Specify amount of time to hold"
-            },
-            {
                 "Argument": "n0",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "execution of code"
-            },
-            {
-                "Argument": "",
-                "Description": ""
+                "Description": "Specify amount of time to hold\rexecution of code"
             },
             {
                 "Argument": "n1",
                 "Description": "Specify the type of WT"
-            },
-            {
-                "Argument": "",
-                "Description": ""
             }
         ]
     },
@@ -9080,24 +6304,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The XQ command begins execution of a program residing in the program memory of the controller. Execution will start at the label or line number\nspecified.\nUp to 8 programs may be executed simultaneously to perform multitasking.",
-        "Arguments": [
-            {
-                "Argument": "str",
-                "Description": "Label to begin code execution"
-            },
-            {
-                "Argument": "n0",
-                "Description": "Line number to begin code execution"
-            },
-            {
-                "Argument": "n0",
-                "Description": "Line number to begin code execution"
-            },
-            {
-                "Argument": "n1",
-                "Description": "Thread number to execute code"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "YA",
@@ -9118,104 +6325,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "Specifies the microstepping resolution of the step drive for Stepper Position Maintenance (SPM) mode in microsteps per full motor step. Consult your drive\ndocumentation to determine its microstepping setting. See the table below for internal Galil stepper drives.\nWhen using the SDM-44040, YA will also configure the drive hardware for microstepping resolution. The SDM-44140 is \nnot\n configurable with YA.",
-        "Arguments": [
-            {
-                "Argument": "",
-                "Description": "Axis to assign"
-            },
-            {
-                "Argument": "m",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "value"
-            },
-            {
-                "Argument": "",
-                "Description": "Drive"
-            },
-            {
-                "Argument": "",
-                "Description": "resolution in"
-            },
-            {
-                "Argument": "",
-                "Description": "step"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "counts/motor"
-            },
-            {
-                "Argument": "",
-                "Description": "step for SPM"
-            },
-            {
-                "Argument": "",
-                "Description": "mode"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Valid settings"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "for SDM-"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "44040 (-"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "D4040)"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "Valid setting"
-            },
-            {
-                "Argument": "",
-                "Description": "for SDM-"
-            },
-            {
-                "Argument": "",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "44140 (-"
-            },
-            {
-                "Argument": "",
-                "Description": "D4140)"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "YB",
@@ -9236,16 +6346,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The YB command specifies the resolution of the step motor, in full steps per full revolution, for Stepper Position Maintenance (SPM) mode.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Motor resolution in full steps/revolution"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "YC",
@@ -9266,16 +6367,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "The YC command specifies the resolution of the encoder, in counts per revolution, for Stepper Position Maintenance (SPM) mode.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Encoder resolution in counts/revolution"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "YR",
@@ -9321,24 +6413,7 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The YS command enables and disables the Stepper Position Maintenance Mode function. YS also reacts to excessive position error condition as defined by\nthe QS command.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "",
-                "Description": "Setting of the SPM"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "mode"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "ZA",
@@ -9359,16 +6434,7 @@
             "Explanation": "Operand holds the value last set by the command"
         },
         "Description": "ZA sets the user variables in the data record. The user variables (one per axis) are automatically sent as part of the status record from the controller to the\nhost computer. These variables provide a method for specific controller information to be passed to the host automatically.",
-        "Arguments": [
-            {
-                "Argument": "m",
-                "Description": "Axis to assign value"
-            },
-            {
-                "Argument": "n",
-                "Description": "Value of user variable for data record"
-            }
-        ]
+        "Arguments": []
     },
     {
         "Command": "ZN",
@@ -9442,19 +6508,6 @@
             "Explanation": "Operand has special meaning, see Remarks"
         },
         "Description": "The ZS command is used to clear the stack when finishing or leaving a subroutine. This command is used to avoid returning from an interrupt (either input\nor error). This turns the jump to subroutine into a jump. The status of the stack can be interrogated with the operand _ZS, see Remarks.",
-        "Arguments": [
-            {
-                "Argument": "",
-                "Description": "Sets zero stack"
-            },
-            {
-                "Argument": "n",
-                "Description": ""
-            },
-            {
-                "Argument": "",
-                "Description": "operation"
-            }
-        ]
+        "Arguments": []
     }
 ]

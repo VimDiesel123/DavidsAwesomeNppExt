@@ -251,8 +251,11 @@ void onDwellStart(SCNotification* pNotify) {
 
 	::SendMessage(handle, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
 	::SendMessage(handle, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
-	/*::SendMessage(handle, SCI_CALLTIPUSESTYLE, 0, 0);*/
+	::SendMessage(handle, SCI_CALLTIPUSESTYLE, 0, 0);
 	::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)calltip.c_str());
+	::SendMessage(handle, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
+	const auto endOfFirstLine = calltip.find_first_of('\n');
+	::SendMessage(handle, SCI_CALLTIPSETHLT, 0, endOfFirstLine);
 
 }
 
@@ -298,8 +301,8 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 	std::string result;
 
 	// Extract the "Command" and "Description" fields
-	result += "Command: " + entry["Command"].get<std::string>() + "\n";
-	result += "Description: " + entry["Description"].get<std::string>() + "\n";
+	result += entry["Command"].get<std::string>() + "\n";
+	result += "Description:\n" + entry["Description"].get<std::string>() + "\n";
 
 
 	tabulate::Table usageAndArgumentsTable;

@@ -52,7 +52,7 @@ extern "C" __declspec(dllexport) void setInfo(NppData notpadPlusData)
 {
 	nppData = notpadPlusData;
 	commandMenuInit();
-	callTipInit();
+	// callTipInit();
 }
 
 extern "C" __declspec(dllexport) const TCHAR * getName()
@@ -82,6 +82,10 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 		case SCN_DWELLEND:
 		{
 			return onDwellEnd(notifyCode);
+		}
+		case NPPN_READY:
+		{
+			return callTipInit();
 		}
 		break;
 

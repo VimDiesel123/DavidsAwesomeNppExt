@@ -43,6 +43,7 @@ nlohmann::json commandData;
 
 const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.json";
 
+std::map<std::string, std::string> labelCalltips;
 
 //
 // Initialize your plugin data here
@@ -93,6 +94,8 @@ void callTipInit()
 {
 	// Set the dwell time (in milliseconds) and the styler for dwell events
 	::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000, 0); // Set a 1-second dwell time
+
+	labelCalltips = parseLabels();
 }
 
 
@@ -245,9 +248,11 @@ void onDwellStart(SCNotification* pNotify) {
 	if (!result || result > 256) {
 		return;
 	}
-	const auto command = extractCommand(word);
 
-	const auto calltip = buildCallTip(command);
+	const auto prevChar = ::SendMessage(handle, SCI_GETCHARAT, wordStart - 1, 0);
+	const auto label = prevChar == '#';
+
+	const auto calltip = label ? buildCallTip(word) : buildCallTip(extractCommand(word));
 
 	::SendMessage(handle, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
 	::SendMessage(handle, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
@@ -288,12 +293,19 @@ std::string extractCommand(const std::string& word) {
 }
 
 std::string buildCallTip(const std::string& word) {
-	for (const auto& entry : commandData) {
-		if (entry["Command"] == word) {
-			return
-				extractDataFromJson(entry);
+	try {
+		return word + "\n" + labelCalltips.at(word);
+	}
+	catch(std::out_of_range)
+	{
+		for (const auto& entry : commandData) {
+			if (entry["Command"] == word) {
+				return
+					extractDataFromJson(entry);
+			}
 		}
 	}
+	
 	return "";
 }
 
@@ -342,6 +354,53 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 
 void onDwellEnd(SCNotification* pNotify) {
 	::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
+}
+
+std::map<std::string, std::string> parseLabels() {
+	std::map<std::string, std::string> result;
+	// Get the current scintilla
+	int which = -1;
+	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+
+
+	if (which == -1)
+		return result;
+	HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+
+	// Get the length of the current document.
+	const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
+
+	// Store text of document in dmcCode
+	std::string dmcCode;
+	dmcCode.resize(length + 1);
+	::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)dmcCode.data());
+
+	OutputDebugStringA(dmcCode.c_str());
+
+	std::regex pattern("((?:REM[^\n]*\n)+)#(\\w{4,8})");
+
+	std::smatch matches;
+
+	std::regex_search(dmcCode, matches, pattern);
+
+	auto it = std::sregex_iterator(dmcCode.begin(), dmcCode.end(), pattern);
+	auto end = std::sregex_iterator();
+
+	while (it != end) {
+		const auto match = *it++;
+		if (match.size() > 2) {
+			const auto label = match[2].str();
+			auto description = match[1].str();
+			std::regex remark("REM\\s+");
+			description = std::regex_replace(description, remark, "");
+			description.erase(std::remove(description.begin(), description.end(), '='), description.end());
+			result.emplace(std::pair<std::string, std::string>({ label, description }));
+		}
+
+	}
+	return result;
+
+
 }
 
 void handleError()

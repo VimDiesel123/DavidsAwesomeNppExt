@@ -86,6 +86,7 @@ std::string buildCallTip(const std::string& word);
 std::string extractCommand(const std::string& word);
 std::string extractDataFromJson(const nlohmann::json& entry);
 int lighten_color(int color);
+std::map<std::string, std::string> parseLabels();
 
 void handleError();
 

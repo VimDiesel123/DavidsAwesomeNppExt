@@ -86,6 +86,10 @@ std::string buildCallTip(const std::string& word);
 std::string extractCommand(const std::string& word);
 std::string extractDataFromJson(const nlohmann::json& entry);
 int lighten_color(int color);
+std::vector<std::string> toLines(std::istringstream rawCode);
+std::map<std::string, std::string> extractLabelDetails(const std::vector<std::string>& lines);
+bool startsWith(const std::string& bigString, const std::string& smallString);
+std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex);
 std::map<std::string, std::string> parseLabels();
 
 void handleError();

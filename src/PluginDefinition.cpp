@@ -95,7 +95,7 @@ void callTipInit()
 	// Set the dwell time (in milliseconds) and the styler for dwell events
 	::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000, 0); // Set a 1-second dwell time
 
-	labelCalltips = parseLabels();
+	// labelCalltips = parseLabels();
 }
 
 
@@ -233,6 +233,7 @@ void showFunny()
 }
 
 void onDwellStart(SCNotification* pNotify) {
+	labelCalltips = parseLabels();
 	const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
 	int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
 	int wordEnd = ::SendMessage(handle, SCI_WORDENDPOSITION, pNotify->position, true);
@@ -294,7 +295,7 @@ std::string extractCommand(const std::string& word) {
 
 std::string buildCallTip(const std::string& word) {
 	try {
-		return word + "\n" + labelCalltips.at(word);
+		return labelCalltips.at(word) == "" ? "" : word + "\n" + labelCalltips.at(word);
 	}
 	catch(std::out_of_range)
 	{
@@ -373,34 +374,57 @@ std::map<std::string, std::string> parseLabels() {
 	// Store text of document in dmcCode
 	std::string dmcCode;
 	dmcCode.resize(length + 1);
-	::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)dmcCode.data());
+	::SendMessage(curScintilla, SCI_GETTEXT, length, (LPARAM)dmcCode.data());
 
-	OutputDebugStringA(dmcCode.c_str());
+	const auto filteredLines = toLines(std::istringstream(dmcCode));
+	const auto labelDetails = extractLabelDetails(filteredLines);
+	return labelDetails;
 
-	std::regex pattern("((?:REM[^\n]*\n)+)#(\\w{4,8})");
 
-	std::smatch matches;
+}
 
-	std::regex_search(dmcCode, matches, pattern);
-
-	auto it = std::sregex_iterator(dmcCode.begin(), dmcCode.end(), pattern);
-	auto end = std::sregex_iterator();
-
-	while (it != end) {
-		const auto match = *it++;
-		if (match.size() > 2) {
-			const auto label = match[2].str();
-			auto description = match[1].str();
-			std::regex remark("REM\\s+");
-			description = std::regex_replace(description, remark, "");
-			description.erase(std::remove(description.begin(), description.end(), '='), description.end());
-			result.emplace(std::pair<std::string, std::string>({ label, description }));
+std::vector<std::string> toLines(std::istringstream rawCode) {
+	std::vector<std::string> result(1024*20);
+	std::string line;
+	while (std::getline(rawCode, line, '\n')) {
+		// Remove any trailing \r if it exists
+		if (!line.empty() && line.back() == '\r') {
+			line.pop_back();
 		}
-
+		result.push_back(line);
 	}
 	return result;
+}
 
+std::map<std::string, std::string> extractLabelDetails(const std::vector<std::string>& lines) {
+	std::map<std::string, std::string> result;
+	for (size_t i = 0; i < lines.size(); ++i) {
+		const auto& currentLine = lines[i];
+		if (startsWith(currentLine, "#")) {
+			const std::regex labelPattern("^#(\\w+)$");
+			std::smatch match;
+			std::regex_search(currentLine, match, labelPattern);
+			const auto labelDescription = extractLabelDescription(lines, i);
+			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription}));
+		}
+	}
+	return result;
+}
 
+std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
+	std::vector<std::string> descriptionLines;
+	auto start = labelIndex - 1;
+	while (startsWith(lines[start], "REM")) {
+		descriptionLines.push_back(lines[start]);
+		--start;
+	}
+	std::string result;
+	std::for_each(descriptionLines.rbegin(), descriptionLines.rend(), [&result](const std::string& line) { result += line + "\r\n"; });
+	return result;
+}
+
+bool startsWith(const std::string& bigString, const std::string& smallString) {
+	return bigString.compare(0, smallString.length(), smallString) == 0;
 }
 
 void handleError()

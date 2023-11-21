@@ -82,6 +82,10 @@ void showFunny();
 
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
+void onCharacterAdded(SCNotification* pNotify);
+void showLabelCallTip();
+void incrementArgumentLineNumber();
+void cancelLabelCallTip();
 std::string buildCallTip(const std::string& word);
 std::string extractCommand(const std::string& word);
 std::string extractDataFromJson(const nlohmann::json& entry);

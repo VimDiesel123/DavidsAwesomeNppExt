@@ -87,6 +87,10 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 		{
 			return callTipInit();
 		}
+		case SCN_CHARADDED:
+		{
+			return onCharacterAdded(notifyCode);
+		}
 		break;
 
 		default:

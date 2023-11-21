@@ -45,6 +45,12 @@ const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.jso
 
 std::map<std::string, std::string> labelCalltips;
 
+struct CurrentCalltipInfo {
+	int argumentNumber;
+};
+
+CurrentCalltipInfo currentCallTipInfo;
+
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
@@ -297,7 +303,7 @@ std::string buildCallTip(const std::string& word) {
 	try {
 		return labelCalltips.at(word) == "" ? "" : word + "\n" + labelCalltips.at(word);
 	}
-	catch(std::out_of_range)
+	catch (std::out_of_range)
 	{
 		for (const auto& entry : commandData) {
 			if (entry["Command"] == word) {
@@ -306,7 +312,7 @@ std::string buildCallTip(const std::string& word) {
 			}
 		}
 	}
-	
+
 	return "";
 }
 
@@ -357,6 +363,78 @@ void onDwellEnd(SCNotification* pNotify) {
 	::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
 }
 
+void onCharacterAdded(SCNotification* pNotify) {
+	switch ((char)pNotify->ch)
+	{
+	case ('('):
+	{
+		showLabelCallTip();
+		break;
+	}
+	case (','):
+	{
+		incrementArgumentLineNumber();
+		break;
+	}
+	case (')'):
+	{
+		cancelLabelCallTip();
+		break;
+	}
+	default:
+		return;
+	}
+}
+
+void incrementArgumentLineNumber() {
+
+}
+
+void cancelLabelCallTip() {
+
+}
+
+void showLabelCallTip() {
+	int which = -1;
+	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+
+
+	if (which == -1)
+		return;
+	HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+
+	int position = ::SendMessage(curScintilla, SCI_GETCURRENTPOS, 0, 0);
+	int wordStart = ::SendMessage(curScintilla, SCI_WORDSTARTPOSITION, position - 1, true);
+	int wordEnd = ::SendMessage(curScintilla, SCI_WORDENDPOSITION, position - 1, true);
+
+
+	char word[256];
+	Sci_TextRange tr = {
+		{ wordStart, wordEnd },
+		word
+	};
+
+	const auto result = ::SendMessage(curScintilla, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
+
+	if (!result || result > 256) {
+		return;
+	}
+
+	const auto prevChar = ::SendMessage(curScintilla, SCI_GETCHARAT, wordStart - 1, 0);
+	const auto label = prevChar == '#';
+
+	const auto calltip = label ? buildCallTip(word) : buildCallTip(extractCommand(word));
+
+	::SendMessage(curScintilla, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
+	::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
+	::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
+	::SendMessage(curScintilla, SCI_CALLTIPSHOW, position, (LPARAM)calltip.c_str());
+	::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
+	const auto endOfFirstLine = calltip.find_first_of('\n');
+	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, 0, endOfFirstLine);
+
+}
+
 std::map<std::string, std::string> parseLabels() {
 	std::map<std::string, std::string> result;
 	// Get the current scintilla
@@ -384,7 +462,7 @@ std::map<std::string, std::string> parseLabels() {
 }
 
 std::vector<std::string> toLines(std::istringstream rawCode) {
-	std::vector<std::string> result(1024*20);
+	std::vector<std::string> result(1024 * 20);
 	std::string line;
 	while (std::getline(rawCode, line, '\n')) {
 		// Remove any trailing \r if it exists
@@ -405,7 +483,7 @@ std::map<std::string, std::string> extractLabelDetails(const std::vector<std::st
 			std::smatch match;
 			std::regex_search(currentLine, match, labelPattern);
 			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
-			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription}));
+			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription }));
 		}
 	}
 	return result;

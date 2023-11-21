@@ -404,11 +404,15 @@ std::map<std::string, std::string> extractLabelDetails(const std::vector<std::st
 			const std::regex labelPattern("^#(\\w+)$");
 			std::smatch match;
 			std::regex_search(currentLine, match, labelPattern);
-			const auto labelDescription = extractLabelDescription(lines, i);
+			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
 			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription}));
 		}
 	}
 	return result;
+}
+
+std::string cleanLabelDescription(const std::string& rawDescription) {
+	return std::regex_replace(rawDescription, std::regex("(^REM\\s*)"), "");
 }
 
 std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {

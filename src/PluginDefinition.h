@@ -90,6 +90,7 @@ std::vector<std::string> toLines(std::istringstream rawCode);
 std::map<std::string, std::string> extractLabelDetails(const std::vector<std::string>& lines);
 bool startsWith(const std::string& bigString, const std::string& smallString);
 std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex);
+std::string cleanLabelDescription(const std::string& rawDescription);
 std::map<std::string, std::string> parseLabels();
 
 void handleError();

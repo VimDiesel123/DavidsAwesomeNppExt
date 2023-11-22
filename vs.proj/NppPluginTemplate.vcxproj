@@ -41,11 +41,14 @@
     <ClInclude Include="..\src\PluginInterface.h" />
     <ClInclude Include="..\src\Scintilla.h" />
     <ClInclude Include="..\src\Sci_Position.h" />
+    <ClInclude Include="..\src\ShowFunny\ShowFunny.h" />
+    <ClInclude Include="FixSetupTreeItems\fixSetupTreeItems.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\DockingFeature\StaticDialog.cpp" />
     <ClCompile Include="..\src\NppPluginDemo.cpp" />
     <ClCompile Include="..\src\PluginDefinition.cpp" />
+    <ClCompile Include="..\src\ShowFunny\ShowFunny.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\DockingFeature\goLine.rc" />

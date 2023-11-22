@@ -91,7 +91,6 @@ struct Calltip {
 };
 
 void fixSetupTreeItems();
-void showFunny();
 
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
@@ -115,7 +114,6 @@ std::string extractLabelDescription(const std::vector<std::string>& lines, const
 std::string cleanLabelDescription(const std::string& rawDescription);
 std::map<std::string, Calltip> parseLabels();
 
-void handleError();
 
 
 #endif //PLUGINDEFINITION_H

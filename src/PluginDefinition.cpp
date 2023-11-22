@@ -478,11 +478,11 @@ std::map<std::string, std::string> extractLabelDetails(const std::vector<std::st
 	for (size_t i = 0; i < lines.size(); ++i) {
 		const auto& currentLine = lines[i];
 		if (startsWith(currentLine, "#")) {
-			const std::regex labelPattern("^#(\\w+)$");
+			const std::regex labelPattern("^#(\\w+)($|;)");
 			std::smatch match;
 			std::regex_search(currentLine, match, labelPattern);
 			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
-			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription }));
+			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription}));
 		}
 	}
 	return result;

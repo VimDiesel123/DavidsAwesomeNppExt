@@ -73,10 +73,23 @@ void commandMenuCleanUp();
 //
 bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk = NULL, bool check0nInit = false);
 
-
 //
 // Your plugin command functions
 //
+
+struct CurrentCalltipInfo {
+	int argumentNumber;
+};
+
+struct Argument {
+	int startLine, endLine;
+};
+
+struct Calltip {
+	std::string description;
+	std::vector<Argument> arguments;
+};
+
 void fixSetupTreeItems();
 void showFunny();
 
@@ -89,17 +102,18 @@ void cancelLabelCallTip();
 HWND currentScintilla();
 std::string wordAt(int position);
 char charAt(int position);
-void displayCallTip(std::string calltip, int highlightLine = 2);
+std::vector<Argument> extractArguments(std::string rawDescription);
+void displayCallTip();
 size_t find_nth(const std::string& haystack, size_t pos, const std::string& needle, size_t nth);
-std::string buildCallTip(const std::string& word);
+std::string buildCallTipString(const std::string& word);
 std::string extractCommand(const std::string& word);
 std::string extractDataFromJson(const nlohmann::json& entry);
 std::vector<std::string> toLines(std::istringstream rawCode);
-std::map<std::string, std::string> extractLabelDetails(const std::vector<std::string>& lines);
+std::map<std::string, Calltip> extractLabelDetails(const std::vector<std::string>& lines);
 bool startsWith(const std::string& bigString, const std::string& smallString);
 std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex);
 std::string cleanLabelDescription(const std::string& rawDescription);
-std::map<std::string, std::string> parseLabels();
+std::map<std::string, Calltip> parseLabels();
 
 void handleError();
 

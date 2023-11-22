@@ -43,13 +43,10 @@ nlohmann::json commandData;
 
 const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.json";
 
-std::map<std::string, std::string> labelCalltips;
+std::map<std::string, Calltip> labelCalltips;
 
-struct CurrentCalltipInfo {
-	int argumentNumber;
-};
-
-CurrentCalltipInfo currentCallTipInfo;
+Calltip currentCalltip;
+size_t currentArgumentNumber;
 
 //
 // Initialize your plugin data here
@@ -249,9 +246,9 @@ std::string extractCommand(const std::string& word) {
 	return match[1];
 }
 
-std::string buildCallTip(const std::string& word) {
+std::string buildCallTipString(const std::string& word) {
 	try {
-		return labelCalltips.at(word) == "" ? "" : word + "\n" + labelCalltips.at(word);
+		return labelCalltips.at(word).description == "" ? "" : word + "\n" + labelCalltips.at(word).description;
 	}
 	catch (std::out_of_range)
 	{
@@ -319,7 +316,7 @@ void onDwellStart(SCNotification* pNotify) {
 	const auto prevChar = charAt(wordStart - 1);
 	const auto label = prevChar == '#';
 
-	const auto calltip = label ? buildCallTip(word) : buildCallTip(extractCommand(word));
+	const auto calltip = label ? buildCallTipString(word) : buildCallTipString(extractCommand(word));
 
 	::SendMessage(handle, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
 	::SendMessage(handle, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
@@ -360,7 +357,9 @@ void onCharacterAdded(SCNotification* pNotify) {
 }
 
 void incrementArgumentLineNumber() {
-
+	if (currentArgumentNumber == currentCalltip.arguments.size() - 1) return;
+	currentArgumentNumber++;
+	displayCallTip();
 }
 
 void cancelLabelCallTip() {
@@ -412,11 +411,11 @@ char charAt(int position) {
 }
 
 void showLabelCallTip() {
-	
 	const auto currentPos = currentPosition();
 	const auto prevWord = wordAt(currentPos - 1);
-	const auto calltip = buildCallTip(prevWord);
-	displayCallTip(calltip, 3);
+	currentArgumentNumber = 0;
+	currentCalltip = labelCalltips[prevWord];
+	displayCallTip();
 
 }
 
@@ -427,22 +426,28 @@ size_t find_nth(const std::string& haystack, size_t pos, const std::string& need
 	return find_nth(haystack, found_pos + 1, needle, nth - 1);
 }
 
-void displayCallTip(std::string calltip, int highlightLine) {
-	(void)highlightLine;
+void displayCallTip() {
 	const auto currentPos = currentPosition();
 	const auto curScintilla = currentScintilla();
 	::SendMessage(curScintilla, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
 	::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
 	::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
-	::SendMessage(curScintilla, SCI_CALLTIPSHOW, currentPos, (LPARAM)calltip.c_str());
+	::SendMessage(curScintilla, SCI_CALLTIPSHOW, currentPos, (LPARAM)currentCalltip.description.c_str());
 	::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
-	const auto startOfHighlight = find_nth(calltip, 0, "\n", highlightLine - 1);
-	const auto endOfHighlight = find_nth(calltip, 0, "\n", highlightLine);
-	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, startOfHighlight, endOfHighlight);
+	std::size_t startOfFirstLine, endOfLastLine;
+	if (currentCalltip.arguments.empty()) {
+		startOfFirstLine = 0;
+		endOfLastLine = find_nth(currentCalltip.description, 0, "\n", 1);
+	}
+	else {
+		startOfFirstLine = find_nth(currentCalltip.description, 0, "\n", currentCalltip.arguments[currentArgumentNumber].startLine - 1);
+		endOfLastLine = find_nth(currentCalltip.description, 0, "\n", currentCalltip.arguments[currentArgumentNumber].endLine);
+	}
+	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, startOfFirstLine, endOfLastLine);
 }
 
-std::map<std::string, std::string> parseLabels() {
-	std::map<std::string, std::string> result;
+std::map<std::string, Calltip> parseLabels() {
+	std::map<std::string, Calltip> result;
 	const auto curScintilla = currentScintilla();
 
 	// Get the length of the current document.
@@ -461,7 +466,7 @@ std::map<std::string, std::string> parseLabels() {
 }
 
 std::vector<std::string> toLines(std::istringstream rawCode) {
-	std::vector<std::string> result(1024 * 20);
+	std::vector<std::string> result;
 	std::string line;
 	while (std::getline(rawCode, line, '\n')) {
 		// Remove any trailing \r if it exists
@@ -473,8 +478,8 @@ std::vector<std::string> toLines(std::istringstream rawCode) {
 	return result;
 }
 
-std::map<std::string, std::string> extractLabelDetails(const std::vector<std::string>& lines) {
-	std::map<std::string, std::string> result;
+std::map<std::string, Calltip> extractLabelDetails(const std::vector<std::string>& lines) {
+	std::map<std::string, Calltip> result;
 	for (size_t i = 0; i < lines.size(); ++i) {
 		const auto& currentLine = lines[i];
 		if (startsWith(currentLine, "#")) {
@@ -482,14 +487,47 @@ std::map<std::string, std::string> extractLabelDetails(const std::vector<std::st
 			std::smatch match;
 			std::regex_search(currentLine, match, labelPattern);
 			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
-			result.emplace(std::pair<std::string, std::string>({ match[1].str(), labelDescription}));
+			const auto arguments = extractArguments(labelDescription);
+			Calltip calltip = { labelDescription, arguments };
+			result.emplace(std::pair<std::string, Calltip>({ match[1].str(), calltip}));
 		}
 	}
 	return result;
 }
 
+std::vector<std::string> split(const std::string& string, char delim) {
+	std::vector<std::string> result;
+	std::stringstream ss(string);
+	std::string line;
+	while (std::getline(ss, line, delim)) result.push_back(line);
+	return result;
+}
+
+std::vector<Argument> extractArguments(std::string rawDescription) {
+	std::vector<Argument> result;
+	std::regex argumentPattern(".*\\^[a-h].*");
+	std::smatch match;
+	const auto lines = toLines(std::istringstream(rawDescription));
+	for (size_t i = 0; i < lines.size(); ++i) {
+		const auto line = lines[i];
+		if (std::regex_match(lines[i], match, argumentPattern)) {
+			Argument argument;
+			argument.startLine = i;
+			if (!result.empty()) {
+				result[result.size()-1].endLine = i - 1;
+			}
+			result.push_back(argument);
+		}
+	}
+	if (!result.empty()) {
+		result[result.size() - 1].endLine = lines.size() - 1;
+	}
+	return result;
+
+}
+
 std::string cleanLabelDescription(const std::string& rawDescription) {
-	return std::regex_replace(rawDescription, std::regex("(^REM\\s*)"), "");
+	return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
 }
 
 std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {

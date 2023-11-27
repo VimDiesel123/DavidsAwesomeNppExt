@@ -2,21 +2,21 @@
 #include <Windows.h>
 #include <regex>
 
-void fixSetupTreeItems(NppData data)
+void fixSetupTreeItems()
 {
 	// Get the current scintilla
 	int which = -1;
-	::SendMessage(data._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
 
 
 	if (which == -1)
 		return;
-	HWND curScintilla = (which == 0) ? data._scintillaMainHandle : data._scintillaSecondHandle;
+	HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
 
 	// Get filename of current document
 	std::wstring filename;
 	filename.resize(MAX_PATH);
-	::SendMessage(data._nppHandle, NPPM_GETFILENAME, MAX_PATH, (LPARAM)filename.data());
+	::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, MAX_PATH, (LPARAM)filename.data());
 
 	const std::wregex treeItemsPattern(L"TreeItems.*\\.ini.*");
 

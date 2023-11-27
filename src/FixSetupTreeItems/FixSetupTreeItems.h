@@ -3,4 +3,4 @@
 
 extern NppData nppData;
 
-void fixSetupTreeItems(NppData data);
+void fixSetupTreeItems();

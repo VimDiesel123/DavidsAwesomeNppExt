@@ -128,7 +128,7 @@ bool setCommand(size_t index, TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey*
 //----------------------------------------------//
 
 void fixTreeItems() {
-	fixSetupTreeItems(nppData);
+	fixSetupTreeItems();
 }
 
 std::string extractCommand(const std::string& word) {

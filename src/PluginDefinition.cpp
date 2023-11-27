@@ -28,6 +28,7 @@
 #include "../lib/tabulate.hpp"
 #include <thread>
 #include "ShowFunny/ShowFunny.h"
+#include "FixSetupTreeItems/FixSetupTreeItems.h"
 
 //
 // The plugin data that Notepad++ needs
@@ -81,7 +82,7 @@ void commandMenuInit()
 	//            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
 	//            bool check0nInit                // optional. Make this menu item be checked visually
 	//            );
-	setCommand(0, TEXT("Fix SetupTree Items"), fixSetupTreeItems, NULL, 0);
+	setCommand(0, TEXT("Fix SetupTree Items"), fixTreeItems, NULL, 0);
 	setCommand(1, TEXT("GIVE FUNNY"), showFunny, NULL, 0);
 
 }
@@ -125,76 +126,10 @@ bool setCommand(size_t index, TCHAR* cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey*
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
-void fixSetupTreeItems()
-{
-	// Get the current scintilla
-	int which = -1;
-	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
 
-
-	if (which == -1)
-		return;
-	HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
-
-	// Get filename of current document
-	std::wstring filename;
-	filename.resize(MAX_PATH);
-	::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, MAX_PATH, (LPARAM)filename.data());
-
-	const std::wregex treeItemsPattern(L"TreeItems.*\\.ini.*");
-
-	const auto isTreeItemsFile = std::regex_match(filename.c_str(), treeItemsPattern);
-
-	if (!isTreeItemsFile) {
-		std::wstring errormessage = std::wstring(filename.c_str()) + std::wstring(L" is not a TreeItems file.");
-		::MessageBox(NULL, errormessage.c_str(), L"Wrong file!", MB_OK);
-		return;
-	}
-
-	// Get the length of the current document.
-	const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
-
-	std::string treeItems;
-	treeItems.resize(length + 1);
-	::SendMessage(curScintilla, SCI_GETTEXT, length + 1, (LPARAM)treeItems.data());
-
-	// Define the regex pattern to match tags like <P1=...> within sections
-	const std::regex pattern("\\[([^\\]]+)\\]|(<P\\d+=)(.*?)\r\n|([^\\[<]+)");
-
-	// Create a regex iterator to iterate through matches
-	std::sregex_iterator it(treeItems.begin(), treeItems.end(), pattern);
-	std::sregex_iterator end;
-
-	std::string result;
-	int tagNumber = 1;
-
-	// Iterate through matches
-	while (it != end) {
-		std::smatch match = *it;
-
-		if (match[1].matched) {
-			// Matched a section header, reset the tag number
-			tagNumber = 1;
-			result += match.str();
-		}
-		else if (match[2].matched) {
-			// Matched the beginning of a tag, update the tag number
-			const std::string tagContent = match[3].str();
-			result += "<P" + std::to_string(tagNumber++) + "=" + tagContent + "\r\n";
-		}
-		else if (match[4].matched) {
-			// Matched text that is not a header or a tag, such as blank lines
-			result += match[4].str();
-		}
-
-		++it;
-	}
-
-
-	::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
+void fixTreeItems() {
+	fixSetupTreeItems(nppData);
 }
-
-
 
 std::string extractCommand(const std::string& word) {
 	auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})(?:[A-HW-Z0-9]+=?|#|$)");
@@ -336,7 +271,7 @@ HWND currentScintilla() {
 	return (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
 }
 
-int currentPosition() 
+int currentPosition()
 {
 	const auto curScintilla = currentScintilla();
 	return ::SendMessage(curScintilla, SCI_GETCURRENTPOS, 0, 0);
@@ -449,7 +384,7 @@ std::map<std::string, Calltip> extractLabelDetails(const std::vector<std::string
 			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
 			const auto arguments = extractArguments(labelDescription);
 			Calltip calltip = { labelDescription, arguments };
-			result.emplace(std::pair<std::string, Calltip>({ match[1].str(), calltip}));
+			result.emplace(std::pair<std::string, Calltip>({ match[1].str(), calltip }));
 		}
 	}
 	return result;
@@ -474,7 +409,7 @@ std::vector<Argument> extractArguments(std::string rawDescription) {
 			Argument argument;
 			argument.startLine = i;
 			if (!result.empty()) {
-				result[result.size()-1].endLine = i - 1;
+				result[result.size() - 1].endLine = i - 1;
 			}
 			result.push_back(argument);
 		}

@@ -90,8 +90,7 @@ struct Calltip {
 	std::vector<Argument> arguments;
 };
 
-void fixSetupTreeItems();
-
+void fixTreeItems();
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
 void onCharacterAdded(SCNotification* pNotify);

@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <regex>
 
+
+
 void fixSetupTreeItems()
 {
 	// Get the current scintilla

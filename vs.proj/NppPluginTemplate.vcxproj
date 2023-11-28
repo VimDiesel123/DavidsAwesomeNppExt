@@ -30,6 +30,7 @@
     <ClInclude Include="..\lib\json.hpp" />
     <ClInclude Include="..\lib\tabulate.hpp" />
     <ClInclude Include="..\src\FixSetupTreeItems\FixSetupTreeItems.h" />
+    <ClInclude Include="..\src\Intellinonsense\Intellinonsense.h" />
     <ClInclude Include="..\src\menuCmdID.h" />
     <ClInclude Include="..\src\Notepad_plus_msgs.h" />
     <ClInclude Include="..\src\PluginDefinition.h" />
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\FixSetupTreeItems\FixSetupTreeItems.cpp" />
+    <ClCompile Include="..\src\Intellinonsense\Intellinonsense.cpp" />
     <ClCompile Include="..\src\NppPluginDemo.cpp" />
     <ClCompile Include="..\src\PluginDefinition.cpp" />
     <ClCompile Include="..\src\ShowFunny\ShowFunny.cpp" />

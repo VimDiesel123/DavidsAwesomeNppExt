@@ -9,6 +9,9 @@
     <ClCompile Include="..\src\FixSetupTreeItems\FixSetupTreeItems.cpp">
       <Filter>FixSetupTreeItems</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Intellinonsense\Intellinonsense.cpp">
+      <Filter>Intellinonsense</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\json.hpp" />
@@ -25,6 +28,9 @@
     <ClInclude Include="..\src\FixSetupTreeItems\FixSetupTreeItems.h">
       <Filter>FixSetupTreeItems</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Intellinonsense\Intellinonsense.h">
+      <Filter>Intellinonsense</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\NppPluginDemo.rc" />
@@ -39,6 +45,9 @@
     </Filter>
     <Filter Include="FixSetupTreeItems">
       <UniqueIdentifier>{507d9334-9f7d-4086-889d-124630cbca7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intellinonsense">
+      <UniqueIdentifier>{e362db1a-813b-46e4-896f-ee17057ab481}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

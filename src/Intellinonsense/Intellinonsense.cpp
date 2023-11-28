@@ -5,19 +5,7 @@
 #include "../../lib/json.hpp"
 #include "../../lib/tabulate.hpp"
 #include "../PluginDefinition.h"
-
-struct CurrentCalltipInfo {
-	int argumentNumber;
-};
-
-struct Argument {
-	int startLine, endLine;
-};
-
-struct Calltip {
-	std::string description;
-	std::vector<Argument> arguments;
-};
+#include "Intellinonsense.h"
 
 Calltip currentCalltip;
 size_t currentArgumentNumber;
@@ -28,8 +16,6 @@ nlohmann::json commandData;
 std::map<std::string, Calltip> labelCalltips;
 
 extern NppData nppData;
-
-const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.json";
 
 void loadManualData() {
 	std::ifstream f(PATH_TO_MANUAL_DATA);
@@ -126,7 +112,7 @@ std::vector<Argument> extractArguments(std::string rawDescription) {
 		result[result.size() - 1].endLine = lines.size() - 1;
 	}
 	return result;
-void loadManualData();
+	void loadManualData();
 
 }
 

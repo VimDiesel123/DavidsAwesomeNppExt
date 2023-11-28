@@ -321,6 +321,7 @@ std::string cleanLabelDescription(const std::string& rawDescription) {
 std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
 	std::vector<std::string> descriptionLines;
 	auto start = labelIndex - 1;
+	if (labelIndex == 0) return "";
 	while (startsWith(lines[start], "REM")) {
 		descriptionLines.push_back(lines[start]);
 		--start;

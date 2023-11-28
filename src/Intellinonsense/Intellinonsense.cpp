@@ -26,24 +26,21 @@ std::string extractCommand(const std::string& word) {
 	std::smatch match;
 	const auto matched = std::regex_search(word, match, commandRegex);
 	return matched ? match[1].str() : "";
-	}
-	return match[1];
 }
 
 std::string extractDataFromJson(const nlohmann::json& entry) {
 	std::string result;
-
 	// Extract the "Command" and "Description" fields
 	result += entry["Command"].get<std::string>() + "\n";
 	result += "Description:\n" + entry["Description"].get<std::string>() + "\n";
 
 
-	tabulate::Table usageAndArgumentsTable;
+	tabulate::Table table;
 
 	// Extract the "Usage" array
 	if (!entry["Usage"].empty()) {
 		for (const auto& usageEntry : entry["Usage"]) {
-			usageAndArgumentsTable.add_row({ "Usage", usageEntry["Example"].get<std::string>(), usageEntry["Explanation"].get<std::string>() });
+			table.add_row({ "Usage", usageEntry["Example"].get<std::string>(), usageEntry["Explanation"].get<std::string>() });
 		}
 	}
 
@@ -53,10 +50,10 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 		for (const std::string operand : entry["Operands"]["Operands"]) {
 			operands += operand;
 		}
-		usageAndArgumentsTable.add_row({ "Operands", operands, entry["Operands"]["Explanation"].get<std::string>() });
+		table.add_row({ "Operands", operands, entry["Operands"]["Explanation"].get<std::string>() });
 	}
 
-	result += usageAndArgumentsTable.str() + "\n";
+	result += table.str() + "\n";
 
 	// Extract the "Arguments" array
 	if (!entry["Arguments"].empty()) {
@@ -72,7 +69,6 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 
 	return result;
 }
-
 
 std::string buildCallTipString(const std::string& word) {
 	try {

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <string>
 #include <regex>
 #include <map>
@@ -72,9 +73,10 @@ std::string extractDataFromJson(const nlohmann::json& entry) {
 
 std::string buildCallTipString(const std::string& word) {
 	try {
+		// Try to look the calltip up in the labelCalltips map, if you find it, return the description.
 		return labelCalltips.at(word).description == "" ? "" : word + "\n" + labelCalltips.at(word).description;
 	}
-	catch (std::out_of_range)
+	catch (std::out_of_range) // If the word isn't in the labelCallTips map, assume that it's a command.
 	{
 		for (const auto& entry : commandData) {
 			if (entry["Command"] == word) {
@@ -87,28 +89,36 @@ std::string buildCallTipString(const std::string& word) {
 	return "";
 }
 
-std::vector<Argument> extractArguments(std::string rawDescription) {
-	std::vector<Argument> result;
+bool isRemarkArgument(std::string remark) {
 	std::regex argumentPattern(".*\\^[a-h].*");
-	std::smatch match;
-	const auto lines = toLines(std::istringstream(rawDescription));
-	for (size_t i = 0; i < lines.size(); ++i) {
-		const auto line = lines[i];
-		if (std::regex_match(lines[i], match, argumentPattern)) {
-			Argument argument;
-			argument.startLine = i;
-			if (!result.empty()) {
-				result[result.size() - 1].endLine = i - 1;
-			}
-			result.push_back(argument);
-		}
-	}
-	if (!result.empty()) {
-		result[result.size() - 1].endLine = lines.size() - 1;
-	}
-	return result;
-	void loadManualData();
+	std::smatch m;
+	return std::regex_match(remark, m, argumentPattern);
+}
 
+std::vector<size_t> argumentLinePositions(std::vector<std::string> lines) {
+	std::vector<size_t> argumentLines;
+
+	for (size_t i = 0; i < lines.size(); ++i)
+		if (isRemarkArgument(lines[i]))
+			argumentLines.push_back(i);
+
+	return argumentLines;
+}
+
+std::vector<Argument> extractArguments(std::string rawDescription) {
+	std::vector<Argument> arguments;
+	const auto lines = toLines(std::istringstream(rawDescription));
+	const auto argLines = argumentLinePositions(lines);
+
+	if (argLines.empty())
+		return arguments;
+
+	std::transform(argLines.begin(), argLines.end() - 1, argLines.begin() + 1, std::back_inserter(arguments),
+		[](const auto& first, const auto& second) { return Argument{ first, second - 1 }; });
+
+	arguments.push_back(Argument{ argLines.back(), lines.size() - 1 });
+
+	return arguments;
 }
 
 

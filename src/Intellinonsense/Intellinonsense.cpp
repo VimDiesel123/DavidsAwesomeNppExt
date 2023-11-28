@@ -24,9 +24,8 @@ void loadManualData() {
 std::string extractCommand(const std::string& word) {
 	auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})(?:[A-HW-Z0-9]+=?|#|$)");
 	std::smatch match;
-	std::regex_search(word, match, commandRegex);
-	if (!match.ready()) {
-		return "";
+	const auto matched = std::regex_search(word, match, commandRegex);
+	return matched ? match[1].str() : "";
 	}
 	return match[1];
 }

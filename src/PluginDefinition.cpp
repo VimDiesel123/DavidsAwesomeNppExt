@@ -16,15 +16,6 @@
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #include "PluginDefinition.h"
-#include "menuCmdID.h"
-#include <iostream>
-#include <string>
-#include <regex>
-#include <map>
-#include <Windows.h>
-#include <wininet.h>
-#include <sstream>
-#include <thread>
 #include "ShowFunny/ShowFunny.h"
 #include "FixSetupTreeItems/FixSetupTreeItems.h"
 #include "Intellinonsense/Intellinonsense.h"
@@ -88,8 +79,6 @@ void callTipInit()
 {
 	// Set the dwell time (in milliseconds) and the styler for dwell events
 	::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000, 0); // Set a 1-second dwell time
-
-	// labelCalltips = parseLabels();
 }
 
 

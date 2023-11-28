@@ -1,8 +1,7 @@
 #include "FixSetupTreeItems.h"
 #include <Windows.h>
 #include <regex>
-
-
+#include "../PluginDefinition.h"
 
 void fixSetupTreeItems()
 {

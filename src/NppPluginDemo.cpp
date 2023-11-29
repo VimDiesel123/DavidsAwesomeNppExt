@@ -16,6 +16,7 @@
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #include "PluginDefinition.h"
+#include "Intellinonsense/Intellinonsense.h"
 
 extern FuncItem funcItem[nbFunc];
 extern NppData nppData;

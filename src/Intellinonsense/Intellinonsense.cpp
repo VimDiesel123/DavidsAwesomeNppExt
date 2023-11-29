@@ -22,6 +22,7 @@ void loadManualData() {
 	std::ifstream f(PATH_TO_MANUAL_DATA);
 	f >> commandData;
 }
+
 std::string extractCommand(const std::string& word) {
 	auto commandRegex = std::regex("(?:^|[;=])_?(@?[A-Z]{2})(?:[A-HW-Z0-9]+=?|#|$)");
 	std::smatch match;
@@ -29,7 +30,7 @@ std::string extractCommand(const std::string& word) {
 	return matched ? match[1].str() : "";
 }
 
-std::string extractDataFromJson(const nlohmann::json& entry) {
+std::string buildTooltipStringFromCommandEntry(const nlohmann::json& entry) {
 	std::string result;
 	// Extract the "Command" and "Description" fields
 	result += entry["Command"].get<std::string>() + "\n";
@@ -81,7 +82,7 @@ std::string buildCallTipString(const std::string& word) {
 		for (const auto& entry : commandData) {
 			if (entry["Command"] == word) {
 				return
-					extractDataFromJson(entry);
+					buildTooltipStringFromCommandEntry(entry);
 			}
 		}
 	}
@@ -103,9 +104,38 @@ std::vector<size_t> argumentLinePositions(std::vector<std::string> lines) {
 	return argumentLines;
 }
 
+std::vector<std::string> toLines(std::istringstream rawCode) {
+	std::vector<std::string> result;
+	std::string line;
+	while (std::getline(rawCode, line, '\n')) {
+		// Remove any trailing \r if it exists
+		if (!line.empty() && line.back() == '\r') {
+			line.pop_back();
+		}
+		result.push_back(line);
+	}
+	return result;
+}
+
 std::vector<size_t> extractArguments(std::string rawDescription) {
 	const auto lines = toLines(std::istringstream(rawDescription));
 	return argumentLinePositions(lines);
+}
+
+bool startsWith(const std::string& bigString, const std::string& smallString) {
+	return bigString.compare(0, smallString.length(), smallString) == 0;
+}
+
+std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
+	const auto start = std::reverse_iterator(lines.begin() + labelIndex);
+	const auto end = std::find_if_not(start, lines.rend(), [](const auto& line) { return startsWith(line, "REM"); });
+	std::vector<std::string> descriptionLines(start, end);
+	return std::accumulate(descriptionLines.rbegin(), descriptionLines.rend(), std::string(),
+		[](const auto& accum, const auto& line) { return accum + line + "\r\n"; });
+}
+
+std::string cleanLabelDescription(const std::string& rawDescription) {
+	return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
 }
 
 std::map<std::string, Calltip> buildLabelLookupTable(const std::vector<std::string>& lines) {
@@ -126,6 +156,16 @@ std::map<std::string, Calltip> buildLabelLookupTable(const std::vector<std::stri
 	return result;
 }
 
+HWND currentScintilla() {
+	int which = -1;
+	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+
+	if (which == -1)
+		return NULL;
+	return (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+}
+
+
 std::string getDocumentText() {
 	const auto curScintilla = currentScintilla();
 	// Get the length of the current document.
@@ -145,53 +185,37 @@ std::map<std::string, Calltip> parseDocument() {
 	return labelDetails;
 }
 
-HWND currentScintilla() {
-	int which = -1;
-	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
-
-	if (which == -1)
-		return NULL;
-	return (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
-}
-
 int currentPosition()
 {
 	const auto curScintilla = currentScintilla();
 	return ::SendMessage(curScintilla, SCI_GETCURRENTPOS, 0, 0);
 }
 
-void displayCallTip(const std::string& text, const std::pair<size_t, size_t> highlightRange) {
-	const auto currentPos = currentPosition();
+void displayCallTip(const std::string& text, const int position, const std::pair<size_t, size_t> highlightRange) {
 	const auto curScintilla = currentScintilla();
 	::SendMessage(curScintilla, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
 	::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
 	::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
-	::SendMessage(curScintilla, SCI_CALLTIPSHOW, currentPos, (LPARAM)text.c_str());
+	::SendMessage(curScintilla, SCI_CALLTIPSHOW, position, (LPARAM)text.c_str());
 	::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
 	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, highlightRange.first, highlightRange.second);
 }
 
-void onCharacterAdded(SCNotification* pNotify) {
-	switch ((char)pNotify->ch)
-	{
-	case ('('):
-	{
-		generateLabelCalltip();
-		break;
+std::string wordAt(int position) {
+	const auto curScintilla = currentScintilla();
+	int wordStart = ::SendMessage(curScintilla, SCI_WORDSTARTPOSITION, position, true);
+	int wordEnd = ::SendMessage(curScintilla, SCI_WORDENDPOSITION, position, true);
+
+	char word[256];
+	Sci_TextRange tr = {
+		{ wordStart, wordEnd },
+		word
+	};
+	const auto result = ::SendMessage(curScintilla, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
+	if (!result || result > 256) {
+		return "";
 	}
-	case (','):
-	{
-		incrementArgumentLineNumber();
-		break;
-	}
-	case (')'):
-	{
-		cancelLabelCallTip();
-		break;
-	}
-	default:
-		return;
-	}
+	return word;
 }
 
 size_t find_nth(const std::string& haystack, size_t pos, const std::string& needle, size_t nth)
@@ -218,56 +242,50 @@ std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t 
 		endOfLastLine = nthNewLine(calltip.description, *std::next(current) - 1);
 	return std::make_pair(startOfFirstLine, endOfLastLine);
 }
+
+void generateLabelCalltip() {
+	const auto prevWord = wordAt(currentPosition() - 1);
+	currentArgumentNumber = 0;
+	currentCalltip = labelCalltips[prevWord];
+	displayCallTip(currentCalltip.description, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
+}
+
 void incrementArgumentLineNumber() {
 	if (currentArgumentNumber == currentCalltip.argumentLineNums.size() - 1) return;
 	currentArgumentNumber++;
-	displayCallTip(currentCalltip.description, argumentLineRange(currentCalltip, currentArgumentNumber));
+	displayCallTip(currentCalltip.description, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
 }
 
 void cancelLabelCallTip() {
 
 }
 
-std::string wordAt(int position) {
-	const auto curScintilla = currentScintilla();
-	int wordStart = ::SendMessage(curScintilla, SCI_WORDSTARTPOSITION, position, true);
-	int wordEnd = ::SendMessage(curScintilla, SCI_WORDENDPOSITION, position, true);
-
-	char word[256];
-	Sci_TextRange tr = {
-		{ wordStart, wordEnd },
-		word
-	};
-	const auto result = ::SendMessage(curScintilla, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
-	if (!result || result > 256) {
-		return "";
+void onCharacterAdded(SCNotification* pNotify) {
+	switch ((char)pNotify->ch)
+	{
+	case ('('):
+	{
+		generateLabelCalltip();
+		break;
 	}
-	return word;
+	case (','):
+	{
+		incrementArgumentLineNumber();
+		break;
+	}
+	case (')'):
+	{
+		cancelLabelCallTip();
+		break;
+	}
+	default:
+		return;
+	}
 }
 
 char charAt(int position) {
 	const auto curScintilla = currentScintilla();
 	return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
-}
-
-void generateLabelCalltip() {
-	const auto prevWord = wordAt(currentPosition() - 1);
-	currentArgumentNumber = 0;
-	currentCalltip = labelCalltips[prevWord];
-	displayCallTip(currentCalltip.description, argumentLineRange(currentCalltip, currentArgumentNumber));
-}
-
-std::vector<std::string> toLines(std::istringstream rawCode) {
-	std::vector<std::string> result;
-	std::string line;
-	while (std::getline(rawCode, line, '\n')) {
-		// Remove any trailing \r if it exists
-		if (!line.empty() && line.back() == '\r') {
-			line.pop_back();
-		}
-		result.push_back(line);
-	}
-	return result;
 }
 
 std::vector<std::string> split(const std::string& string, char delim) {
@@ -276,22 +294,6 @@ std::vector<std::string> split(const std::string& string, char delim) {
 	std::string line;
 	while (std::getline(ss, line, delim)) result.push_back(line);
 	return result;
-}
-
-std::string cleanLabelDescription(const std::string& rawDescription) {
-	return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
-}
-
-std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
-	const auto start = std::reverse_iterator(lines.begin() + labelIndex);
-	const auto end = std::find_if_not(start, lines.rend(), [](const auto& line) { return startsWith(line, "REM"); });
-	std::vector<std::string> descriptionLines(start, end);
-	return std::accumulate(descriptionLines.rbegin(), descriptionLines.rend(), std::string(),
-		[](const auto& accum, const auto& line) { return accum + line + "\r\n"; });
-}
-
-bool startsWith(const std::string& bigString, const std::string& smallString) {
-	return bigString.compare(0, smallString.length(), smallString) == 0;
 }
 
 void onDwellStart(SCNotification* pNotify) {
@@ -304,7 +306,7 @@ void onDwellStart(SCNotification* pNotify) {
 	const auto word = wordAt(pNotify->position);
 	const auto calltip = label ? buildCallTipString(word) : buildCallTipString(extractCommand(word));
 	const auto endOfFirstLine = calltip.find_first_of('\n');
-	displayCallTip(calltip,{ 0, endOfFirstLine });
+	displayCallTip(calltip, pNotify->position, { 0, endOfFirstLine });
 }
 
 

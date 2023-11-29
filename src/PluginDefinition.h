@@ -77,27 +77,6 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 // Your plugin command functions
 //
 
-
 void fixTreeItems();
-void onDwellStart(SCNotification* pNotify);
-void onDwellEnd(SCNotification* pNotify);
-void onCharacterAdded(SCNotification* pNotify);
-void generateLabelCalltip();
-void incrementArgumentLineNumber();
-void cancelLabelCallTip();
-HWND currentScintilla();
-std::string wordAt(int position);
-char charAt(int position);
-void displayCallTip();
-size_t find_nth(const std::string& haystack, size_t pos, const std::string& needle, size_t nth);
-std::string buildCallTipString(const std::string& word);
-std::string extractCommand(const std::string& word);
-std::string extractDataFromJson(const nlohmann::json& entry);
-std::vector<std::string> toLines(std::istringstream rawCode);
-bool startsWith(const std::string& bigString, const std::string& smallString);
-std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex);
-std::string cleanLabelDescription(const std::string& rawDescription);
-
-
 
 #endif //PLUGINDEFINITION_H

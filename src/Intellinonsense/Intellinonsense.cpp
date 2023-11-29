@@ -117,11 +117,6 @@ std::vector<std::string> toLines(std::istringstream rawCode) {
 	return result;
 }
 
-std::vector<size_t> extractArguments(std::string rawDescription) {
-	const auto lines = toLines(std::istringstream(rawDescription));
-	return argumentLinePositions(lines);
-}
-
 bool startsWith(const std::string& bigString, const std::string& smallString) {
 	return bigString.compare(0, smallString.length(), smallString) == 0;
 }
@@ -138,14 +133,23 @@ std::string cleanLabelDescription(const std::string& rawDescription) {
 	return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
 }
 
+std::vector<std::string> split(const std::string& string, char delim) {
+	std::vector<std::string> result;
+	std::stringstream ss(string);
+	std::string line;
+	while (std::getline(ss, line, delim)) result.push_back(line);
+	return result;
+}
+
 std::map<std::string, Calltip> buildLabelLookupTable(const std::vector<std::string>& lines) {
 	std::map<std::string, Calltip> result;
 	for (size_t i = 0; i < lines.size(); ++i) {
 		const auto& currentLine = lines[i];
 		if (startsWith(currentLine, "#")) {
+			// TODO: (David) this is stupid. extractLabelDescription flattens a vector of strings and then I'm turning it back into a vector on the next line.
 			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
-			const auto arguments = extractArguments(labelDescription);
-			Calltip calltip = { labelDescription, arguments };
+			const auto argLines = argumentLinePositions(toLines(std::istringstream(labelDescription)));
+			Calltip calltip = { labelDescription, argLines };
 
 			const std::regex labelPattern("^#(\\w+)($|;)");
 			std::smatch match;
@@ -286,14 +290,6 @@ void onCharacterAdded(SCNotification* pNotify) {
 char charAt(int position) {
 	const auto curScintilla = currentScintilla();
 	return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
-}
-
-std::vector<std::string> split(const std::string& string, char delim) {
-	std::vector<std::string> result;
-	std::stringstream ss(string);
-	std::string line;
-	while (std::getline(ss, line, delim)) result.push_back(line);
-	return result;
 }
 
 void onDwellStart(SCNotification* pNotify) {

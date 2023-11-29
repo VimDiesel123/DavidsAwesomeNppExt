@@ -82,7 +82,7 @@ void fixTreeItems();
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
 void onCharacterAdded(SCNotification* pNotify);
-void showLabelCallTip();
+void generateLabelCalltip();
 void incrementArgumentLineNumber();
 void cancelLabelCallTip();
 HWND currentScintilla();

@@ -145,32 +145,30 @@ std::map<std::string, Calltip> parseDocument() {
 	return labelDetails;
 }
 
+HWND currentScintilla() {
+	int which = -1;
+	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
 
-void onDwellStart(SCNotification* pNotify) {
-	labelCalltips = parseDocument();
-	const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
-	int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
-
-	const auto word = wordAt(pNotify->position);
-
-	const auto prevChar = charAt(wordStart - 1);
-	const auto label = prevChar == '#';
-
-	const auto calltip = label ? buildCallTipString(word) : buildCallTipString(extractCommand(word));
-
-	::SendMessage(handle, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
-	::SendMessage(handle, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
-	::SendMessage(handle, SCI_CALLTIPUSESTYLE, 0, 0);
-	::SendMessage(handle, SCI_CALLTIPSHOW, pNotify->position, (LPARAM)calltip.c_str());
-	::SendMessage(handle, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
-	const auto endOfFirstLine = calltip.find_first_of('\n');
-	::SendMessage(handle, SCI_CALLTIPSETHLT, 0, endOfFirstLine);
-
+	if (which == -1)
+		return NULL;
+	return (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
 }
 
+int currentPosition()
+{
+	const auto curScintilla = currentScintilla();
+	return ::SendMessage(curScintilla, SCI_GETCURRENTPOS, 0, 0);
+}
 
-void onDwellEnd(SCNotification* pNotify) {
-	::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
+void displayCallTip(const std::string& text, const std::pair<size_t, size_t> highlightRange) {
+	const auto currentPos = currentPosition();
+	const auto curScintilla = currentScintilla();
+	::SendMessage(curScintilla, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
+	::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
+	::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
+	::SendMessage(curScintilla, SCI_CALLTIPSHOW, currentPos, (LPARAM)text.c_str());
+	::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
+	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, highlightRange.first, highlightRange.second);
 }
 
 void onCharacterAdded(SCNotification* pNotify) {
@@ -178,7 +176,7 @@ void onCharacterAdded(SCNotification* pNotify) {
 	{
 	case ('('):
 	{
-		showLabelCallTip();
+		generateLabelCalltip();
 		break;
 	}
 	case (','):
@@ -196,70 +194,6 @@ void onCharacterAdded(SCNotification* pNotify) {
 	}
 }
 
-void incrementArgumentLineNumber() {
-	if (currentArgumentNumber == currentCalltip.argumentLineNums.size() - 1) return;
-	currentArgumentNumber++;
-	displayCallTip();
-}
-
-void cancelLabelCallTip() {
-
-}
-
-HWND currentScintilla() {
-	int which = -1;
-	::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
-
-
-	if (which == -1)
-		return NULL;
-	return (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
-}
-
-int currentPosition()
-{
-	const auto curScintilla = currentScintilla();
-	return ::SendMessage(curScintilla, SCI_GETCURRENTPOS, 0, 0);
-}
-
-std::string wordAt(int position) {
-	const auto curScintilla = currentScintilla();
-
-	int wordStart = ::SendMessage(curScintilla, SCI_WORDSTARTPOSITION, position, true);
-	int wordEnd = ::SendMessage(curScintilla, SCI_WORDENDPOSITION, position, true);
-
-
-	char word[256];
-	Sci_TextRange tr = {
-		{ wordStart, wordEnd },
-		word
-	};
-
-	const auto result = ::SendMessage(curScintilla, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
-
-	if (!result || result > 256) {
-		return "";
-	}
-
-	return word;
-}
-
-char charAt(int position) {
-	const auto curScintilla = currentScintilla();
-	return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
-
-}
-
-void showLabelCallTip() {
-	const auto currentPos = currentPosition();
-	const auto prevWord = wordAt(currentPos - 1);
-	currentArgumentNumber = 0;
-	currentCalltip = labelCalltips[prevWord];
-	displayCallTip();
-
-}
-
-
 size_t find_nth(const std::string& haystack, size_t pos, const std::string& needle, size_t nth)
 {
 	size_t found_pos = haystack.find(needle, pos);
@@ -274,9 +208,7 @@ size_t nthNewLine(const std::string& haystack, const size_t nth) {
 std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t currentArgument) {
 	if (calltip.argumentLineNums.empty())
 		return { 0,0 };
-
 	std::size_t startOfFirstLine, endOfLastLine;
-
 	const auto current = calltip.argumentLineNums.begin() + currentArgument;
 	const auto next = std::next(current);
 	startOfFirstLine = nthNewLine(calltip.description, (*current) - 1);
@@ -286,17 +218,43 @@ std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t 
 		endOfLastLine = nthNewLine(calltip.description, *std::next(current) - 1);
 	return std::make_pair(startOfFirstLine, endOfLastLine);
 }
-void displayCallTip() {
-	const auto currentPos = currentPosition();
-	const auto curScintilla = currentScintilla();
-	::SendMessage(curScintilla, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
-	::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
-	::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
-	::SendMessage(curScintilla, SCI_CALLTIPSHOW, currentPos, (LPARAM)currentCalltip.description.c_str());
-	::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
+void incrementArgumentLineNumber() {
+	if (currentArgumentNumber == currentCalltip.argumentLineNums.size() - 1) return;
+	currentArgumentNumber++;
+	displayCallTip(currentCalltip.description, argumentLineRange(currentCalltip, currentArgumentNumber));
+}
 
-	const auto [start, end] = argumentLineRange(currentCalltip, currentArgumentNumber);
-	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, start, end);
+void cancelLabelCallTip() {
+
+}
+
+std::string wordAt(int position) {
+	const auto curScintilla = currentScintilla();
+	int wordStart = ::SendMessage(curScintilla, SCI_WORDSTARTPOSITION, position, true);
+	int wordEnd = ::SendMessage(curScintilla, SCI_WORDENDPOSITION, position, true);
+
+	char word[256];
+	Sci_TextRange tr = {
+		{ wordStart, wordEnd },
+		word
+	};
+	const auto result = ::SendMessage(curScintilla, SCI_GETTEXTRANGE, 0, (LPARAM)&tr);
+	if (!result || result > 256) {
+		return "";
+	}
+	return word;
+}
+
+char charAt(int position) {
+	const auto curScintilla = currentScintilla();
+	return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
+}
+
+void generateLabelCalltip() {
+	const auto prevWord = wordAt(currentPosition() - 1);
+	currentArgumentNumber = 0;
+	currentCalltip = labelCalltips[prevWord];
+	displayCallTip(currentCalltip.description, argumentLineRange(currentCalltip, currentArgumentNumber));
 }
 
 std::vector<std::string> toLines(std::istringstream rawCode) {
@@ -335,4 +293,23 @@ std::string extractLabelDescription(const std::vector<std::string>& lines, const
 bool startsWith(const std::string& bigString, const std::string& smallString) {
 	return bigString.compare(0, smallString.length(), smallString) == 0;
 }
+
+void onDwellStart(SCNotification* pNotify) {
+	labelCalltips = parseDocument();
+	const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
+	int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
+	const auto prevChar = charAt(wordStart - 1);
+	const auto label = prevChar == '#';
+
+	const auto word = wordAt(pNotify->position);
+	const auto calltip = label ? buildCallTipString(word) : buildCallTipString(extractCommand(word));
+	const auto endOfFirstLine = calltip.find_first_of('\n');
+	displayCallTip(calltip,{ 0, endOfFirstLine });
+}
+
+
+void onDwellEnd(SCNotification* pNotify) {
+	::SendMessage((HWND)pNotify->nmhdr.hwndFrom, SCI_CALLTIPCANCEL, 0, 0);
+}
+
 

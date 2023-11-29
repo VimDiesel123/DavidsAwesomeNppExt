@@ -108,17 +108,18 @@ std::vector<size_t> extractArguments(std::string rawDescription) {
 	return argumentLinePositions(lines);
 }
 
-std::map<std::string, Calltip> extractLabelDetails(const std::vector<std::string>& lines) {
+std::map<std::string, Calltip> buildLabelLookupTable(const std::vector<std::string>& lines) {
 	std::map<std::string, Calltip> result;
 	for (size_t i = 0; i < lines.size(); ++i) {
 		const auto& currentLine = lines[i];
 		if (startsWith(currentLine, "#")) {
-			const std::regex labelPattern("^#(\\w+)($|;)");
-			std::smatch match;
-			std::regex_search(currentLine, match, labelPattern);
 			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
 			const auto arguments = extractArguments(labelDescription);
 			Calltip calltip = { labelDescription, arguments };
+
+			const std::regex labelPattern("^#(\\w+)($|;)");
+			std::smatch match;
+			std::regex_search(currentLine, match, labelPattern);
 			result.emplace(std::pair<std::string, Calltip>({ match[1].str(), calltip }));
 		}
 	}
@@ -139,7 +140,7 @@ std::map<std::string, Calltip> parseLabels() {
 	::SendMessage(curScintilla, SCI_GETTEXT, length, (LPARAM)dmcCode.data());
 
 	const auto filteredLines = toLines(std::istringstream(dmcCode));
-	const auto labelDetails = extractLabelDetails(filteredLines);
+	const auto labelDetails = buildLabelLookupTable(filteredLines);
 	return labelDetails;
 }
 

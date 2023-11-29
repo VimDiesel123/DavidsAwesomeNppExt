@@ -10,7 +10,7 @@ struct Argument {
 
 struct Calltip {
 	std::string description;
-	std::vector<Argument> arguments;
+	std::vector<size_t> argumentLineNums;
 };
 
 typedef std::pair<std::string, size_t> LinePosition;

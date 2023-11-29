@@ -89,7 +89,7 @@ std::string buildCallTipString(const std::string& word) {
 	return "";
 }
 
-bool isRemarkArgument(std::string remark) {
+bool isFirstLineOfArgumentRemark(std::string remark) {
 	std::regex argumentPattern(".*\\^[a-h].*");
 	std::smatch m;
 	return std::regex_match(remark, m, argumentPattern);
@@ -97,30 +97,16 @@ bool isRemarkArgument(std::string remark) {
 
 std::vector<size_t> argumentLinePositions(std::vector<std::string> lines) {
 	std::vector<size_t> argumentLines;
-
 	for (size_t i = 0; i < lines.size(); ++i)
-		if (isRemarkArgument(lines[i]))
+		if (isFirstLineOfArgumentRemark(lines[i]))
 			argumentLines.push_back(i);
-
 	return argumentLines;
 }
 
-std::vector<Argument> extractArguments(std::string rawDescription) {
-	std::vector<Argument> arguments;
+std::vector<size_t> extractArguments(std::string rawDescription) {
 	const auto lines = toLines(std::istringstream(rawDescription));
-	const auto argLines = argumentLinePositions(lines);
-
-	if (argLines.empty())
-		return arguments;
-
-	std::transform(argLines.begin(), argLines.end() - 1, argLines.begin() + 1, std::back_inserter(arguments),
-		[](const auto& first, const auto& second) { return Argument{ first, second - 1 }; });
-
-	arguments.push_back(Argument{ argLines.back(), lines.size() - 1 });
-
-	return arguments;
+	return argumentLinePositions(lines);
 }
-
 
 std::map<std::string, Calltip> extractLabelDetails(const std::vector<std::string>& lines) {
 	std::map<std::string, Calltip> result;
@@ -209,7 +195,7 @@ void onCharacterAdded(SCNotification* pNotify) {
 }
 
 void incrementArgumentLineNumber() {
-	if (currentArgumentNumber == currentCalltip.arguments.size() - 1) return;
+	if (currentArgumentNumber == currentCalltip.argumentLineNums.size() - 1) return;
 	currentArgumentNumber++;
 	displayCallTip();
 }
@@ -271,6 +257,7 @@ void showLabelCallTip() {
 
 }
 
+
 size_t find_nth(const std::string& haystack, size_t pos, const std::string& needle, size_t nth)
 {
 	size_t found_pos = haystack.find(needle, pos);
@@ -278,6 +265,25 @@ size_t find_nth(const std::string& haystack, size_t pos, const std::string& need
 	return find_nth(haystack, found_pos + 1, needle, nth - 1);
 }
 
+size_t nthNewLine(const std::string& haystack, const size_t nth) {
+	return find_nth(haystack, 0, "\n", nth);
+}
+
+std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t currentArgument) {
+	if (calltip.argumentLineNums.empty())
+		return { 0,0 };
+
+	std::size_t startOfFirstLine, endOfLastLine;
+
+	const auto current = calltip.argumentLineNums.begin() + currentArgument;
+	const auto next = std::next(current);
+	startOfFirstLine = nthNewLine(calltip.description, (*current) - 1);
+	if (next == calltip.argumentLineNums.end())
+		endOfLastLine = SIZE_MAX;
+	else
+		endOfLastLine = nthNewLine(calltip.description, *std::next(current) - 1);
+	return std::make_pair(startOfFirstLine, endOfLastLine);
+}
 void displayCallTip() {
 	const auto currentPos = currentPosition();
 	const auto curScintilla = currentScintilla();
@@ -286,16 +292,9 @@ void displayCallTip() {
 	::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
 	::SendMessage(curScintilla, SCI_CALLTIPSHOW, currentPos, (LPARAM)currentCalltip.description.c_str());
 	::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
-	std::size_t startOfFirstLine, endOfLastLine;
-	if (currentCalltip.arguments.empty()) {
-		startOfFirstLine = 0;
-		endOfLastLine = find_nth(currentCalltip.description, 0, "\n", 1);
-	}
-	else {
-		startOfFirstLine = find_nth(currentCalltip.description, 0, "\n", currentCalltip.arguments[currentArgumentNumber].startLine - 1);
-		endOfLastLine = find_nth(currentCalltip.description, 0, "\n", currentCalltip.arguments[currentArgumentNumber].endLine);
-	}
-	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, startOfFirstLine, endOfLastLine);
+
+	const auto [start, end] = argumentLineRange(currentCalltip, currentArgumentNumber);
+	::SendMessage(curScintilla, SCI_CALLTIPSETHLT, start, end);
 }
 
 std::vector<std::string> toLines(std::istringstream rawCode) {

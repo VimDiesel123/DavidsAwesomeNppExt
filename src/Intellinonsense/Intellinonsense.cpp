@@ -126,19 +126,20 @@ std::map<std::string, Calltip> buildLabelLookupTable(const std::vector<std::stri
 	return result;
 }
 
-
-std::map<std::string, Calltip> parseLabels() {
-	std::map<std::string, Calltip> result;
+std::string getDocumentText() {
 	const auto curScintilla = currentScintilla();
-
 	// Get the length of the current document.
 	const unsigned length = ::SendMessage(curScintilla, SCI_GETLENGTH, 0, 0);
-
 	// Store text of document in dmcCode
 	std::string dmcCode;
 	dmcCode.resize(length + 1);
 	::SendMessage(curScintilla, SCI_GETTEXT, length, (LPARAM)dmcCode.data());
+	return dmcCode;
+}
 
+
+std::map<std::string, Calltip> parseDocument() {
+	const auto dmcCode = getDocumentText();
 	const auto filteredLines = toLines(std::istringstream(dmcCode));
 	const auto labelDetails = buildLabelLookupTable(filteredLines);
 	return labelDetails;
@@ -146,7 +147,7 @@ std::map<std::string, Calltip> parseLabels() {
 
 
 void onDwellStart(SCNotification* pNotify) {
-	labelCalltips = parseLabels();
+	labelCalltips = parseDocument();
 	const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
 	int wordStart = ::SendMessage(handle, SCI_WORDSTARTPOSITION, pNotify->position, true);
 

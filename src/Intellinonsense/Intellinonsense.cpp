@@ -323,16 +323,11 @@ std::string cleanLabelDescription(const std::string& rawDescription) {
 }
 
 std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
-	std::vector<std::string> descriptionLines;
-	auto start = labelIndex - 1;
-	if (labelIndex == 0) return "";
-	while (startsWith(lines[start], "REM")) {
-		descriptionLines.push_back(lines[start]);
-		--start;
-	}
-	std::string result;
-	std::for_each(descriptionLines.rbegin(), descriptionLines.rend(), [&result](const std::string& line) { result += line + "\r\n"; });
-	return result;
+	const auto start = std::reverse_iterator(lines.begin() + labelIndex);
+	const auto end = std::find_if_not(start, lines.rend(), [](const auto& line) { return startsWith(line, "REM"); });
+	std::vector<std::string> descriptionLines(start, end);
+	return std::accumulate(descriptionLines.rbegin(), descriptionLines.rend(), std::string(),
+		[](const auto& accum, const auto& line) { return accum + line + "\r\n"; });
 }
 
 bool startsWith(const std::string& bigString, const std::string& smallString) {

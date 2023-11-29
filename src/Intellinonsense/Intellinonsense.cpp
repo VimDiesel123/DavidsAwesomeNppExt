@@ -279,7 +279,7 @@ std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t 
 	const auto next = std::next(current);
 	startOfFirstLine = nthNewLine(calltip.description, (*current) - 1);
 	if (next == calltip.argumentLineNums.end())
-		endOfLastLine = SIZE_MAX;
+		endOfLastLine = calltip.description.length();
 	else
 		endOfLastLine = nthNewLine(calltip.description, *std::next(current) - 1);
 	return std::make_pair(startOfFirstLine, endOfLastLine);

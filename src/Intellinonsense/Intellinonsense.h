@@ -4,14 +4,6 @@
 
 typedef struct SCNotification SCNotification;
 
-struct CurrentCalltipInfo {
-  int argumentNumber;
-};
-
-struct Argument {
-  size_t startLine, endLine;
-};
-
 struct Calltip {
   std::vector<std::string> description;
   std::vector<size_t> argumentLineNums;

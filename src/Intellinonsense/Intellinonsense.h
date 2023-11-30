@@ -1,26 +1,28 @@
 #pragma once
+#include <vector>
+#include <string>
 
 typedef struct SCNotification SCNotification;
 
 struct CurrentCalltipInfo {
-	int argumentNumber;
+  int argumentNumber;
 };
 
 struct Argument {
-	size_t startLine, endLine;
+  size_t startLine, endLine;
 };
 
 struct Calltip {
-	std::vector<std::string> description;
-	std::vector<size_t> argumentLineNums;
+  std::vector<std::string> description;
+  std::vector<size_t> argumentLineNums;
 };
 
 typedef std::pair<std::string, size_t> LinePosition;
 
-const std::string PATH_TO_MANUAL_DATA = "plugins\\DavidsAwesomeTools\\manual.json";
+const std::string PATH_TO_MANUAL_DATA =
+    "plugins\\DavidsAwesomeTools\\manual.json";
 
 void loadManualData();
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
 void onCharacterAdded(SCNotification* pNotify);
-

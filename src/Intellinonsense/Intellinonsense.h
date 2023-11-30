@@ -9,7 +9,7 @@ struct Argument {
 };
 
 struct Calltip {
-	std::string description;
+	std::vector<std::string> description;
 	std::vector<size_t> argumentLineNums;
 };
 

@@ -72,21 +72,29 @@ std::string buildTooltipStringFromCommandEntry(const nlohmann::json& entry) {
 	return result;
 }
 
-std::string buildCallTipString(const std::string& word) {
-	try {
-		// Try to look the calltip up in the labelCalltips map, if you find it, return the description.
-		return labelCalltips.at(word).description == "" ? "" : word + "\n" + labelCalltips.at(word).description;
-	}
-	catch (std::out_of_range) // If the word isn't in the labelCallTips map, assume that it's a command.
-	{
-		for (const auto& entry : commandData) {
-			if (entry["Command"] == word) {
-				return
-					buildTooltipStringFromCommandEntry(entry);
-			}
+std::string linesToString(std::vector<std::string> lines) {
+	std::ostringstream result;
+	std::copy(begin(lines), end(lines), std::ostream_iterator<std::string>(result, "\n"));
+	return result.str();
+}
+
+std::string cleanLabelDescription(const std::string& rawDescription) {
+	return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
+}
+
+std::string buildLabelCalltip(const std::string& label) {
+	// Try to look the calltip up in the labelCalltips map, if you find it, return the description.
+	const auto lines = labelCalltips.at(label).description;
+	return label + ":\n" + cleanLabelDescription(linesToString(lines));
+}
+
+std::string buildCommandCalltip(const std::string& command) {
+	for (const auto& entry : commandData) {
+		if (entry["Command"] == command) {
+			return
+				buildTooltipStringFromCommandEntry(entry);
 		}
 	}
-
 	return "";
 }
 
@@ -143,8 +151,8 @@ std::map<std::string, Calltip> buildLabelLookupTable(const std::vector<std::stri
 		const auto& currentLine = lines[i];
 		if (startsWith(currentLine, "#")) {
 			// TODO: (David) this is stupid. extractLabelDescription flattens a vector of strings and then I'm turning it back into a vector on the next line.
-			const auto labelDescription = cleanLabelDescription(extractLabelDescription(lines, i));
-			const auto argLines = argumentLinePositions(toLines(std::istringstream(labelDescription)));
+			const auto labelDescription = extractLabelDescription(lines, i);
+			const auto argLines = argumentLinePositions(labelDescription);
 			Calltip calltip = { labelDescription, argLines };
 
 			const std::regex labelPattern("^#(\\w+)($|;)");
@@ -230,16 +238,17 @@ size_t nthNewLine(const std::string& haystack, const size_t nth) {
 }
 
 std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t currentArgument) {
+	const auto callTipString = cleanLabelDescription(linesToString(calltip.description));
 	if (calltip.argumentLineNums.empty())
 		return { 0,0 };
 	std::size_t startOfFirstLine, endOfLastLine;
 	const auto current = calltip.argumentLineNums.begin() + currentArgument;
 	const auto next = std::next(current);
-	startOfFirstLine = nthNewLine(calltip.description, (*current) - 1);
+	startOfFirstLine = nthNewLine(callTipString, (*current) - 1);
 	if (next == calltip.argumentLineNums.end())
-		endOfLastLine = calltip.description.length();
+		endOfLastLine = callTipString.length();
 	else
-		endOfLastLine = nthNewLine(calltip.description, *std::next(current) - 1);
+		endOfLastLine = nthNewLine(callTipString, *std::next(current) - 1);
 	return std::make_pair(startOfFirstLine, endOfLastLine);
 }
 
@@ -247,13 +256,15 @@ void generateLabelCalltip() {
 	const auto prevWord = wordAt(currentPosition() - 1);
 	currentArgumentNumber = 0;
 	currentCalltip = labelCalltips[prevWord];
-	displayCallTip(currentCalltip.description, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
+	const auto callTipString = cleanLabelDescription(linesToString(currentCalltip.description));
+	displayCallTip(callTipString, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
 }
 
 void incrementArgumentLineNumber() {
 	if (currentArgumentNumber == currentCalltip.argumentLineNums.size() - 1) return;
 	currentArgumentNumber++;
-	displayCallTip(currentCalltip.description, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
+	const auto callTipString = cleanLabelDescription(linesToString(currentCalltip.description));
+	displayCallTip(callTipString, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
 }
 
 void cancelLabelCallTip() {
@@ -296,7 +307,7 @@ void onDwellStart(SCNotification* pNotify) {
 	const auto label = prevChar == '#';
 
 	const auto word = wordAt(pNotify->position);
-	const auto calltip = label ? buildCallTipString(word) : buildCallTipString(extractCommand(word));
+	const auto calltip = label ? buildLabelCalltip(word) : buildCommandCalltip(extractCommand(word));
 	const auto endOfFirstLine = calltip.find_first_of('\n');
 	displayCallTip(calltip, pNotify->position, { 0, endOfFirstLine });
 }

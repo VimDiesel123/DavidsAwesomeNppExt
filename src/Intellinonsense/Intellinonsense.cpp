@@ -121,16 +121,12 @@ bool startsWith(const std::string& bigString, const std::string& smallString) {
 	return bigString.compare(0, smallString.length(), smallString) == 0;
 }
 
-std::string extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
-	const auto start = std::reverse_iterator(lines.begin() + labelIndex);
-	const auto end = std::find_if_not(start, lines.rend(), [](const auto& line) { return startsWith(line, "REM"); });
-	std::vector<std::string> descriptionLines(start, end);
-	return std::accumulate(descriptionLines.rbegin(), descriptionLines.rend(), std::string(),
-		[](const auto& accum, const auto& line) { return accum + line + "\r\n"; });
-}
-
-std::string cleanLabelDescription(const std::string& rawDescription) {
-	return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
+std::vector<std::string> extractLabelDescription(const std::vector<std::string>& lines, const size_t labelIndex) {
+	// NOTE: (David) this is a little confusing, but the line at labelIndex is the END of our doc comment and the first line
+	// we find looking backwards that starts with "REM", is the START of our doc comment,
+	const auto end = std::reverse_iterator(lines.begin() + labelIndex);
+	const auto start = std::find_if_not(end, lines.rend(), [](const auto& line) { return startsWith(line, "REM"); });
+	return std::vector<std::string>(start.base(), end.base());
 }
 
 std::vector<std::string> split(const std::string& string, char delim) {

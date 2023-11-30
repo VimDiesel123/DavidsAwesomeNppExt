@@ -252,17 +252,18 @@ std::pair<size_t, size_t> argumentLineRange(const Calltip calltip, const size_t 
 	return std::make_pair(startOfFirstLine, endOfLastLine);
 }
 
-void generateLabelCalltip() {
+void updateCurrentCalltip() {
 	const auto prevWord = wordAt(currentPosition() - 1);
 	currentArgumentNumber = 0;
 	currentCalltip = labelCalltips[prevWord];
-	const auto callTipString = cleanLabelDescription(linesToString(currentCalltip.description));
-	displayCallTip(callTipString, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
 }
 
 void incrementArgumentLineNumber() {
 	if (currentArgumentNumber == currentCalltip.argumentLineNums.size() - 1) return;
 	currentArgumentNumber++;
+}
+
+void generateLabelCalltip() {
 	const auto callTipString = cleanLabelDescription(linesToString(currentCalltip.description));
 	displayCallTip(callTipString, currentPosition(), argumentLineRange(currentCalltip, currentArgumentNumber));
 }
@@ -276,12 +277,14 @@ void onCharacterAdded(SCNotification* pNotify) {
 	{
 	case ('('):
 	{
+		updateCurrentCalltip();
 		generateLabelCalltip();
 		break;
 	}
 	case (','):
 	{
 		incrementArgumentLineNumber();
+		generateLabelCalltip();
 		break;
 	}
 	case (')'):

@@ -155,6 +155,7 @@ std::vector<std::string> split(const std::string& string, char delim) {
 std::map<std::string, Calltip> buildLabelLookupTable(
     const std::vector<std::string>& lines) {
   std::map<std::string, Calltip> result;
+
   for (size_t i = 0; i < lines.size(); ++i) {
     const auto& currentLine = lines[i];
     if (startsWith(currentLine, "#")) {
@@ -187,24 +188,24 @@ size_t find_nth(const std::string& haystack, size_t pos,
   return find_nth(haystack, found_pos + 1, needle, nth - 1);
 }
 
-size_t nthNewLine(const std::string& haystack, const size_t nth) {
-  return find_nth(haystack, 0, "\n", nth);
+size_t startOfNthLine(const std::string& haystack, const size_t nth) {
+  return find_nth(haystack, 0, "\n",
+                  nth - 1);  // - 1 because the first line doesn't have a '\n'
+                             // associated with it.
 }
 
-std::pair<size_t, size_t> argumentLineRange(const Calltip calltip,
-                                            const size_t currentArgument) {
-  const auto callTipString =
-      cleanLabelDescription(linesToString(calltip.description));
-  if (calltip.argumentLineNums.empty()) return {0, 0};
-  std::size_t startOfFirstLine, endOfLastLine;
-  const auto current = calltip.argumentLineNums.begin() + currentArgument;
-  const auto next = std::next(current);
-  startOfFirstLine = nthNewLine(callTipString, (*current) - 1);
-  if (next == calltip.argumentLineNums.end())
-    endOfLastLine = callTipString.length();
-  else
-    endOfLastLine = nthNewLine(callTipString, *std::next(current) - 1);
-  return std::make_pair(startOfFirstLine, endOfLastLine);
+std::pair<size_t, size_t> argumentLineRange(
+    std::string calltip, std::vector<size_t> argumentLineNums,
+    const size_t currentArgument) {
+  const auto current = argumentLineNums.begin() + currentArgument;
+  const auto last = argumentLineNums.end();
+  if (current == last) return {0, 0};
+
+  const auto startOfFirstLine = startOfNthLine(calltip, *current);
+  const auto endOfLastLine = std::next(current) < last
+                                 ? startOfNthLine(calltip, *std::next(current))
+                                 : calltip.length();
+  return {startOfFirstLine, endOfLastLine};
 }
 
 void updateCurrentCalltip() {
@@ -222,8 +223,10 @@ void incrementArgumentLineNumber() {
 void generateLabelCalltip() {
   const auto callTipString =
       cleanLabelDescription(linesToString(currentCalltip.description));
-  displayCallTip(callTipString, currentPosition(),
-                 argumentLineRange(currentCalltip, currentArgumentNumber));
+  displayCallTip(
+      callTipString, currentPosition(),
+      argumentLineRange(callTipString, currentCalltip.argumentLineNums,
+                        currentArgumentNumber));
 }
 
 void cancelLabelCallTip() {}

@@ -12,6 +12,7 @@
     <ClCompile Include="..\src\Intellinonsense\Intellinonsense.cpp">
       <Filter>Intellinonsense</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\SCI_Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\json.hpp" />
@@ -31,6 +32,7 @@
     <ClInclude Include="..\src\Intellinonsense\Intellinonsense.h">
       <Filter>Intellinonsense</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\SCI_Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\NppPluginDemo.rc" />

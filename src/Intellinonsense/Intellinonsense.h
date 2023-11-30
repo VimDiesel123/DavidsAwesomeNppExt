@@ -1,5 +1,7 @@
 #pragma once
 
+typedef struct SCNotification SCNotification;
+
 struct CurrentCalltipInfo {
 	int argumentNumber;
 };

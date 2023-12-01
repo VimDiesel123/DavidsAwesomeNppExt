@@ -77,6 +77,20 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode) {
     }
     case SCN_CHARADDED: {
       return onCharacterAdded(notifyCode);
+    }
+    case SCN_MODIFIED: {
+      // TODO: (David) Idk where SETMODEVENTMASK is meant to be called.
+      // Everything I tried didn't work, so I'm doing it here. Which is dumb.
+
+      // TODO: (David) Also, this is completely ridiculous. Why does SCI have a
+      // CHARADDED event and not a CHARDELETED event? This is just a mess.
+      if (!(notifyCode->modificationType & SC_MOD_DELETETEXT)) {
+        ::SendMessage(nppData._scintillaMainHandle, SCI_SETMODEVENTMASK,
+                      SC_MOD_DELETETEXT, 0);
+        return;
+      }
+      assert(notifyCode->modificationType & SC_MOD_DELETETEXT);
+      return onTextDeleted(notifyCode);
     } break;
 
     default:

@@ -179,6 +179,11 @@ void incrementArgumentLineNumber() {
   currentArgumentNumber++;
 }
 
+void decrementArgumentLineNumber() {
+  if (currentArgumentNumber == 0) return;
+  currentArgumentNumber--;
+}
+
 void generateLabelCalltip() {
   const auto callTipString =
       cleanLabelDescription(linesToString(currentCalltip.description));
@@ -186,6 +191,14 @@ void generateLabelCalltip() {
       callTipString, currentPosition(),
       argumentLineRange(callTipString, currentCalltip.argumentLineNums,
                         currentArgumentNumber));
+}
+
+void updateArgumentHighlight() {
+  const auto callTipString =
+      cleanLabelDescription(linesToString(currentCalltip.description));
+  const auto argumentRange = argumentLineRange(
+      callTipString, currentCalltip.argumentLineNums, currentArgumentNumber);
+  setCallTipHighlightRange(argumentRange);
 }
 
 void cancelLabelCallTip() {}
@@ -199,7 +212,7 @@ void onCharacterAdded(SCNotification* pNotify) {
     }
     case (','): {
       incrementArgumentLineNumber();
-      generateLabelCalltip();
+      updateArgumentHighlight();
       break;
     }
     case (')'): {
@@ -208,6 +221,14 @@ void onCharacterAdded(SCNotification* pNotify) {
     }
     default:
       return;
+  }
+}
+
+void onTextDeleted(SCNotification* pNotify) {
+  const auto textDeleted = std::string(pNotify->text);
+  if (textDeleted.find(",") != std::string::npos) {
+    decrementArgumentLineNumber();
+    updateArgumentHighlight();
   }
 }
 

@@ -35,6 +35,11 @@ void displayCallTip(const std::string& text, const int position,
   ::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
   ::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
   ::SendMessage(curScintilla, SCI_CALLTIPSHOW, position, (LPARAM)text.c_str());
+  setCallTipHighlightRange(highlightRange);
+}
+
+void setCallTipHighlightRange(const std::pair<size_t, size_t>& highlightRange) {
+  const auto curScintilla = currentScintilla();
   ::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
   ::SendMessage(curScintilla, SCI_CALLTIPSETHLT, highlightRange.first,
                 highlightRange.second);
@@ -61,5 +66,3 @@ char charAt(int position) {
   const auto curScintilla = currentScintilla();
   return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
 }
-
-

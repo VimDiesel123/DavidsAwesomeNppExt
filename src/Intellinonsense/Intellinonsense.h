@@ -18,3 +18,4 @@ void loadManualData();
 void onDwellStart(SCNotification* pNotify);
 void onDwellEnd(SCNotification* pNotify);
 void onCharacterAdded(SCNotification* pNotify);
+void onTextDeleted(SCNotification* pNotify);

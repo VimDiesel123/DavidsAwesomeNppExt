@@ -32,7 +32,7 @@ std::string extractCommand(const std::string& word) {
   return matched ? match[1].str() : "";
 }
 
-std::string buildCommandTooltipString(const nlohmann::json& entry) {
+std::string stringFromCommandEntry(const nlohmann::json& entry) {
   std::string result;
   // Extract the "Command" and "Description" fields
   result += entry["Command"].get<std::string>() + "\n";
@@ -90,13 +90,13 @@ std::string buildLabelCalltip(const std::string& label) {
 std::string buildCommandCalltip(const std::string& command) {
   for (const auto& entry : commandData) {
     if (entry["Command"] == command) {
-      return buildCommandTooltipString(entry);
+      return stringFromCommandEntry(entry);
     }
   }
   return "";
 }
 
-bool isFirstLineOfArgumentRemark(std::string remark) {
+bool isArgumentLine(std::string remark) {
   std::regex argumentPattern(".*\\^[a-h].*");
   std::smatch m;
   return std::regex_match(remark, m, argumentPattern);
@@ -105,7 +105,7 @@ bool isFirstLineOfArgumentRemark(std::string remark) {
 std::vector<size_t> argumentLinePositions(std::vector<std::string> lines) {
   std::vector<size_t> argumentLines;
   for (size_t i = 0; i < lines.size(); ++i)
-    if (isFirstLineOfArgumentRemark(lines[i])) argumentLines.push_back(i);
+    if (isArgumentLine(lines[i])) argumentLines.push_back(i);
   return argumentLines;
 }
 
@@ -121,31 +121,35 @@ std::vector<std::string> extractLabelDescription(
   return std::vector<std::string>(start.base(), end.base());
 }
 
+bool isLabelDecleration(std::string line) { return startsWith(line, "#"); }
+
 std::map<std::string, Calltip> buildLabelLookupTable(
     const std::vector<std::string>& lines) {
   std::map<std::string, Calltip> result;
 
   for (size_t i = 0; i < lines.size(); ++i) {
     const auto& currentLine = lines[i];
-    if (startsWith(currentLine, "#")) {
-      const auto labelDescription = extractLabelDescription(lines, i);
-      const auto argLines = argumentLinePositions(labelDescription);
-      Calltip calltip = {labelDescription, argLines};
 
-      const std::regex labelPattern("^#(\\w+)($|;)");
-      std::smatch match;
-      std::regex_search(currentLine, match, labelPattern);
-      result.emplace(
-          std::pair<std::string, Calltip>({match[1].str(), calltip}));
-    }
+    if (!isLabelDecleration(currentLine)) continue;
+
+    const auto labelDescription = extractLabelDescription(lines, i);
+    const auto argLines = argumentLinePositions(labelDescription);
+    Calltip calltip = {labelDescription, argLines};
+
+    const std::regex labelPattern("^#(\\w+)($|;)");
+    std::smatch match;
+    std::regex_search(currentLine, match, labelPattern);
+    result.emplace(std::pair<std::string, Calltip>({match[1].str(), calltip}));
   }
   return result;
 }
 
 std::map<std::string, Calltip> parseDocument() {
   auto rawCode = getDocumentText();
-  const auto filteredCode = std::regex_replace(rawCode, std::regex("\r"), ""); // Get rid of \r because it's needlessly complicated
-  const auto lines = split(filteredCode, '\n');   
+  const auto filteredCode = std::regex_replace(
+      rawCode, std::regex("\r"),
+      "");  // Get rid of \r because it's needlessly complicated
+  const auto lines = split(filteredCode, '\n');
   return buildLabelLookupTable(lines);
 }
 

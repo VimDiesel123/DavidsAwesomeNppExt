@@ -115,19 +115,6 @@ std::vector<size_t> argumentLinePositions(std::vector<std::string> lines) {
   return argumentLines;
 }
 
-std::vector<std::string> toLines(std::istringstream rawCode) {
-  std::vector<std::string> result;
-  std::string line;
-  while (std::getline(rawCode, line, '\n')) {
-    // Remove any trailing \r if it exists
-    if (!line.empty() && line.back() == '\r') {
-      line.pop_back();
-    }
-    result.push_back(line);
-  }
-  return result;
-}
-
 bool startsWith(const std::string& bigString, const std::string& smallString) {
   return bigString.compare(0, smallString.length(), smallString) == 0;
 }
@@ -159,8 +146,6 @@ std::map<std::string, Calltip> buildLabelLookupTable(
   for (size_t i = 0; i < lines.size(); ++i) {
     const auto& currentLine = lines[i];
     if (startsWith(currentLine, "#")) {
-      // TODO: (David) this is stupid. extractLabelDescription flattens a vector
-      // of strings and then I'm turning it back into a vector on the next line.
       const auto labelDescription = extractLabelDescription(lines, i);
       const auto argLines = argumentLinePositions(labelDescription);
       Calltip calltip = {labelDescription, argLines};
@@ -175,10 +160,10 @@ std::map<std::string, Calltip> buildLabelLookupTable(
   return result;
 }
 std::map<std::string, Calltip> parseDocument() {
-  const auto dmcCode = getDocumentText();
-  const auto filteredLines = toLines(std::istringstream(dmcCode));
-  const auto labelDetails = buildLabelLookupTable(filteredLines);
-  return labelDetails;
+  auto rawCode = getDocumentText();
+  const auto filteredCode = std::regex_replace(rawCode, std::regex("\r"), ""); // Get rid of \r because it's needlessly complicated
+  const auto lines = split(filteredCode, '\n');   
+  return buildLabelLookupTable(lines);
 }
 
 size_t find_nth(const std::string& haystack, size_t pos,
@@ -197,9 +182,9 @@ size_t startOfNthLine(const std::string& haystack, const size_t nth) {
 std::pair<size_t, size_t> argumentLineRange(
     std::string calltip, std::vector<size_t> argumentLineNums,
     const size_t currentArgument) {
+  if (argumentLineNums.empty()) return {0, 0};
   const auto current = argumentLineNums.begin() + currentArgument;
   const auto last = argumentLineNums.end();
-  if (current == last) return {0, 0};
 
   const auto startOfFirstLine = startOfNthLine(calltip, *current);
   const auto endOfLastLine = std::next(current) < last

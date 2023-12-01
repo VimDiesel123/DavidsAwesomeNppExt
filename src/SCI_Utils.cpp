@@ -56,3 +56,10 @@ std::string wordAt(int position) {
   }
   return word;
 }
+
+char charAt(int position) {
+  const auto curScintilla = currentScintilla();
+  return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
+}
+
+

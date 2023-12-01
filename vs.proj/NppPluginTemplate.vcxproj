@@ -39,6 +39,7 @@
     <ClInclude Include="..\src\Sci_Position.h" />
     <ClInclude Include="..\src\SCI_Utils.h" />
     <ClInclude Include="..\src\ShowFunny\ShowFunny.h" />
+    <ClInclude Include="..\src\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\FixSetupTreeItems\FixSetupTreeItems.cpp" />
@@ -47,6 +48,7 @@
     <ClCompile Include="..\src\PluginDefinition.cpp" />
     <ClCompile Include="..\src\SCI_Utils.cpp" />
     <ClCompile Include="..\src\ShowFunny\ShowFunny.cpp" />
+    <ClCompile Include="..\src\StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\NppPluginDemo.rc" />

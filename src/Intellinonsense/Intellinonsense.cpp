@@ -9,6 +9,7 @@
 #include "../../lib/json.hpp"
 #include "../../lib/tabulate.hpp"
 #include "../SCI_Utils.h"
+#include "../StringUtils.h"
 
 Calltip currentCalltip;
 size_t currentArgumentNumber;
@@ -31,7 +32,7 @@ std::string extractCommand(const std::string& word) {
   return matched ? match[1].str() : "";
 }
 
-std::string buildTooltipStringFromCommandEntry(const nlohmann::json& entry) {
+std::string buildCommandTooltipString(const nlohmann::json& entry) {
   std::string result;
   // Extract the "Command" and "Description" fields
   result += entry["Command"].get<std::string>() + "\n";
@@ -75,13 +76,6 @@ std::string buildTooltipStringFromCommandEntry(const nlohmann::json& entry) {
   return result;
 }
 
-std::string linesToString(std::vector<std::string> lines) {
-  std::ostringstream result;
-  std::copy(begin(lines), end(lines),
-            std::ostream_iterator<std::string>(result, "\n"));
-  return result.str();
-}
-
 std::string cleanLabelDescription(const std::string& rawDescription) {
   return std::regex_replace(rawDescription, std::regex("(^REM)"), "");
 }
@@ -96,7 +90,7 @@ std::string buildLabelCalltip(const std::string& label) {
 std::string buildCommandCalltip(const std::string& command) {
   for (const auto& entry : commandData) {
     if (entry["Command"] == command) {
-      return buildTooltipStringFromCommandEntry(entry);
+      return buildCommandTooltipString(entry);
     }
   }
   return "";
@@ -115,10 +109,6 @@ std::vector<size_t> argumentLinePositions(std::vector<std::string> lines) {
   return argumentLines;
 }
 
-bool startsWith(const std::string& bigString, const std::string& smallString) {
-  return bigString.compare(0, smallString.length(), smallString) == 0;
-}
-
 std::vector<std::string> extractLabelDescription(
     const std::vector<std::string>& lines, const size_t labelIndex) {
   // NOTE: (David) this is a little confusing, but the line at labelIndex is the
@@ -129,14 +119,6 @@ std::vector<std::string> extractLabelDescription(
     return startsWith(line, "REM");
   });
   return std::vector<std::string>(start.base(), end.base());
-}
-
-std::vector<std::string> split(const std::string& string, char delim) {
-  std::vector<std::string> result;
-  std::stringstream ss(string);
-  std::string line;
-  while (std::getline(ss, line, delim)) result.push_back(line);
-  return result;
 }
 
 std::map<std::string, Calltip> buildLabelLookupTable(
@@ -159,24 +141,12 @@ std::map<std::string, Calltip> buildLabelLookupTable(
   }
   return result;
 }
+
 std::map<std::string, Calltip> parseDocument() {
   auto rawCode = getDocumentText();
   const auto filteredCode = std::regex_replace(rawCode, std::regex("\r"), ""); // Get rid of \r because it's needlessly complicated
   const auto lines = split(filteredCode, '\n');   
   return buildLabelLookupTable(lines);
-}
-
-size_t find_nth(const std::string& haystack, size_t pos,
-                const std::string& needle, size_t nth) {
-  size_t found_pos = haystack.find(needle, pos);
-  if (0 == nth || std::string::npos == found_pos) return found_pos;
-  return find_nth(haystack, found_pos + 1, needle, nth - 1);
-}
-
-size_t startOfNthLine(const std::string& haystack, const size_t nth) {
-  return find_nth(haystack, 0, "\n",
-                  nth - 1);  // - 1 because the first line doesn't have a '\n'
-                             // associated with it.
 }
 
 std::pair<size_t, size_t> argumentLineRange(
@@ -237,11 +207,6 @@ void onCharacterAdded(SCNotification* pNotify) {
   }
 }
 
-char charAt(int position) {
-  const auto curScintilla = currentScintilla();
-  return (char)::SendMessage(curScintilla, SCI_GETCHARAT, position, 0);
-}
-
 void onDwellStart(SCNotification* pNotify) {
   labelCalltips = parseDocument();
   const HWND handle = (HWND)pNotify->nmhdr.hwndFrom;
@@ -253,6 +218,7 @@ void onDwellStart(SCNotification* pNotify) {
   const auto word = wordAt(pNotify->position);
   const auto calltip = label ? buildLabelCalltip(word)
                              : buildCommandCalltip(extractCommand(word));
+
   const auto endOfFirstLine = calltip.find_first_of('\n');
   displayCallTip(calltip, pNotify->position, {0, endOfFirstLine});
 }

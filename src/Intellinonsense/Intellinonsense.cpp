@@ -160,10 +160,16 @@ std::pair<size_t, size_t> argumentLineRange(
   const auto current = argumentLineNums.begin() + currentArgument;
   const auto last = argumentLineNums.end();
 
+  // TODO: (David) This is way uglier than it needs to be.
   const auto startOfFirstLine = startOfNthLine(calltip, *current);
-  const auto endOfLastLine = std::next(current) < last
-                                 ? startOfNthLine(calltip, *std::next(current))
-                                 : calltip.length();
+  auto endOfLastLine =
+      std::next(current) < last
+          ? startOfNthLine(calltip, *std::next(current))
+          : find_nth(calltip, startOfFirstLine, "\n\n",
+                     1);  // We are either going to highlight to the next blank
+                          // line OR to the end of the calltip if there isn't
+                          // another blank line
+  if (endOfLastLine == std::string::npos) endOfLastLine = calltip.length();
   return {startOfFirstLine, endOfLastLine};
 }
 

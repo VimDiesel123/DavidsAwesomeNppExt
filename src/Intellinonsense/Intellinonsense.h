@@ -12,7 +12,7 @@ struct Calltip {
 typedef std::pair<std::string, size_t> LinePosition;
 
 const std::string PATH_TO_MANUAL_DATA =
-    "plugins\\DavidsAwesomeTools\\manual.json";
+    "plugins\\DavidsAwesomeTools\\example_command.json";
 
 void loadManualData();
 void onDwellStart(SCNotification* pNotify);

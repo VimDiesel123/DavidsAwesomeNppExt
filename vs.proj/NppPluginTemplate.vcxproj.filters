@@ -42,6 +42,7 @@
   <ItemGroup>
     <None Include="manual.json" />
     <None Include="manual.pdf" />
+    <None Include="example_command.json" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ShowFunny">

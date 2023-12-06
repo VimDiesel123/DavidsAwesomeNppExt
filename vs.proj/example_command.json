@@ -1,0 +1,69 @@
+[
+    {
+        "Command": "JS",
+        "Usage": [
+            {
+                "Example": "JS n ...",
+                "Explanation": "Arguments specified with an implicit, comma-separated order"
+            }
+        ],
+        "Operands": {
+            "Operands": [
+                "_JS"
+            ],
+            "Explanation": "Operand has special meaning, see Remarks"
+        },
+        "Description": "Allows the program to jump to a subroutine and return back after completion. This command is often used to call reusable code.",
+        "Arguments": {
+            "Argument": {
+                "0": "str",
+                "1": "n",
+                "2": "n",
+                "3": "ex",
+                "4": "arg"
+            },
+            "Min": {
+                "0": "1 char",
+                "1": "0",
+                "2": "0",
+                "3": "N/A",
+                "4": "N/A"
+            },
+            "Max": {
+                "0": "7 chars",
+                "1": "3,999",
+                "2": "1,999",
+                "3": "N/A",
+                "4": "N/A"
+            },
+            "Default": {
+                "0": "N/A",
+                "1": "N/A",
+                "2": "N/A",
+                "3": "N/A",
+                "4": "N/A"
+            },
+            "Resolution": {
+                "0": "String",
+                "1": "1",
+                "2": "1",
+                "3": "N/A",
+                "4": "N/A"
+            },
+            "Description": {
+                "0": "Label Name for jump\rdestination",
+                "1": "Line number for jump\rdestination",
+                "2": "Line number for jump\rdestination",
+                "3": "Conditional statement/s that\rmust evaluate true for jump\rto occur",
+                "4": "A value, variable, or array to\rpass to the subroutine being\rcalled"
+            },
+            "Notes": {
+                "0": "Must be a valid label in application code",
+                "1": "Firmware Rev 1.2a and later. May be a value or a\rvariable, but not an evaluated statement with\rparenthesis",
+                "2": "May be a value or a variable, but not an\revaluated statement with parenthesis",
+                "3": "If omitted, the jump is taken",
+                "4": "referenced from within the subroutine as ^a-^h,\rrespectively. See Remarks for a table of valid\rargs"
+            }
+        }
+    }
+]

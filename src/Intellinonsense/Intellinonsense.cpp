@@ -15,13 +15,13 @@ Calltip currentCalltip;
 size_t currentArgumentNumber;
 
 // JSON data with commands
-nlohmann::json commandData;
+nlohmann::ordered_json commandData;
 
 std::map<std::string, Calltip> labelCalltips;
 
 void loadManualData() {
   std::ifstream f(PATH_TO_MANUAL_DATA);
-  f >> commandData;
+  commandData = nlohmann::ordered_json::parse(f);
 }
 
 std::string extractCommand(const std::string& word) {
@@ -32,11 +32,11 @@ std::string extractCommand(const std::string& word) {
   return matched ? match[1].str() : "";
 }
 
-std::string stringFromCommandEntry(const nlohmann::json& entry) {
+std::string stringFromCommandEntry(const nlohmann::ordered_json& entry) {
   std::string result;
   // Extract the "Command" and "Description" fields
-  result += entry["Command"].get<std::string>() + "\n";
-  result += "Description:\n" + entry["Description"].get<std::string>() + "\n";
+  result += entry["Command"].get<std::string>() + "\n\n";
+  result += "Description:\n" + entry["Description"].get<std::string>() + "\n\n";
 
   tabulate::Table table;
 
@@ -58,17 +58,31 @@ std::string stringFromCommandEntry(const nlohmann::json& entry) {
                    entry["Operands"]["Explanation"].get<std::string>()});
   }
 
-  result += table.str() + "\n";
+  result += "Usage:\n" + table.str() + "\n\n";
 
+  const nlohmann::ordered_json argumentsData = entry["Arguments"];
   // Extract the "Arguments" array
-  if (!entry["Arguments"].empty()) {
+  if (!argumentsData.empty()) {
     result += "Arguments:\n";
     tabulate::Table argumentsTable;
-    argumentsTable.add_row({"Argument", "Description"});
-    argumentsTable[0].format().font_style({tabulate::FontStyle::bold});
-    for (const auto& argEntry : entry["Arguments"]) {
-      argumentsTable.add_row({argEntry["Argument"].get<std::string>(),
-                              argEntry["Description"].get<std::string>()});
+    // Extract column names from the JSON
+    tabulate::Table::Row_t header;
+
+    const auto columns = argumentsData.items();
+    for (const auto& column : columns) {
+      header.push_back(column.key());
+    }
+    argumentsTable.add_row(header);
+    // Add rows to the table
+    for (size_t i = 0; i < argumentsData["Argument"].size(); ++i) {
+      tabulate::Table::Row_t row;
+      for (const auto& column : columns) {
+        row.push_back(column.value()[std::to_string(i)].get<std::string>());
+      }
+      argumentsTable.add_row(row);
+    }
+    for (auto& cell : argumentsTable.column(5)) {
+      cell.format().width(60).font_align(tabulate::FontAlign::left);
     }
     result += argumentsTable.str();
   }

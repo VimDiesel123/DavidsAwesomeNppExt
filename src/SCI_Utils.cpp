@@ -33,6 +33,7 @@ void displayCallTip(const std::string& text, const int position,
   const auto curScintilla = currentScintilla();
   ::SendMessage(curScintilla, SCI_CALLTIPSETBACK, RGB(68, 70, 84), 0);
   ::SendMessage(curScintilla, SCI_CALLTIPSETFORE, RGB(209, 213, 219), 0);
+  ::SendMessage(curScintilla, SCI_STYLESETSIZE, STYLE_CALLTIP, 9);
   ::SendMessage(curScintilla, SCI_CALLTIPUSESTYLE, 0, 0);
   ::SendMessage(curScintilla, SCI_CALLTIPSHOW, position, (LPARAM)text.c_str());
   setCallTipHighlightRange(highlightRange);

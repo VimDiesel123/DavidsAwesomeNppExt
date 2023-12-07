@@ -21,7 +21,11 @@ std::map<std::string, Calltip> labelCalltips;
 
 void loadManualData() {
   std::ifstream f(PATH_TO_MANUAL_DATA);
-  commandData = nlohmann::ordered_json::parse(f);
+  try {
+    commandData = nlohmann::ordered_json::parse(f);
+  } catch (nlohmann::ordered_json::parse_error& ex) {
+    ::MessageBoxA(NULL, ex.what(), "error", 0);
+  }
 }
 
 std::string extractCommand(const std::string& word) {
@@ -30,6 +34,34 @@ std::string extractCommand(const std::string& word) {
   std::smatch match;
   const auto matched = std::regex_search(word, match, commandRegex);
   return matched ? match[1].str() : "";
+}
+
+tabulate::Table jsonToTable(const nlohmann::ordered_json& json) {
+  // Extract the "Arguments" array
+  tabulate::Table table;
+  // Extract column names from the JSON
+  tabulate::Table::Row_t header;
+
+  const auto columns = json.items();
+  for (const auto& column : columns) {
+    header.push_back(column.key());
+  }
+  table.add_row(header);
+  if (columns.begin() == columns.end()) return table;
+  // Add rows to the table
+  for (size_t i = 0; i < columns.begin().value().size();
+       ++i) {  // Demeter?? I barely know her!
+    tabulate::Table::Row_t row;
+    for (const auto& column : columns) {
+      if (column.value().empty()) {
+        continue;
+      }
+      row.push_back(column.value()[std::to_string(i)].get<std::string>());
+    }
+    table.add_row(row);
+  }
+
+  return table;
 }
 
 std::string stringFromCommandEntry(const nlohmann::ordered_json& entry) {
@@ -61,31 +93,18 @@ std::string stringFromCommandEntry(const nlohmann::ordered_json& entry) {
   result += "Usage:\n" + table.str() + "\n\n";
 
   const nlohmann::ordered_json argumentsData = entry["Arguments"];
-  // Extract the "Arguments" array
-  if (!argumentsData.empty()) {
-    result += "Arguments:\n";
-    tabulate::Table argumentsTable;
-    // Extract column names from the JSON
-    tabulate::Table::Row_t header;
 
-    const auto columns = argumentsData.items();
-    for (const auto& column : columns) {
-      header.push_back(column.key());
-    }
-    argumentsTable.add_row(header);
-    // Add rows to the table
-    for (size_t i = 0; i < argumentsData["Argument"].size(); ++i) {
-      tabulate::Table::Row_t row;
-      for (const auto& column : columns) {
-        row.push_back(column.value()[std::to_string(i)].get<std::string>());
-      }
-      argumentsTable.add_row(row);
+  auto argumentsTable = jsonToTable(argumentsData);
+  if (argumentsTable.row(0).size() >= 6) {
+    for (auto& cell : argumentsTable.column(6)) {
+      cell.format().width(50);
     }
     for (auto& cell : argumentsTable.column(5)) {
-      cell.format().width(60).font_align(tabulate::FontAlign::left);
+      cell.format().width(50);
     }
-    result += argumentsTable.str();
   }
+
+  result += "Arguments:\n" + argumentsTable.str();
 
   return result;
 }
@@ -95,8 +114,6 @@ std::string cleanLabelDescription(const std::string& rawDescription) {
 }
 
 std::string buildLabelCalltip(const std::string& label) {
-  // Try to look the calltip up in the labelCalltips map, if you find it, return
-  // the description.
   const auto lines = labelCalltips.at(label).description;
   return label + ":\n" + cleanLabelDescription(linesToString(lines));
 }

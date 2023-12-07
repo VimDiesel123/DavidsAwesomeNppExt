@@ -41,7 +41,7 @@ void displayCallTip(const std::string& text, const int position,
 
 void setCallTipHighlightRange(const std::pair<size_t, size_t>& highlightRange) {
   const auto curScintilla = currentScintilla();
-  ::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(3, 128, 226), 0);
+  ::SendMessage(curScintilla, SCI_CALLTIPSETFOREHLT, RGB(255, 235, 0), 0);
   ::SendMessage(curScintilla, SCI_CALLTIPSETHLT, highlightRange.first,
                 highlightRange.second);
 }

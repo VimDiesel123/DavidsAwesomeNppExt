@@ -5,6 +5,7 @@
 #include <regex>
 
 #include "../PluginDefinition.h"
+#include "../SCI_Utils.h"
 
 void fixSetupTreeItems() {
   // Get the current scintilla
@@ -12,9 +13,7 @@ void fixSetupTreeItems() {
   ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0,
                 (LPARAM)&which);
 
-  if (which == -1) return;
-  HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle
-                                   : nppData._scintillaSecondHandle;
+  const auto curScintilla = currentScintilla();
 
   // Get filename of current document
   std::wstring filename;
@@ -72,5 +71,15 @@ void fixSetupTreeItems() {
     ++it;
   }
 
+  // NOTE: (David) A lot of this crap is just to get the cursor/scrollbar back
+  // into the position it was originally after we replace all the text
+  const auto currentPos = currentPosition();
+  const auto firstVisibleLine =
+      ::SendMessage(curScintilla, SCI_GETFIRSTVISIBLELINE, 0, 0);
   ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)result.c_str());
+  ::SendMessage(curScintilla, SCI_SETSEL, currentPos, currentPos);
+  const auto linesToScroll =
+      firstVisibleLine -
+      ::SendMessage(curScintilla, SCI_GETFIRSTVISIBLELINE, 0, 0);
+  ::SendMessage(curScintilla, SCI_LINESCROLL, 0, linesToScroll);
 }

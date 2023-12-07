@@ -337,7 +337,7 @@
                 "0": "Value to use with AND operator"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe result of this operation is a value, which is not valid on its own. It must be coupled with a command. See examples below.\nFor IF, JP, and JS, the values used for n are typically the results of logical expressions such as (x > 2) & (y=8)",
@@ -427,7 +427,7 @@
                 "0": "Number to display as absolute value"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@ABS[] is an operand, not a command. It can only be used as an argument to other commands and operators",
@@ -463,7 +463,7 @@
                 "0": "Value used for arc cosine operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@ACOS[] is an operand, not a command. It can only be used as an argument to other commands and operators\n@ACOS[] is also referred to as the inverse cosine function",
@@ -505,7 +505,7 @@
                 "1": "Read Modbus slave analog input"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "See Remarks"
             }
         },
@@ -542,7 +542,7 @@
                 "0": "Value used for arc sine operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@ASIN[] is an operand, not a command. It can only be used as an argument to other commands and operators\n@ASIN[] is also referred to as the inverse sine function",
@@ -578,7 +578,7 @@
                 "0": "Value used for arc tangent operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@ATAN[] is an operand, not a command. It can only be used as an argument to other commands and operators\n@ATAN[] is also referred to as the inverse tangent function",
@@ -650,7 +650,7 @@
                 "0": "Value in degrees to use for cosine operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@COS[] is an operand, not a command. It can only be used as an argument to other commands and operators",
@@ -686,7 +686,7 @@
                 "0": "Value to use for floating point conversion"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@FLOT[] is an operand, not a command. It can only be used as an argument to other commands and operators\nA useful utility for determining the 32 bit floating point value for a given fractional number can be found here: \nhttp://babbage.cs.qc.cuny.edu/IEEE-\n754/index.xhtml",
@@ -722,7 +722,7 @@
                 "0": "Value to use in fractional operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe sign of the number input to the operation will be maintained in the fractional output.\n@FRAC[] is an operand, not a command. It can only be used as an argument to other commands and operators",
@@ -741,8 +741,8 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan",
-                "2": "nan",
+                "1": "-",
+                "2": "-",
                 "3": "n"
             },
             "Min": {
@@ -815,7 +815,7 @@
                 "0": "Value to use in integer operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@INT[] is an operand, not a command. It can only be used as an argument to other commands and operators",
@@ -834,7 +834,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan",
+                "1": "-",
                 "2": "n"
             },
             "Min": {
@@ -901,7 +901,7 @@
                 "0": "32 bit floating point number to convert to Galil 4.2 integer"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@REAL[] is an operand, not a command. It can only be used as an argument to other commands and operators\nA useful utility for determining the 32 bit floating point value for a given fractional number can be found here: \nhttp://babbage.cs.qc.cuny.edu/IEEE-\n754/index.xhtml",
@@ -937,7 +937,7 @@
                 "0": "Value to use in rounding operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@FRAC[] is an operand, not a command. It can only be used as an argument to other commands and operators\nThe sign of the number input to the operation will be maintained in the rounded output.",
@@ -973,7 +973,7 @@
                 "0": "Value in degrees to use for sine operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@SIN[] is an operand, not a command. It can only be used as an argument to other commands and operators",
@@ -1045,7 +1045,7 @@
                 "0": "Value in degrees to use for tangent operation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n@TAN[] is an operand, not a command. It can only be used as an argument to other commands and operators",
@@ -1185,7 +1185,7 @@
                 "0": "Axis of interest"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nAn operand is not valid individually. Instead, _GP would be used in an expression. See example below.\nPhase Differential is a term that is used to describe the lead or lag between the master axis and the slave axis due to gradual gear shift\nPd= GR * Cm - Cs where\nPd is the phase differential\nGR is the gear ratio\nCm is the number of encoder counts the master axis moved\nCs is the number of encoder counts the slave moved.",
@@ -1226,7 +1226,7 @@
                 "0": "Axis of forward limit switch"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n_LF is an operand only with the following output:\n_LFm = 1 when the limit switch state will allow motion in the positive direction.\n_LFm = 0 when the limit switch state will not allow motion in the positive direction.\nThis operand is not a direct readout of the digital input and is affected by the command CN.\nSee Connecting Hardware in User Manual for active/inactive state\nValues of _LF\nDigital Input activation\n_LF value for CN-1\n_LF value for CN1\nOn. Grounded for TTL, or sufficient activation current flowing for optos.\n0 (forward motion prohibited)\n1 (forward motion allowed)\nOff. \nPullup for TTL, or insufficient activation current flowing for optos.\n1 (forward motion allowed)\n0 (forward motion prohibited)",
@@ -1267,7 +1267,7 @@
                 "0": "Axis of reverse limit switch"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n_LR is an operand with the following output\n_LRm= 1 when the limit switch state will allow motion in the reverse direction.\n_LRm= 0 when the limit switch state will not allow motion in the reverse direction.\nThis operand is not a direct readout of the digital input and is affected by the command CN.\nSee Connecting Hardware in User Manual for active/inactive state\nValues of _LR\nDigital input activation\n_LR value for CN-1\n_LR value for CN1\nOn. Grounded for TTL, or sufficient activation current flowing for optos.\n0 (reverse motion prohibited)\n1 (reverse motion allowed)\nOff. Pullup for TTL, or insufficient activation current flowing for optos.\n1 (reverse motion allowed)\n0 (reverse motion prohibited)",
@@ -1303,7 +1303,7 @@
                 "0": "Value to use with OR operator"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nFor IF, JP, and JS, the values used for m are typically the results of logical expressions such as (x > 2) | (y=8)\nThe result of this operation is a value, which is not valid on its own. It must be coupled with a command. See examples below.",
@@ -1368,8 +1368,8 @@
                 "1": "Value to test"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nA comparator is not a command and is not valid individually. Instead, the above expression would be used as part of a jump (JP,JS), IF expression, or\nassignment. See examples below.\nIf n\n0\n < n\n1\n, the expression will evaluate to 1.0000. If the comparision is false, it will evaluate to 0.0000.\nEvaluation occurs left to right. Use parenthesis for operator precedence.",
@@ -1420,8 +1420,8 @@
                 "1": "Value to test"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nA comparator is not a command and is not valid individually. Instead, the above expression would be used as part of a jump (JP,JS), IF expression, or\nassignment. See examples below.\nIf n\n0\n <= \nn\n1\n, the expression will evaluate to 1.0000. If the comparision is false, it will evaluate to 0.0000.\nEvaluation occurs left to right. Use parenthesis for operator precedence.",
@@ -1472,8 +1472,8 @@
                 "1": "Value to test"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nA comparator is not a command and is not valid individually. Instead, the above expression would be used as part of a jump (JP,JS), IF expression, or\nassignment. See examples below.\nIf n\n0\n <> \nn\n1\n, the expression will evaluate to 1.0000. If the comparision is false, it will evaluate to 0.0000.\nEvaluation occurs left to right. Use parenthesis for operator precedence.",
@@ -1515,8 +1515,8 @@
                 "1": "Value to test"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nA comparator is not a command and is not valid individually. Instead, the above expression would be used as part of a jump (JP,JS), IF expression, or\nassignment. See examples below.\nIf n\n0\n = n\n1\n, the expression will evaluate to 1.0000. If the comparision is false, it will evaluate to 0.0000.\nEvaluation occurs left to right. Use parenthesis for operator precedence.",
@@ -1569,8 +1569,8 @@
                 "1": "Value to test"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nA comparator is not a command and is not valid individually. Instead, the above expression would be used as part of a jump (JP,JS), IF expression, or\nassignment. See examples below.\nIf n\n0\n > n\n1\n, the expression will evaluate to 1.0000. If the comparision is false, it will evaluate to 0.0000.\nEvaluation occurs left to right. Use parenthesis for operator precedence.",
@@ -1621,8 +1621,8 @@
                 "1": "Value to test"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nA comparator is not a command and is not valid individually. Instead, the above expression would be used as part of a jump (JP,JS), IF expression, or\nassignment. See examples below.\nIf n\n0\n >= \nn\n1\n, the expression will evaluate to 1.0000. If the comparision is false, it will evaluate to 0.0000.\nEvaluation occurs left to right. Use parenthesis for operator precedence.",
@@ -1655,7 +1655,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -1667,7 +1667,7 @@
             },
             "Notes": {
                 "0": "Default if omitted",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\n_AB gives state of Abort Input, 1 inactive and 0 active.\nAB aborts motion on all axes in motion and cannot stop individual axes.",
@@ -1695,7 +1695,7 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n"
             },
             "Min": {
@@ -1724,8 +1724,8 @@
                 "2": "Acceleration rate"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "At TM 1000. Resolution and Min depend on TM, see\rremarks."
             }
         },
@@ -1772,7 +1772,7 @@
                 "1": "Distance of motion"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Cannot specify more than 1 argument at a time"
             }
         },
@@ -1802,7 +1802,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -1830,7 +1830,7 @@
                 "2": "Sinusoidal encoder input used with 2^n interpolation\rcounts per encoder cycle"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "1= analog, 0= digital\rfeedback",
                 "2": "ICM-42100 required to use\rsine feedback"
             }
@@ -1883,7 +1883,7 @@
                 "1": "Gain setting"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "See table in Remarks for gain settings"
             }
         },
@@ -2022,7 +2022,7 @@
             },
             "Notes": {
                 "0": "See \"Using AO with a Modbus Slave\" in\rRemarks",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nn\n1\n-9.9998\n9.9998\nN/A\n20/65,536\nAnalog Output Voltage\nRemarks\nUsing AO with a Modbus Slave\nRIO as Modbus Slave\n3rd Party Modbus Slave Device\nn\n0\n is the I/O number calculated using the following equations:\nn\n0\n = (HandleNum*1000) + ((Module-1)*4) + (Bitnum-1)\nHandleNum is the handle specifier from A to H.\nHandle must be assigned to port 502 for Modbus comms (See IH)\nModule is the position of the module in the rack from 1 to 16.\nBitNum is the I/O point in the module from 1 to 4",
@@ -2068,7 +2068,7 @@
                 "1": "Position trippoint value"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Only one axis may be specified at a time."
             }
         },
@@ -2101,7 +2101,7 @@
             "Argument": {
                 "0": "n0",
                 "1": "n1",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "1",
@@ -2129,7 +2129,7 @@
                 "2": "Specify analog input is differential"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "See Table Below",
                 "2": "See Remarks"
             }
@@ -2177,7 +2177,7 @@
                 "1": "Relative position for trippoint"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Only one axis may be specified at a time."
             }
         },
@@ -2259,7 +2259,7 @@
                 "1": "Set amplifier current loop gain\rsetting"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "See table below for setting for your amplifier\rmodel"
             }
         },
@@ -2317,8 +2317,8 @@
                 "1": "Vector distance to be executed in the T coordinate system"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThe units of the command are quadrature counts.\n_AVS contains the vector distance from the start of the sequence in the S coordinate system\n_AVT contains the vector distance from the start of the sequence in the T coordinate system.",
@@ -2342,7 +2342,7 @@
         "Arguments": {
             "Argument": {
                 "0": "mm",
-                "1": "nan"
+                "1": "-"
             },
             "Min": {
                 "0": "A",
@@ -2366,7 +2366,7 @@
             },
             "Notes": {
                 "0": "mm = \"\" removes all axes configured for sine\rcommutation",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nGalil Sine Drive Use\n_BAm will contain a 1 if the BA command has been issued for the speciifed axis, or a 0 if it has not.\nThird-Party Sine Drives Requiring Dual Analog Inputs (Rare)\nIf more than one dual DAC setup is going to be used, both axes must be specified in the same BA command.\n_BAm indicates the axis number of the auxiliary DAC used for the second phase of the selected sinusoidal axis. The axis numbers start with zero for\nthe A axis DAC. If the motor is configured as standard servo or stepper motor, _BAn contains 0.",
@@ -2417,8 +2417,8 @@
                 "1": "Phase offset of hall sensors"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThis command must be saved in non-volatile memory to be effective upon reset.",
@@ -2459,7 +2459,7 @@
                 "0": "Axes to initialize with hall commutation"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe BC command is one of several ways to initialize a Galil sine drive. The table below lists the various methods:\nCommutation of a Galil Sine Drive\nCommand\nDescription\nBC/BI\nUses hall sensors to commutate until a hall transition is encountered. Drive then commutates sinusoidally.\nBX\nUses an algorithm to determine phase angle with minimal motion.\nBZ\nDrives the motor to a known magnetic phase. Drive then commutates sinusoidally.\nSteps for BC sine initialization\n1\n. \nSpecify the axis/axes for initialization with the BA command\n2\n. \nSpecify the number of encoder counts per magnetic phase of the motor with the BM command (see command for examples)\n3\n. \nIssue BI to select the inputs to use as hall inputs.\n4\n. \nServo the motor and verify it holds position\n1\n. \nIf the motor will not servo, verify encoder is functional. If it is, then re-verify hall wiring\n5\n. \nIssue the BC command, then issue a small jog until a hall transition occurs.\n6\n. \nThe motor is now fully commutated based off of the hall sensor feedback.\n7\n. \n(Optional) Use the BB command to correct for hall offsets from true magnetic 0 of the motor.\nOperand Usage\n_BCm contains the state of the Hall sensor inputs. This value should be between 1 and 6. 0 and 7 are invalid hall states.",
@@ -2510,8 +2510,8 @@
                 "1": "Brushless motor angle in degrees"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nUsing BD to set a brushless degree overrides the current brushless degrees set by the BZ/BX/BI initialization routines.\nOnce initialized, BD is updated by the firmware to the current brushless degree value.\nn = ? queries the current brushless degrees\n_BDm contains the commutation phase of the specified axis.",
@@ -2535,8 +2535,8 @@
         "Arguments": {
             "Argument": {
                 "0": "mm",
-                "1": "nan",
-                "2": "nan"
+                "1": "-",
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -2595,8 +2595,8 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan",
-                "3": "nan"
+                "2": "-",
+                "3": "-"
             },
             "Min": {
                 "0": "A",
@@ -2629,10 +2629,10 @@
                 "3": "Select starting auxiliary\rencoder input for hall\rsensor use."
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = -1 uses dedicated hall inputs. n = 0 clears\rconfiguration. Inputs 9-16 only valid for 5-8 axis\rcontroller",
                 "2": "See Remarks",
-                "3": "nan"
+                "3": "-"
             }
         },
         "Remarks": "\nThe inputs can be the general use inputs, the auxiliary encoder inputs, or the extended I/O inputs. The Hall sensors of each axis must be connected\nto consecutive input lines,\nFor example: BI 3 indicates that inputs 3,4 and 5 are used for halls sensors.\nWhen using extended IO, the bits must be configured as inputs by the CO command for proper operation\nThe Hall A, Hall B and Hall C inputs on the Encoder connector may be specified by setting the BI command to -1.\nWith the AMP-43540 or the AMP-43640, for a motor wired to work with the AMP-43020/43040, the following wiring to the general inputs is used for\ncommutating the halls with the BI n command.\n@IN[n] = Hall B\n@IN[n+1] = Hall C\n@IN[n+2] = Hall A",
@@ -2738,8 +2738,8 @@
                 "1": "Position for reverse soft limit"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThe reverse limit is activated at the position n-1. n = -2147483648 effectively disables the reverse soft limit\nThe software limit is specified in counts for a servo system or in microsteps for a stepper system.\nWhen the reverse software limit is activated, the automatic subroutine #LIMSWI will be executed if it is included in the program.\nIf motion is commanded when the axis is already passed the BL value, the axis will profile a small move before the software limit is again detected.\nThis is typically encountered when commanding motion in loops, such as a jog loop.\nIn these scenarios it is recommended to use the #LIMSWI routine to stop the loop when the BL limit has been exceeded.",
@@ -2790,8 +2790,8 @@
                 "1": "Encoder counts per magnetic cycle"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nFor rotary motors, the magnectic cycle (BM value) is calculated by:\nBM = encoder counts per revolution / # of pole pairs\nThe issuance of BM is required for commutation using one of the following methods:\nBX\nBZ\nBI/BC",
@@ -2861,8 +2861,8 @@
                 "1": "Offset applied to DAC output in volts"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nInternal Sine Drive\nWhen using an internal Galil sine drive, each axis has two DACs (Digital to Analog Converter). BO sets the first DAC offset. BQ sets the second.\nExternal Sine Drive\nWhen using a third party, external sine drive, each motor axis requires two control axes. Therefore, for 4 axes of external sine control, an 8 axis\ncontroller is required.\nIn this configuration, BO sets the offset for both DACs. Each member of a pair of axes has its own BO value.\nWhen measuring DAC output voltage, to assure that the output voltage equals the BO parameters, set the PID and OF parameters to zero.",
@@ -2927,8 +2927,8 @@
                 "1": "Offset applied to DAC output in volts."
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nWhen using an internal Galil sine drive, each axis has two DACs (Digital to Analog Converter). BO sets the first DAC offset. BQ sets the second.",
@@ -2958,8 +2958,8 @@
                 "0": "m",
                 "1": "Argument",
                 "2": "n",
-                "3": "nan",
-                "4": "nan"
+                "3": "-",
+                "4": "-"
             },
             "Min": {
                 "0": "A",
@@ -2984,24 +2984,24 @@
             },
             "Resolution": {
                 "0": "Axis",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-"
             },
             "Description": {
                 "0": "Axis to assign value",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-"
             }
         },
         "Remarks": "\nIf an axis has Off-On-Error(OE) set to 1, an amplifier error will occur on an axis if there are no halls and BR is set to 0. Set BR to 1 to avoid an amplifier\nerror state.\nThe hall error bits cannot cause #AMPERR events if an axis is configured as brush-type.\nWith BR1, the hall inputs are available for general use via the QH command.\nNote: If the controller has been previously configured with the BA command for sinusoidal commutation with a Galil internal amplifier, the command\n\"BA N\" must be issued prior to setting the axis to brushed mode.",
@@ -3039,7 +3039,7 @@
                 "0": "Axes to begin PVT motion"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nFor more details on PVT mode see the user manual.\n_BTm contains the number of PV segments that have executed.",
@@ -3145,7 +3145,7 @@
         "Description": "The BZ command is used to initialize axes which use sinusoidal commutation. To do this, the command drives the motor to two different magnetic\npositions and sets the magnetic position.",
         "Arguments": {
             "Unnamed: 0": {
-                "0": "nan",
+                "0": "-",
                 "1": "Operands"
             },
             "BZm= n": {
@@ -3281,8 +3281,8 @@
                 "0": "m",
                 "1": "n",
                 "2": "t",
-                "3": "nan",
-                "4": "nan"
+                "3": "-",
+                "4": "-"
             },
             "Min": {
                 "0": "A",
@@ -3320,7 +3320,7 @@
                 "4": "Time override\roption"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Incremental position move",
                 "2": "t = 1-8 specifies 2^n samples for the given interval.",
                 "3": "t=0 with n=0 disables Contour mode. See Remarks",
@@ -3375,7 +3375,7 @@
                 "1": "Encoder\rconfiguration\rsetting"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n is the sum of 2 integers M and N which configure main and\rauxiliary encoders. See table below for configuration description."
             }
         },
@@ -3400,8 +3400,8 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
-                "2": "nan"
+                "1": "-",
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -3606,7 +3606,7 @@
                 "1": "Set the position deadband for motor off."
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n=-1 disables the feature"
             }
         },
@@ -3673,7 +3673,7 @@
                 "0": "Coordinate plane specified to clear buffer"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n_CSm contains the segment number in the sequence specified by m= S or T.\nThis operand is valid in the Linear mode, LM, and Vector mode, VM.",
@@ -3711,7 +3711,7 @@
         "Arguments": {
             "Argument": {
                 "0": "str",
-                "1": "nan"
+                "1": "-"
             },
             "Min": {
                 "0": "1 char",
@@ -3786,8 +3786,8 @@
                 "1": "Position setpoint for PID deadband"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid on -NAN, -CER, and -CLS firmware\nDB should be set greater than or equal to DS.",
@@ -3815,7 +3815,7 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n"
             },
             "Min": {
@@ -3844,8 +3844,8 @@
                 "2": "Deceleration rate"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "At TM 1000. See Remarks for resolution details."
             }
         },
@@ -3875,7 +3875,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -3903,7 +3903,7 @@
                 "2": "Position set for main encoders"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "For MT 1,-1,1.5,-1.5",
                 "2": "For MT 2,-2,2.5,-2.5"
             }
@@ -3933,7 +3933,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -3945,7 +3945,7 @@
             },
             "Notes": {
                 "0": "Default",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nWire the motor's incremental encoder per normal to the DMC-4xxx main encoder inputs. The load SSI encoder should be wired to the axis aux\nencoder lines:\nSSI Signals for DMC-4xxx\nNominal Signal Name\nSignal Reassignment with SSI\nSignal Reassignment with BiSS\nAA+\nClock+\nMA+\nAA-\nClock-\nMA-\nAB+\nData+\nSLO+\nAB-\nData-\nSLO-\nOnce wired, configure the serial encoder as an auxiliary encoder.\nSee SI or SS for configuration information.\nOnce configured for Dual Loop (DV1), DF1 will swap the serial encoder to become the load (Main) encoder. The incremental encoder wired to the main\nencoder inputs becomes the motor (Auxiliary) encoder. TP will now report the serial encoder position, and TD will report the incremental encoder\nposition.",
@@ -3964,7 +3964,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -4031,9 +4031,9 @@
             },
             "Notes": {
                 "0": "Firmware Rev 1.2a and later",
-                "1": "nan",
+                "1": "-",
                 "2": "If str = \"\", download begins at the end of the\rcurrent program in RAM",
-                "3": "nan"
+                "3": "-"
             }
         },
         "Remarks": "\nDo not insert spaces before label declarations.\n_DL gives the number of available labels.\nIssuing this command will pause the output of the Data Record until the command is completed.",
@@ -4081,9 +4081,9 @@
                 "2": "Number of array elements to assign to dimensioned\rarray"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Firmware Rev 1.2a and\rlater",
-                "2": "nan"
+                "2": "-"
             }
         },
         "Remarks": "\nTyping in array name with [-1] element marked reports the number of elements for that array.\nThe first character of str must be alphabetic. The rest can be any alphanumeric characters.\nWhen assigning array elements, the number specified must be less than the current available array space\n_DM contains the available array space.",
@@ -4111,9 +4111,9 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n",
-                "3": "nan"
+                "3": "-"
             },
             "Min": {
                 "0": "A",
@@ -4146,8 +4146,8 @@
                 "3": "Value assigned to step/commanded position (RP and TD\rregisters)"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "For MT 1,-\r1,1.5,-1.5",
                 "3": "For MT 2,-\r2,2.5,-2.5"
             }
@@ -4174,7 +4174,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n0",
-                "1": "nan",
+                "1": "-",
                 "2": "n1"
             },
             "Min": {
@@ -4204,7 +4204,7 @@
             },
             "Notes": {
                 "0": "n = 0 turns off data record output.",
-                "1": "nan",
+                "1": "-",
                 "2": "0=A,1=B,2=C,3=D,4=E,5=F,6=G,7=H."
             }
         },
@@ -4256,8 +4256,8 @@
                 "1": "Position range for PID deadband"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nCommand valid for -NAN, -CER, and -CLS firmware\nDB should be set greater than or equal to DS.",
@@ -4333,7 +4333,7 @@
                 "1": "State of dual loop mode"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = 0 disables Dual loop. n = 1 enables Dual loop"
             }
         },
@@ -4353,7 +4353,7 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan"
+                "1": "-"
             },
             "Min": {
                 "0": "A",
@@ -4376,7 +4376,7 @@
                 "1": "Virtual axis to assign as ECAM master"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "N is default"
             }
         },
@@ -4401,7 +4401,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -4413,7 +4413,7 @@
             },
             "Notes": {
                 "0": "Default",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nWhen the EB command is given, the master axis position is modularized.\n_EB holds the enabled state, 1 or 0",
@@ -4454,7 +4454,7 @@
                 "0": "Set the ECAM table index"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n_EC contains the current value of the index into the ECAM table.",
@@ -4564,7 +4564,7 @@
                 "1": "Master position to\rengage ECAM slave"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = outside of master axis position range causes\rslave to engage immediately."
             }
         },
@@ -4674,7 +4674,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -4702,7 +4702,7 @@
                 "2": "Position change over one full ECAM cycle"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "For defining master axis",
                 "2": "For defining slave axis"
             }
@@ -4756,7 +4756,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -4767,7 +4767,7 @@
                 "1": "Echo On"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Default"
             }
         },
@@ -4867,7 +4867,7 @@
                 "1": "Master position to disengage\rthe slave axis specified."
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "If n = outside of master position range,\rdisengage slave axis immediately."
             }
         },
@@ -4919,7 +4919,7 @@
                 "1": "Set the position error limit in\rcounts"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n=0 enables Error output. n=-1 disables Error\routput."
             }
         },
@@ -5056,7 +5056,7 @@
                 "0": "Current ECAM cycle count"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n_EY returns the current cycle count\nEY can be used to calculate the absolute position of an axis with the following equation:\nAbsolute position = EY * EM + TP",
@@ -5107,8 +5107,8 @@
                 "1": "Value of proportional term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThe Feedforward Bias product is limited to 10 Volts.\nIf the feedforward coefficient is changed during a move, then the change will not take effect until the next move.\nFA operates on PA, PR, IP, JG and PVT mode.\nFA does not operate in:\nContour Mode (CM)\nAxis is Gearing or ECAM slave\nCoordinated motion (LM, VM)\nAcceleration Feedforward Bias = FA * AC * (1.5 10-7) * ((TM/1000)^2)\nDeceleration Feedforward Bias = FA * DC * (1.5 10-7) * ((TM/1000)^2)\nFA is enabled during the PVT mode of motion.",
@@ -5159,8 +5159,8 @@
                 "1": "Value of distance selectable feedforward gain"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only in -NAN and -CER firmware\nBias in volts = 1.22 E-6 * FC . (commanded Velocity in counts/s)",
@@ -5212,7 +5212,7 @@
                 "0": "Axes to Find Index"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe controller looks for a transition from low to high. There are 2 stages to the FI command. The first stage jogs the motor at the speed and direction\nof the JG command until a transition is detected on the index line. When the transition is detected, the position is latched and the motor will decelerate\nto a stop. In the second stage, the motor will reverse direction and move to the latched position of the index pulse at the speed set by the HV\ncommand. At the conclusion of FI, the position is defined as zero.\nFind Index only searches for a change in state on the Index. Use FE to search for the Home. Use HM (Home) to search for both the Home input and\nthe Index. Remember to specify BG after each of these commands.",
@@ -5263,7 +5263,7 @@
                 "1": "Value of software forward limit"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "2147483647 turns off forward limit"
             }
         },
@@ -5315,8 +5315,8 @@
                 "1": "Distance from end of move for FC to engage"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only in -NAN and -CER firmware\nBias in volts = 1.22 . E-6 . FC . (commanded Velocity in counts/s)",
@@ -5345,7 +5345,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -5373,8 +5373,8 @@
                 "2": "Value of proportional term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "-CER firmware only."
             }
         },
@@ -5399,10 +5399,10 @@
             "Argument": {
                 "0": "m0",
                 "1": "m",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Min": {
                 "0": "A",
@@ -5446,11 +5446,11 @@
             },
             "Notes": {
                 "0": "m0<>m",
-                "1": "nan",
+                "1": "-",
                 "2": "Valid arguments:\rCA,CB,CC,CD,CE,CF,CG,CH",
                 "3": "Valid arguments:\rDA,DB,DC,DD,DE,DF,DG,DH",
-                "4": "nan",
-                "5": "nan"
+                "4": "-",
+                "5": "-"
             }
         },
         "Remarks": "\nm=? returns the GA setting\nWhen the geared motors must be coupled \"strongly\" to the master, use the gantry mode GM\nWhen gearing is used in a gantry application, gearing off of the commanded position is recommended\nWhen an axis is geared to a master axis, the slave's geared profile will be superimposed to the slave's commanded profile",
@@ -5497,7 +5497,7 @@
                 "1": "Absolute Value of Gearing Distance"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "0 engages gearing instantly"
             }
         },
@@ -5549,7 +5549,7 @@
                 "1": "Value of GM command"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "1 Enables Gantry Mode, 0 disables Gantry Mode"
             }
         },
@@ -5601,7 +5601,7 @@
                 "1": "Value of Gear Ratio of Slave"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = 0 disables gearing"
             }
         },
@@ -5690,7 +5690,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -5718,7 +5718,7 @@
                 "2": "Value of Homing Velocity in\rcnts/second"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "For MT settings of 1,-1,1.5 and -1.5\r(Servos)",
                 "2": "For MT settings of 2,-2,2.5 and -2.5\r(Steppers)"
             }
@@ -5959,7 +5959,7 @@
                 "1": "Value of Integrator limit\rin volts"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n< 0 (negative value) freezes the effect of the\rintegrator during the move"
             }
         },
@@ -5997,7 +5997,7 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n"
             },
             "Min": {
@@ -6026,9 +6026,9 @@
                 "2": "Value of incremental move"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-"
             }
         },
         "Remarks": "\n_IPm contains the current position of the motor\nThe IP command has four effects depending on the mode of motion being executed.\nIP operation based upon modes of motion\nCase\nEquivalent Commands\nDescription\nMotor is\nstanding still\nIPm=n Equivalent to\nPRm=n;BGm\nMotor will move to specified position with the predefined AC,DC,SP values.\nMotor is\nmoving\ntoward\nposition n\nPRm=n\n0\n; BGm;IPm=n\n1\nEquivalent to PRm=\n(n\n0\n+n\n1\n); BGm\nMotor will move a relative move of (n\n0\n+n\n1\n).\nMotor is in\nJog Mode\nJGm=n\n0\n;BGm;IPm=n\n1\nEquivalent to Continuing jog\nfrom (current position + n\n1\n)\nThe motor will instantly try to servo to a position which is the current instantaneous position plus the\nspecified IP position. SP and AC parameters have no effect. This command is useful when synchronizing 2\naxes in which one of the axis' speed is indeterminate due to a variable diameter pulley.\nMotor is a\nslave in\ngearing\nmode\nGAm= m0; GRm=n\n0\n;\nIPm=n\n1\n \nEquivalent to GAm=\nm0; GRm=n\n0\n; PRm=n\n1\n;\nBGm\nThe motor will move with the predefined AC,DC,SP values superimposed on top of the existing gearing\nmotion.",
@@ -6079,7 +6079,7 @@
                 "1": "Value of independent smoothing\rfunction"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "1 = no filtering, 0.004 = maximum\rfiltering"
             }
         },
@@ -6108,10 +6108,10 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n",
-                "3": "nan",
-                "4": "nan"
+                "3": "-",
+                "4": "-"
             },
             "Min": {
                 "0": "A",
@@ -6149,8 +6149,8 @@
                 "4": "Vale of jog speed in cnts/second"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "For MT settings of 1,-1,1.5 and -1.5 (Servos)",
                 "3": "For MT settings of 2,-2,2.5 and -2.5\r(Steppers)",
                 "4": "ICM-42100 with AF>=5"
@@ -6305,9 +6305,9 @@
         "Description": "",
         "Arguments": {
             "EN ,,^a+^b+^c+^d+^e+^f+^g+^h;'  Return the sum": {
-                "0": "nan",
+                "0": "-",
                 "1": "'Galil DMC Code Example\r'Dimension two arrays\rDM array1[10]\rDM array2[100]\r'Zero the contents of each array\rJS #zeroary(\"array1\", 0)\rJS #zeroary(\"array2\", 0)\rEN\r'Zero the contents of an array\r#zeroary;'(^a array,^b starting index)\r^a[^b]= 0\r^b= (^b+1)\rJP #zeroary,(^b < ^a[-1])\rEN",
-                "2": "nan"
+                "2": "-"
             }
         },
         "Remarks": "",
@@ -6358,8 +6358,8 @@
                 "1": "Value of proportional term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only in -CLS, -NAN and -CER firmware",
@@ -6410,8 +6410,8 @@
                 "1": "Value of integrator term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only in -NAN, -CER, -CLS firmware",
@@ -6462,8 +6462,8 @@
                 "1": "Value of derivative term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only in -NAN and -CER firmware",
@@ -6514,8 +6514,8 @@
                 "1": "Value of derivative term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nn=? will return the currently set value of KD\nm=* will set the KD value for all axes/channels\nFor further details see the section \"Theory of Operation\" in the controller user manual.",
@@ -6566,8 +6566,8 @@
                 "1": "Value of Integral term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nn=? will return the currently set value of KD\nm=* will set the KD value for all axes/channels\nFor further details see the section \"Theory of Operation\" in the controller user manual.",
@@ -6618,8 +6618,8 @@
                 "1": "Value of proportional term"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nn=? will return the currently set value of KP\nFor further details see the section \"Theory of Operation\" in the controller user manual.",
@@ -6670,8 +6670,8 @@
                 "1": "Value of smoothing constant"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThis is most useful when operating in full or half step mode.\nKS effect on timing:\nThis parameter will increase the time to complete a motion time by 3KS sampling periods.\nKS will cause an overall delay in the generation of output steps.",
@@ -6755,7 +6755,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -6783,9 +6783,9 @@
                 "2": "Specifies \"n\" samples after move before going to 0% holding\rcurrent"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-"
             }
         },
         "Remarks": "\nThe MT command must be issued prior to the LC command.\nUsing LC with an internal Galil Stepper drive (SDM)\nSetting LC to 0 for each axis may be necessary to shut off all current to the motors in the \"motor off\" (MO) state\nUsing LC will reduce current consumption, but there will be a reduction of holding torque at rest\nConsult the user manual for more details regarding your specific amplifier\nUsing LC with external amplifiers\nWhen using external amplifiers low current mode will simply disable the motors by toggling the amplifier enable line during rest\nUsing LC will reduce current consumption, but there will be no holding torque at rest",
@@ -6816,9 +6816,9 @@
                 "1": "n",
                 "2": "Argument",
                 "3": "n",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "4": "-",
+                "5": "-",
+                "6": "-"
             },
             "Min": {
                 "0": "A",
@@ -6843,36 +6843,36 @@
                 "1": "0",
                 "2": "Notes",
                 "3": "Default",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "4": "-",
+                "5": "-",
+                "6": "-"
             },
             "Resolution": {
                 "0": "Axis",
                 "1": "1",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-"
             },
             "Description": {
                 "0": "Axis to assign value",
                 "1": "Sets limit disable state",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "See table below for details",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-"
             }
         },
         "Remarks": "\nn = ? will return the current setting of LD\nWhen this feature should be used:\nTo gain additional digital inputs if limit switches are not being utilized.\nTo prevent noise from causing the limit switchs conditions even though no limit switches are connected.\nLD does not disable software limits set by BL and FL.",
@@ -6918,7 +6918,7 @@
                 "0": "m",
                 "1": "n",
                 "2": "o",
-                "3": "nan",
+                "3": "-",
                 "4": "p"
             },
             "Min": {
@@ -6957,8 +6957,8 @@
                 "4": "Specifies the vector speed to be achieved at the end of the linear\rsegment. The controller will decelerate or accelerate during the\rsegment and will reach the specified speed at the end of the\rsegment."
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "For MT 1,-\r1,1.5 and -\r1.5.",
                 "3": "For MT 2,-\r2,2.5 and -\r2.5",
                 "4": "For MT 1,-\r1,1.5 and -\r1.5."
@@ -7025,7 +7025,7 @@
                 "0": "Axes to use for linear interpolation mode"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nAny set of axis may be used for linear interpolation.\nLI commands are used to specify the travel distances between various linear interpolation moves.\nSeveral LI commands may be given as long as the controller sequence buffer has room for additional segments\nSee the LI command for more information regarding the Linear Inerpolation Buffer\nThe LE command specifies the end of the linear interpolation sequence.\nOnce the LM command has been given, it does not need to be given again unless the VM command has been used\nOperand/Queries\n_LMm contains the number of spaces available in the sequence buffer for the 'm' coordinate system, S or T.\nThe LM command will apply to the selected coordinate system, S or T. To select the coordinate system, use the command CA S or CA T.",
@@ -7073,9 +7073,9 @@
                 "2": "Specifies the line at which the listing will end"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-"
             }
         },
         "Remarks": "\nn\n0\n < n\n1\n must always be true\nIf n\n0\n or n\n1\n is omitted, default values are used\nn\n0\n and n\n1\n can also specify a label, for example:\n\"LS #label,20\" would print out program lines from #label to line 20.\nIssuing this command will pause the output of the Data Record until the command is completed.",
@@ -7099,7 +7099,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -7149,7 +7149,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -7160,7 +7160,7 @@
                 "1": "Removes leading zeros from interrogated values"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Default"
             }
         },
@@ -7193,27 +7193,27 @@
             },
             "1": {
                 "0": "1 char",
-                "1": "nan"
+                "1": "-"
             },
             "99": {
                 "0": "8 chars",
-                "1": "nan"
+                "1": "-"
             },
             "N/A": {
                 "0": "N/A",
-                "1": "nan"
+                "1": "-"
             },
             "1.1": {
                 "0": "String",
-                "1": "nan"
+                "1": "-"
             },
             "Quantity of registers\rto read": {
                 "0": "Name of array to\rstore values",
-                "1": "nan"
+                "1": "-"
             },
             "Unnamed: 0": {
                 "0": "str[0] holds the first value. 2 bytes per element. Array\rmust be as large as the value for n3",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "",
@@ -7231,27 +7231,27 @@
             },
             "0": {
                 "0": "1 char",
-                "1": "nan"
+                "1": "-"
             },
             "99": {
                 "0": "8 chars",
-                "1": "nan"
+                "1": "-"
             },
             "N/A": {
                 "0": "N/A",
-                "1": "nan"
+                "1": "-"
             },
             "1": {
                 "0": "String",
-                "1": "nan"
+                "1": "-"
             },
             "Quantity of registers": {
                 "0": "Array containing modbus\rdata",
-                "1": "nan"
+                "1": "-"
             },
             "Unnamed: 0": {
                 "0": "str[0] holds the first value. 2 bytes per element. Array\rsize must be > n3",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "",
@@ -7284,7 +7284,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -7296,7 +7296,7 @@
             },
             "Notes": {
                 "0": "Default",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nArray writes when enabled by ME are done using function code 16\nGalil Modbus supports one master per slave.\nA useful utility for determining the 32 bit floating point value for a given fractional number can be found here: \nhttp://babbage.cs.qc.cuny.edu/IEEE-\n754/index.xhtml\nDMC-40x0 requires firmware revision 1.2d or newer for use as Modbus slave.\nModbus Register Map\nEach element is accessible as a 16 bit unsigned integer (Modbus registers 1xxx) -OR- as a 32 bit floating point number (Modbus registers 2xxx).\nThe table below shows the mapping for a Modbus master writing to the controller with ME 1 set.\n1000 (0-999) elements are available for read/write on the DMC-40x0. \nOther array elements are not exposed to Modbus.\nModbus Register Map to Galil Array A[]\nModbus Registers:\n1000-1999\n2000-2999\nAvailable Modbus function codes\n3 (read) and 16 (write)\n3 (read) and 16 (write)\nNumber Type\n16 bit unsigned integer\n32 bit floating point\nReferences in A[] array\nA[0]-A[999]\nA[0]-A[999]\nNumber written to A[]\nInteger only, fraction not changed\nGalil 4.2 format (internal from float conversion)\nNumber read from A[]\nInteger only, fraction not read\n32 bit float (internal to float conversion)\nExample Modbus Master Write\nMBH=0,16,1000,1,write[]\nMBH=0,16,2001,2,write[]\nExample Modbus Master Read\nMBH=0,3,1000,1,read[]\nMBH=0,3,2001,2,read[]\nEmbedded Array Mapping\nOnce enabled, the entire array table can be written remotely. These writes can span across dimensioned user arrays. It is the user's responsibility to\npartition the array table and to read/write remotely to the correct location.\nWhen using multiple array names, the array table is partitioned alphabetically (all captital letters first).\nFor example, a partioned array of Grape[600] and Orange[200] would place the first 600 registers in Grape[], and the next 200 registers in\nOrange[]. The last 200 elements would be inaccesible from embedded code. If the user then dimensioned the array Apple[200], the register\nmapping would change. The first 200 registers would read/write from Apple[], the next 600 from Grape[], and finally the last 200 from\nOrange[].\nAdditionally, all captial letters come before lowercase letters. \nFor example, a partioned array of Banana[100] and apple[200] would place the first\n100 registers in Banana[] and the next 200 registers in apple[].\nFor simplicity, Galil recommends that a single, contiguous array be dimensioned with the array name \"A\".",
@@ -7351,8 +7351,8 @@
                 "1": "Position required to be crossed before subsequent\rcommands will be executed."
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nAlthough multiple positions can be specified, only one of the MF conditions must be satisfied for subsequent code execution.\nMF command references absolute position.\nThe MF command only requires an encoder and does not require that the axis be under servo control.\nThe accuracy of the MF command is the number of counts that occur in 2*TM sec. Multiply the speed by 2*TM sec to obtain the maximum error.\nExample with speed of 20,000 counts/second and TM of 1000 (1000 us).\nMaximum error = 2 * 1000 E-6 seconds * 20,000 counts/second = 40 counts\nWhen using a stepper motor:\nThis condition is satisfied when the stepper position (as determined by the output buffer - TD) has crossed the specified Forward Motion\nPosition.",
@@ -7510,20 +7510,20 @@
         "Description": "The MG command is used to send strings, operands, variables, and array values to a specified destination.",
         "Arguments": {
             "Unnamed: 0": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-"
             },
             "0": {
                 "0": "n1",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
                 "5": "Argument",
                 "6": "n"
             },
@@ -7547,12 +7547,12 @@
             },
             "Unnamed: 3": {
                 "0": "See Examples for valid uses of n1.",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
                 "5": "Notes",
-                "6": "nan"
+                "6": "-"
             }
         },
         "Remarks": "\nMultiple strings, variables, and ASCII characters may be used; each must be separated by a comma.\nSolicited Messages\nFrom a host terminal, application code, or device, sending the MG command will return with the requested information. \nThis is known as a\nsolicited command, because the host sends the command and expects a response.\nUnsolicited Messages\nFrom embedded DMC code, the MG command will send an unsolicited, asynchronous message from the controller to the host. This can be\nused to alert an operator, send instructions, or return a variable value. This is known as an unsolicited command because the host is not\nexplicitly requesting it.\nThe CW command controls the ASCII format of all unsolicited messages.\nUnsolicited messages can go to any of the Ethernet handles or serial ports.\nThe CF command sets the default communication port for routing unsolicited messages.\nFormatting\nFormatters can be placed after each argument in to modify how it is printed.\n{Fm.n} Display variable in decimal format with m digits to left of decimal and n to the right.\n{Zm.n} Same as {Fm.n} but suppresses leading zeros.\n{$m.n} Display variable in hexadecimal format with m digits to left of decimal and n to the right.\n{Sn} Display variable as a string of length n, where n is 1 through 6. If n is greater than the length of the string stored in the variable, null chars\n(0x00) will be inserted at the end of the string.\n{N} Suppress carriage return at the end of the message.\nMessage Routing\nMG can override the default CF setting by using the following modifiers at the beginning of the message, right after MG.\n{Pn} Sends the message out the Serial port n, where n is 1 or 2 denoting Main or Auxilary (where equipped).\n{Ex} Sends the message out the Ethernet handle x, where x is A,B,C,D,E,F,G, or H\nPrinting to the LCD\nLike with other message routing modifiers, the following should be placed at the beginning of the message, right after MG.\n{Lx} Sends the message to the LCD, where x is 1 or 2 for the top or bottom line of the LCD, respectivly.\nThe message cannot be more than 8 characters when sent to the LCD screen; excess characters will not be shown.\nThe LU command must be set to 0 for user messages sent to the LCD to appear.",
@@ -7604,7 +7604,7 @@
                 "0": "Specifies axis to turn off"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe controller will continue to monitor the motor position\nSee the TP command for more details\nTo turn the motor back on use the SH (Servo Here) command.\nThe MO command is useful for positioning the motors by hand.\n_MOm contains 1.000 if the axis is in the motor off state or 0.000 if the axes is in the servo here state.",
@@ -7650,8 +7650,8 @@
                 "1": "Value of position that must be crossed in the reverse\rdirection"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nMR command references absolute position.\nAlthough multiple positions can be specified, only one of the MR conditions must be satisfied for subsequent code execution.\nThe MR command only requires an encoder and does not require that the axis be under servo control.\nThe accuracy of the MR command is the number of counts that occur in 2*TM usec. Multiply the speed by 2*TM usec to obtain the maximum error.\nExample with speed of 20,000 counts/second and TM of 1000 (1000 us).\nMaximum error = 2 * 1000 E-6 seconds * 20,000 counts/second = 40 counts\nWhen using a stepper motor, this condition is satisfied when the stepper position (as determined by the output buffer - TD) has crossed the specified\nreverse motion position.",
@@ -7681,12 +7681,12 @@
                 "0": "m",
                 "1": "Argument",
                 "2": "n",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan",
-                "7": "nan",
-                "8": "nan"
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-",
+                "7": "-",
+                "8": "-"
             },
             "Min": {
                 "0": "A",
@@ -7715,44 +7715,44 @@
                 "1": "Notes",
                 "2": "Default",
                 "3": "Setting invalid for Galil sine drives",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan",
+                "4": "-",
+                "5": "-",
+                "6": "-",
                 "7": "Valid setting for all Galil SDM stepper drives",
-                "8": "nan"
+                "8": "-"
             },
             "Resolution": {
                 "0": "Axis",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan",
-                "7": "nan",
-                "8": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-",
+                "7": "-",
+                "8": "-"
             },
             "Description": {
                 "0": "Axis to assign value",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan",
-                "7": "nan",
-                "8": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-",
+                "7": "-",
+                "8": "-"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan",
-                "7": "nan",
-                "8": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-",
+                "7": "-",
+                "8": "-"
             }
         },
         "Remarks": "\nn = ? will return the value of the motor type for the specified axis.\nFor step and direction modes (n=2,-2,2.5,-2.5), the auxiliary encoder input for the axis is no longer available.\nFor step and direction modes (n=2,-2,2.5,-2.5), TM 500 is recommended. \nContact Galil for TM greater than 500.",
@@ -7811,10 +7811,10 @@
                 "3": "Last field of the multicast address"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-"
             }
         },
         "Remarks": "\nSupported on DMC-40x0 firmware rev 1.1e and above.\nMU ? returns the current multicast address setting in 4 byte format\n_MU contains the 32-bit multicast address number in two's complement.",
@@ -7839,7 +7839,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -7850,7 +7850,7 @@
                 "1": "Enables Modbus wait"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Default"
             }
         },
@@ -7911,7 +7911,7 @@
                 "1": "Value of the notch bandwidth\rin Hz"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Max value dependent upon TM setting, see\rRemarks"
             }
         },
@@ -7963,7 +7963,7 @@
                 "1": "Sets the frequency of the notch filter"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "See Remarks"
             }
         },
@@ -8042,7 +8042,7 @@
                 "1": "Value of Notch Frequency in\rHz"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Max value dependent upon TM setting, see\rRemarks"
             }
         },
@@ -8094,7 +8094,7 @@
                 "1": "Status of encoder failure detection"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "1 = enabled, 0 = disabled"
             }
         },
@@ -8202,9 +8202,9 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-"
             },
             "Min": {
                 "0": "A",
@@ -8242,11 +8242,11 @@
                 "4": "Motor shut off by position error, amplifier error, abort input or by\rhardware limit switch"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Default",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-"
             }
         },
         "Remarks": "\nFor any value of OE <> 0, the axis will be shut off due to amplifier faults on any amplifier axis. See the TA command for conditions of an amplifier fault.\nBR1 must be enabled when internal brushless servo amplifiers are installed but the axis is driven with an external amplifier. BR1 disables hall error\nchecking when OE <> 0",
@@ -8306,8 +8306,8 @@
                 "1": "Offset voltage applied to MCMD"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThis can be used to counteract gravity or an offset in an amplifier.",
@@ -8363,8 +8363,8 @@
             },
             "Notes": {
                 "0": "On a 1-4 axis controller, max is 255 ($FF)\rfor outputs 1-8 only.",
-                "1": "nan",
-                "2": "nan"
+                "1": "-",
+                "2": "-"
             }
         },
         "Remarks": "\nBit patterns for extended I/O banks (where available) configured as inputs have no affect on the IO status.\nOutput Mapping Examples\nExample\nCommand Issued (Hex version)\nBits Set\nBits Cleared\n1-4 axis Set all outputs\nOP255 (OP$FF)\n1-8\n-\n5-8 axis Set all outputs\nOP65535 (OP$FFFF)\n1-16\n-\nClear all outputs\nOP0 (OP$0000)\n-\n1-16\nAlternating on/off\nOP43690 (OP$AAAA)\n2,4,6,8,10,12,14,16\n1,3,5,7,9,11,13,15\nSet High Byte\nOP65280 (OP$FF00)\n9-16\n1-8\nSet Low Byte\nOP255 (OP$00FF)\n1-8\n9-16",
@@ -8415,8 +8415,8 @@
                 "1": "Number of samples for error detection"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nEncoder error detection is based on whether motion of at least 4 counts is detected whenever the torque exceeds a preset level (OV) for a specified\ntime (OT).\nNote that for this function to work properly it is necessary to have a non-zero value for KI.\nSee the OA command for more details on this error detection mode",
@@ -8467,8 +8467,8 @@
                 "1": "Torque voltage to trigger encoder error detection"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nEncoder error detection is accomplished by checking on whether motion of at least 4 counts is detected whenever the torque exceeds a preset level\n(OV) for a specified time (OT).\nNote that for this function to work properly it is recommended to have a non-zero value for KI.\nThe value of OV should be high enough to guarantee that the motor would overcome any static friction in the system. \nIf it is too low, there will be\nfalse triggering of the error condition.\nThe OV value may not be higher than the TL value.\nSee the OA command for more details on this error detection mode",
@@ -8593,7 +8593,7 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n"
             },
             "Min": {
@@ -8622,8 +8622,8 @@
                 "2": "Absolute position target for\rindependant move"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "n=? returns the commanded position at\rwhich motion last stopped"
             }
         },
@@ -8672,7 +8672,7 @@
             },
             "Notes": {
                 "0": "Negative numbers force data to display in\rhexadecimal format",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nIf PF is minus, the format will be hexadecimal and a dollar sign will precede the characters. Hex numbers are displayed as 2's complement with the first\nbit used to signify the sign.\nIf a number exceeds the format, the number will be displayed as the maximum possible positive or negative number (i.e. 999.99, -999, $8000 or\n$7FF).\nThe PF command formats the values returned from the following commands:\nBL?\nIP ?\nTD\nDE ?\nLE ?\nTE\nDP ?\nPA ?\nTN\nEM ?\nPR ?\nTP\nFL ?\nRL\nVE\nGP\nRP",
@@ -8701,7 +8701,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "A",
@@ -8729,7 +8729,7 @@
                 "2": "Value used to generate pole filter\rcrossover frequency"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "'Max' is a function of TM. See Remarks. n =\r0 disables the Pole filter.",
                 "2": "See Remarks for the equation used. n = 0\rdisables the Pole filter"
             }
@@ -8759,7 +8759,7 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n"
             },
             "Min": {
@@ -8788,8 +8788,8 @@
                 "2": "Incremental distance for\rindependent move"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "n = ? returns the current incremental\rdistance specified"
             }
         },
@@ -8841,7 +8841,7 @@
                 "1": "Setting for position tracking mode of\rmotion"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = 1 enables PT mode, n = 0 disables\rPT mode"
             }
         },
@@ -8901,9 +8901,9 @@
                 "3": "Number of samples for PVT\rsegment"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
+                "0": "-",
+                "1": "-",
+                "2": "-",
                 "3": "n2 = -1 clears the PVT buffer, n2 = 0 exits PVT\rmode. See Remarks"
             }
         },
@@ -8995,7 +8995,7 @@
                 "0": "Axes to return Hall status"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe 3 bit value returned by QH is defined in the table below:\nBit\nStatus\n07\nUndefined (set to 0)\n06\nUndefined (set to 0)\n05\nUndefined (set to 0)\n04\nUndefined (set to 0)\n03\nUndefined (set to 0)\n02\nHall C State\n01\nHall B State\n00\nHall A State\nQH should return a value from 1 through 6 as valid Hall combinations. A value of 0 or 7 is invalid when using Hall sensors and will generate a Hall error\nwith OE set.\nThe valid sequence for Hall inputs is a greycode output (only one bit changes at a time):\n1,3,2,6,4,5 (or 5,4,6,2,3,1)\nTo disable Hall error checking, set the axis to brushed with a BR 1 command.\nWhen using an internal sine amplifier, the BA command must be issued before QH will report the Hall state status.\nOperand Usage\n_QHm Contains the state of the Hall sensor inputs for the specified axis",
@@ -9030,9 +9030,9 @@
                 "0": "mm",
                 "1": "Argument",
                 "2": "mm",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Min": {
                 "0": "A",
@@ -9053,34 +9053,34 @@
             "Default": {
                 "0": "ABCDEFGHSTI",
                 "1": "Notes",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Resolution": {
                 "0": "Multi-Axis\rMask",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Description": {
                 "0": "Axes/Coordinated/IO data specified to\rdisplay in the data record",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Notes": {
                 "0": "If no argument entered, mm =\r\"ABCDEFGHSTI\"",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             }
         },
         "Remarks": "\nThe data returned by the QR command is in binary format and is unreadable in programs such as Galiltools.\nThe Galiltools API has specialized commands to parse the data record packet. See the Galiltools User Manual for more details.",
@@ -9128,7 +9128,7 @@
             },
             "Notes": {
                 "0": "Default value used if mm is\rundefined.",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nThe result of QS is modularized so that result is never greater than 1/2 the revolution of the stepper motor.\nLargest possible QS result = 0.5*YA*YB\nIf present in embedded code, command execution will jump to #POSERR when QS is equal to 3 full motor steps (_YAm * 3)\nQSm=? will return the current error for axis m\nOperand Usage\n_QSm contains the error magnitude in drive step counts for the specified axis.",
@@ -9244,10 +9244,10 @@
         "Arguments": {
             "Argument": {
                 "0": "arg",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-"
             },
             "Value": {
                 "0": "TIME",
@@ -9267,8 +9267,8 @@
                 "0": "Value as read by the TIME command",
                 "1": "Data range is -32768 to 32767. The analog inputs are limited to those which correspond to an axis on the\rcontroller. Syntax Note: Unlike the operand _AFm, the symbol _AFm in the context of RD records the ADC\rvalue, not the AF setting.",
                 "2": "_DEm and _TDm capture the same data",
-                "3": "nan",
-                "4": "nan"
+                "3": "-",
+                "4": "-"
             }
         },
         "Remarks": "\nArguments listed as _XXm are valid when m is a valid axis mask\nThe order of args specified in RD corresponds with the array order specified in the RA command.\nthe operand \n_RD\n contains the address for the next array element for recording.\nWhen recording _AFm, the returned value is signed. This means that when AQ is used to set unipolar inputs, values on the upper half of the voltage\nrange are sign extended. Anding the value with $0000FFFF will return the expected unsigned value.",
@@ -9294,10 +9294,10 @@
             },
             "Notes": {
                 "0": "Only when using internal amps",
-                "1": "nan",
-                "2": "nan",
+                "1": "-",
+                "2": "-",
                 "3": "Only when equipped with serial encoder firmware support",
-                "4": "nan"
+                "4": "-"
             }
         },
         "Remarks": "\nThe RE command is used to end the following error automatic subroutines.\nAutomatic Subroutines Used\nNotes\n#AMPERR\nOnly when using internal amps\n#LIMSWI\n#POSERR\n#SERERR\nOnly when equipped with serial encoder firmware support\n#TCPERR\nCare should be taken to ensure the error conditions are cleared when finishing the subroutine to avoid immediate re-entering of the error routine.\nTo avoid returning to the main program on an interrupt, use the ZS command to zero the subroutine stack, then use JP to return to the desired\nlocation in code.\nRE 1 restores the trippoint that was interrupted by an automatic subroutine (like WT)\nA motion trippoint like MF or MR requires the axis to be actively profiling in order to be restored with the RE 1 command.",
@@ -9374,7 +9374,7 @@
                 "0": "Axes to query for latched position"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe armed state of the latch can be configured using the CN command.\nThe Latch Function works with the main or auxiliary encoder.\nSee the DMC-40x0 user manual for a description of RL with sinusoidal encoders (-SIN firmware).\nCapturing Stepper Position using the Latch\nWhen working with a stepper motor without an encoder, the latch can be used to capture the stepper position. Follow the steps below to achieve\nthis.\n1\n. \nPlace a wire from the controller Step (PWM) output into the main encoder input, channel A+.\n2\n. \nConnect the Direction (sign) output into the channel B+ input.\n3\n. \nConfigure the main encoder for Step/Direction using the CE command.\n4\n. \nThe latch will now capture the stepper position based on the pulses generated by the controller.\nOperand Usage\n_RLm contains the latched position of the specified axis.",
@@ -9398,7 +9398,7 @@
         "Arguments": {
             "Argument": {
                 "0": "mm",
-                "1": "nan"
+                "1": "-"
             },
             "Min": {
                 "0": "A",
@@ -9421,8 +9421,8 @@
                 "1": "Virtual axes to report commanded position"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThe relationship between RP, TP and TE: TEA equals the difference between the reference position, RPA, and the actual position, TPA.\nTE = RP - TP\n_RPm contains the commanded reference position for the specified axis.",
@@ -9511,9 +9511,9 @@
                 "2": "Value to send for the specified parameter"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-"
             }
         },
         "Remarks": "\nStrings are encapsulated by quotations. This will typically begin an SA command.\nn is a number, controller operand, variable, mathematical function, or string. The range for numeric values is 4 bytes of integer followed by two bytes\nof fraction.\nTypical usage would have the first argument as a string such as \"KI\" and the subsequent arguments as the arguments to the command:\nExample SAF=\"KI\", 1, 2 would send the command: KI1,2\nSA automatically adds commas between two number values being sent.\nThere is a 78 character maximum payload length for the SA command.\nOperational Notes\n1\n. \nSA is non-blocking. A wait (e.g. WT10) must occur between successive calls to SA.\n2\n. \nSA is not valid over a handle configured for Modbus (port 502).\n3\n. \nWhen writing multi-threaded DMC code, send all traffic from only one thread.\n4\n. \nSA command functionality is provided to assist with controller to controller communications under error handling conditions. \nRecommended\ncommands for use with SA include, but are not limited to: HX, XQ, ST, and AB. \nPlease contact a Galil Applications Engineer for additional details.",
@@ -9655,7 +9655,7 @@
                 "1": "Value of switch deceleration"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "Resolution changes with TM, see Remarks"
             }
         },
@@ -9692,7 +9692,7 @@
                 "0": "Axes to enable"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe SH command changes the coordinate system.\nTherefore, all position commands given prior to SH, must be repeated. Otherwise, the controller produces incorrect motion.\nThis command can be useful when the position of a motor has been manually adjusted following a motor off (MO) command.",
@@ -9849,11 +9849,11 @@
                 "4": "The full subnet mask specified as a signed 32 bit two's\rcomplement integer"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-"
             }
         },
         "Remarks": "\nn = ? will return the subnet mask of the controller as n\n0\n,n\n1\n,n\n2\n,n\n3\n_SM0 contains the subnet mask representing a 32 bit signed number (Two's complement)\nUse the following equation to change the 4 byte subnet (n\n0\n,n\n1\n,n\n2\n,n\n3\n) to a single 32 bit number, n\nn = (n\n0\n*2^24) + (n\n1\n*2^16) + (n\n2\n*2^8) + n\n3\nFor more information, see \nhttp://www.galil.com/news/dmc-programming-software/blocking-unwanted-ethernet-devices-connecting",
@@ -9881,10 +9881,10 @@
         "Arguments": {
             "Argument": {
                 "0": "m",
-                "1": "nan",
+                "1": "-",
                 "2": "n",
-                "3": "nan",
-                "4": "nan"
+                "3": "-",
+                "4": "-"
             },
             "Min": {
                 "0": "A",
@@ -9922,8 +9922,8 @@
                 "4": "Vale of jog speed in\rcnts/second"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "For MT settings of 1,-1,1.5 and -1.5 (Servos) - See\rRemarks for Resolution details",
                 "3": "For MT settings of 2,-2,2.5 and -2.5 (Steppers) - See\rRemarks for Resolution details",
                 "4": "ICM-42100 with AF>=5 - See Remarks for Resolution\rdetails"
@@ -10018,7 +10018,7 @@
                 "0": "Axes to command to stop motion"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nIf ST is sent from the host without an axis specification, program execution will stop in addition to motion.",
@@ -10048,9 +10048,9 @@
                 "0": "m",
                 "1": "Argument",
                 "2": "n",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Min": {
                 "0": "A",
@@ -10071,34 +10071,34 @@
             "Default": {
                 "0": "N/A",
                 "1": "Notes",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
+                "2": "-",
+                "3": "-",
+                "4": "-",
                 "5": "Default"
             },
             "Resolution": {
                 "0": "Axis",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Description": {
                 "0": "Axis to assign value",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-"
             }
         },
         "Remarks": "\nThe SY mask should be set appropriately to ensure that the #SERERR automatic subroutine will run when the bits are active, and that the _SSn\noperand reports the fault state of the encoder correctly.\nExample of Warning and Alarm/Error bit use, Quoted from Renishaw Data Sheet L-9709-9005-03-A\nError (1 bit) \"The error bit is active low: \"1\" indicates that the transmitted position information has been verified by the readhead's internal\nsafety checking algorithm and is correct; \"0\" indicates that the internal check has failed and the position information should not be trusted. The\nerror bit is also set to \"0\" if the temperature exceeds the maximum specification for the product.\"\nWarning (1 bit) \"The warning bit is active low: \"0\" indicates that the encoder scale (and/or reading window) should be cleaned. Note that the\nwarning bit is not an indication of the trustworthiness of the position data. Only the error bit should be used for this purpose.\"",
@@ -10151,7 +10151,7 @@
                 "0": "Selects amp status byte to return"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\n_TAn Contains the amplifier error status. n = 0,1,2, or 3\nIf a brushed-type servo motor is disabling and TA1 shows a Hall error, use the BR command to set the axis as a brushed axis. This causes the\ncontroller to ignore invalid Hall states.",
@@ -10215,7 +10215,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -10227,7 +10227,7 @@
             },
             "Notes": {
                 "0": "Default",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "",
@@ -10276,22 +10276,22 @@
                 "15": "No movement in BZ command"
             },
             "Unnamed: 2": {
-                "0": "nan",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan",
-                "7": "nan",
-                "8": "nan",
-                "9": "nan",
-                "10": "nan",
-                "11": "nan",
-                "12": "nan",
-                "13": "nan",
-                "14": "nan",
-                "15": "nan"
+                "0": "-",
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-",
+                "7": "-",
+                "8": "-",
+                "9": "-",
+                "10": "-",
+                "11": "-",
+                "12": "-",
+                "13": "-",
+                "14": "-",
+                "15": "-"
             }
         },
         "Remarks": "",
@@ -10341,7 +10341,7 @@
                 "0": "Axes to report dual (auxiliary) encoder position."
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nAuxiliary encoders are not available for a stepper axis or for the axis where output compare is used.\nOperand Usage\n_TDm reports the dual encoder position for the specified axis.",
@@ -10382,7 +10382,7 @@
                 "0": "Axes to report position error"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nUnder normal operating conditions with servo control, the position error should be small. The position error is typically largest during acceleration and\ndeceleration.\nThe Tell Error command is not valid for step motors since they operate open-loop.\nOperand Usage\n_TEm contains the current position error value for the specified axis.",
@@ -10427,12 +10427,12 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan",
-                "2": "nan",
-                "3": "nan",
-                "4": "nan",
-                "5": "nan",
-                "6": "nan"
+                "1": "-",
+                "2": "-",
+                "3": "-",
+                "4": "-",
+                "5": "-",
+                "6": "-"
             },
             "Value": {
                 "0": "0",
@@ -10531,7 +10531,7 @@
                 "1": "Value of peak torque limit"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = 0 disables the peak torque limit"
             }
         },
@@ -10583,8 +10583,8 @@
                 "1": "Value of torque limit"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nTL sets the absolute torque maximum for negative and positive torque\nFor example, TL of 5 limits the motor command output to 5 volts maximum and -5 volts minimum\nTL With Internal Drives\nThe maximum torque limit is different for certain amplifier configurations at a specific AG setting. These cases are listed below.\nAmplifier\nAG setting (current rating)\nTL limit\nAMP-430x0\n2 (1.0 A/V)\n7.0000\nAMP-43240\n2 (2.0 A/V)\n5.0000\nAMP-43540\n2 (1.6 A/V)\n5.0000\nAMP-43640\nN/A (0.2 A/V)\n5.0000\nAMP-43740\n2 (3.2 A/V)\n5.0000",
@@ -10672,8 +10672,8 @@
                 "1": "Absolute position of tangent axis where the tangent angle is 0"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nWhen operating with stepper motors, n\n0\n is the scale factor in steps / degree\nThe tangent axis is specified with the VMm0m1m2 command where m2 is the tangent axis.\nFor example, VMABD specifies the D axis as the tangent axis\nOperand Usage\n_TNm (where m = S or T) contains the first position value for the tangent axis in the specified vector plane. This allows the user to correctly position\nthe tangent axis before the motion begins.\n_TNm will change based upon the vector path described in the VM declaration. See the example below.\nn\n0\n = ? also reports this value",
@@ -10747,7 +10747,7 @@
                 "0": "Axes to report axis switches"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nEach bit of the TS response represents the following status information when the bit is set (1).\nBit #\nStatus\nBit 7\nAxis in motion\nBit 6\nPosition error exceeds error limit\nBit 5\nMotor off\nBit 4\nReserved (0)\nBit 3\nForward Limit switch inactive\nBit 2\nReverse Limit switch inactive\nBit 1\nHome switch status\nBit 0\nPosition Latch has occurred\nFor active high or active low configuration (CN command), the limit switch bits are '1' when the switch is inactive and '0' when active.\nOperand Usage\n_TSm contains the current status of the switches for the specified axis.",
@@ -10788,7 +10788,7 @@
                 "0": "Axes to report output torque command"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nTorque output is limited by the value set for the TL command.\n_TTm contains the value of the torque for the specified axis.",
@@ -10829,7 +10829,7 @@
                 "0": "Axes to report velocity"
             },
             "Notes": {
-                "0": "nan"
+                "0": "-"
             }
         },
         "Remarks": "\nThe TV command is computed using a special averaging filter (over approximately 0.25 sec for TM1000). Therefore, TV will return average velocity,\nnot instantaneous velocity.\n_TVm contains the value of the velocity for the specified axis.",
@@ -10880,7 +10880,7 @@
                 "1": "Set the timeout in msec for the MC command"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = -1 disables the timeout"
             }
         },
@@ -10979,8 +10979,8 @@
                 "1": "Vector acceleration for the coordinate system"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\n_VAm contains the value of the vector acceleration for the specified coordinate system",
@@ -11031,8 +11031,8 @@
                 "1": "Vector deceleration for the coordinate system"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\n_VDm contains the value of the vector deceleration for the specified coordinate system.",
@@ -11056,7 +11056,7 @@
         "Arguments": {
             "Argument": {
                 "0": "n",
-                "1": "nan"
+                "1": "-"
             },
             "Value": {
                 "0": "0",
@@ -11068,7 +11068,7 @@
             },
             "Notes": {
                 "0": "Also occurs when n = 'null'",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nThe VE command will apply to the selected coordinate system, S or T. To select the coordinate system, use the command CAS or CAT.\n_VEm contains the length of the vector in counts for the specified coordinate system, S or T",
@@ -11116,7 +11116,7 @@
             },
             "Notes": {
                 "0": "A negative value specifies hexadecimal\rformat, see Remarks",
-                "1": "nan"
+                "1": "-"
             }
         },
         "Remarks": "\nA negative n\n0\n specifies hexadecimal format. When in hexadecimal, the string will be preceded by a $ and Hex numbers are displayed as 2's\ncomplement with the first bit used to signify the sign.\nA positive n\n0\n specifies standard decimal format.\nA ? is only valid for querying n\n0\n. When queried, the value reported will be the value of the format for variables and arrrays specified by n\n0\n and n\n1\neg. VF 10,4 would respond to VF ? with 10.4\n_VF contains the value of the format for variables and arrays\nIf the number of digits set by n\n0\n is insufficient for representing the integer portion of a variable, the returned value will be the greatest number\nrepresentable by n\n0\n.n\n1\n. For example, if \nvar=123\n, and \nVF\n is 2.4, \nvar=?\n will return \n99.9999\n.",
@@ -11141,9 +11141,9 @@
             "Argument": {
                 "0": "m0",
                 "1": "m1",
-                "2": "nan",
+                "2": "-",
                 "3": "m2",
-                "4": "nan"
+                "4": "-"
             },
             "Min": {
                 "0": "A",
@@ -11181,8 +11181,8 @@
                 "4": "Virtual axis specified for\rvector mode."
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan",
+                "0": "-",
+                "1": "-",
                 "2": "Used when performing vector mode for a single real\raxis",
                 "3": "m2 = null if tangent mode is not desired.",
                 "4": "Used to disable the tangent function if already\renabled. Otherwise, use m2 = null."
@@ -11220,7 +11220,7 @@
                 "0": "n0",
                 "1": "n1",
                 "2": "o",
-                "3": "nan"
+                "3": "-"
             },
             "Min": {
                 "0": "-\r2,147,483,648",
@@ -11312,8 +11312,8 @@
                 "1": "Vector ratio specified for the T coordinate plane"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nVR doesn't ratio acceleration or deceleration, but the change in speed is accomplished by accelerating or decelerating at the rate specified by VA and\nVD.\nVR is useful for feedrate override, particularly when specifying the speed of individual segments using the operator '<' and '>'.\n_VRm contains the vector speed ratio of the specified coordinate system - where m = S or T.\n_VRS contains the vector speed ratio of the specified coordinate system",
@@ -11364,8 +11364,8 @@
                 "1": "Vector speed applied to the coordinate system"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nVector speed can be attached to individual vector segments using the operators '<' and '>'. For more information, see description of VP, CR, and LI\ncommands. \nThe VV command allows for variables to be specified during vector segments.\nVector Speed can be calculated by taking the square root of the sum of the squared values of speed for each axis specified for vector or linear\ninterpolated motion.\n_VSm contains the vector speed of the specified coordinate system",
@@ -11394,7 +11394,7 @@
             "Argument": {
                 "0": "m",
                 "1": "n",
-                "2": "nan"
+                "2": "-"
             },
             "Min": {
                 "0": "S",
@@ -11422,7 +11422,7 @@
                 "2": "Variable vector speed"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "For MT 1,-1,1.5 and -1.5",
                 "2": "For MT 2,-2,2.5 and -2.5"
             }
@@ -11568,7 +11568,7 @@
                 "1": "Drive\rresolution in\rstep\rcounts/motor\rstep for SPM\rmode"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "YA has special functionality for certain hardware configurations.\rSee the rest of the notes in this table."
             }
         },
@@ -11620,8 +11620,8 @@
                 "1": "Motor resolution in full steps/revolution"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThis command is only required if using SPM mode with stepper motors with an attached encoder.\nA 1.8 degree step motor is 200 steps/revolution.",
@@ -11672,8 +11672,8 @@
                 "1": "Encoder resolution in counts/revolution"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nThis command is only required if using SPM mode with stepper motors with an attached encoder.",
@@ -11719,8 +11719,8 @@
                 "1": "Number of step pulses to increment position by"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nUsers will typically use the value of QS to increment motor by the number of step pulses of error.\nEG. YRm = _QSm increments the specified axis by the error magnitude.\nThe sign of YR depends on the polarity of the position encoder\nIf the encoder increments when the stepper moves forward (increasing TD), the correction is YRm=_QSm. This is typical.\nIf the encoder decrements when the stepper moves forward, the correction is YRm= -_QSm. See CE to invert the polarity of the position\nencoder, if desired.",
@@ -11771,7 +11771,7 @@
                 "1": "Setting of the SPM\rmode"
             },
             "Notes": {
-                "0": "nan",
+                "0": "-",
                 "1": "n = 0 disables SPM mode, n = 1 Enables SPM mode. See\rRemarks"
             }
         },
@@ -11823,8 +11823,8 @@
                 "1": "Value of user variable for data record"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nn is an integer and can be a number, controller operand, variable, mathematical function, or string.\nOnly 4 bytes are available for n. Fractional values are not stored or sent via the data record",
@@ -11870,8 +11870,8 @@
                 "1": "Open loop voltage (Volts)"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only for -NAN and -CER firmware",
@@ -11917,8 +11917,8 @@
                 "1": "Open loop voltage (Volts)"
             },
             "Notes": {
-                "0": "nan",
-                "1": "nan"
+                "0": "-",
+                "1": "-"
             }
         },
         "Remarks": "\nValid only for -NAN and -CER firmware",

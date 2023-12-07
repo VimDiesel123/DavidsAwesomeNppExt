@@ -18,7 +18,8 @@ size_t currentArgumentNumber;
 nlohmann::ordered_json commandData;
 
 std::map<std::string, Calltip> labelCalltips;
-std::size_t fileContentsHash; //Cache the last file contents so we don't need to reparse the file if it didn't change;
+std::size_t fileContentsHash;  // Cache the last file contents so we don't need
+                               // to reparse the file if it didn't change;
 
 void loadManualData() {
   std::ifstream f(PATH_TO_MANUAL_DATA);
@@ -68,7 +69,7 @@ tabulate::Table jsonToTable(const nlohmann::ordered_json& json) {
 std::string stringFromCommandEntry(const nlohmann::ordered_json& entry) {
   std::string result;
   // Extract the "Command" and "Description" fields
-  result += entry["Command"].get<std::string>() + "\n\n";
+  result += entry["Command"].get<std::string>() + "\n";
   result += "Description:\n" + entry["Description"].get<std::string>() + "\n\n";
 
   tabulate::Table table;
@@ -91,7 +92,7 @@ std::string stringFromCommandEntry(const nlohmann::ordered_json& entry) {
                    entry["Operands"]["Explanation"].get<std::string>()});
   }
 
-  result += "Usage:\n" + table.str() + "\n\n";
+  result += "Usage:\n" + table.str();
 
   const nlohmann::ordered_json argumentsData = entry["Arguments"];
 
@@ -105,7 +106,8 @@ std::string stringFromCommandEntry(const nlohmann::ordered_json& entry) {
     }
   }
 
-  result += "Arguments:\n" + argumentsTable.str();
+  if (argumentsTable.row(0).size() > 0)
+    result += "\n\nArguments:\n" + argumentsTable.str();
 
   return result;
 }
@@ -183,7 +185,6 @@ std::map<std::string, Calltip> buildLabelLookupTable(
 
 std::map<std::string, Calltip> parseDocument() {
   auto rawCode = getDocumentText();
-  
 
   const auto hasher = std::hash<std::string>();
   const auto fileHash = hasher(rawCode);
@@ -253,11 +254,11 @@ void updateArgumentHighlight() {
   setCallTipHighlightRange(argumentRange);
 }
 
-void cancelLabelCallTip() {}
 
 void onCharacterAdded(SCNotification* pNotify) {
   switch ((char)pNotify->ch) {
     case ('('): {
+      labelCalltips = parseDocument();
       updateCurrentCalltip();
       generateLabelCalltip();
       break;
@@ -268,7 +269,7 @@ void onCharacterAdded(SCNotification* pNotify) {
       break;
     }
     case (')'): {
-      cancelLabelCallTip();
+      cancelCallTip();
       break;
     }
     default:

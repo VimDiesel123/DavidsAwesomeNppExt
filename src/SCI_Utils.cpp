@@ -46,6 +46,11 @@ void setCallTipHighlightRange(const std::pair<size_t, size_t>& highlightRange) {
                 highlightRange.second);
 }
 
+void cancelCallTip() {
+  const auto curScintilla = currentScintilla();
+  ::SendMessage(curScintilla, SCI_CALLTIPCANCEL, 0, 0);
+}
+
 std::string wordAt(int position) {
   const auto curScintilla = currentScintilla();
   int wordStart =

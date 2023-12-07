@@ -21,7 +21,10 @@ void showFunny() {
                                      INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
   if (hInternet == NULL) {
     OutputDebugStringA("Failed to intialize internet handle.");
-    handleError();
+    ::MessageBoxA(NULL,
+                  "You're not connected to the internet!\n I get all my jokes "
+                  "from the internet!",
+                  "Error: No Internet Connection", MB_OK);
     return;
   }
 
@@ -32,7 +35,10 @@ void showFunny() {
       NULL, 0, INTERNET_FLAG_RELOAD, 0);
   if (hRequest == NULL) {
     OutputDebugStringA("Failed to create request.");
-    handleError();
+    ::MessageBoxA(NULL,
+                  "You're not connected to the internet!\nI get all my jokes "
+                  "from the internet!",
+                  "Error: No Internet Connection", MB_OK);
     return;
   }
 

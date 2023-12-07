@@ -114,8 +114,13 @@ std::string cleanLabelDescription(const std::string& rawDescription) {
 }
 
 std::string buildLabelCalltip(const std::string& label) {
-  const auto lines = labelCalltips.at(label).description;
-  return label + ":\n" + cleanLabelDescription(linesToString(lines));
+  try {
+    const auto lines = labelCalltips.at(label).description;
+    return label + ":\n" + cleanLabelDescription(linesToString(lines));
+  } catch (std::out_of_range& ex) {
+    OutputDebugStringA(ex.what());
+    return "";
+  }
 }
 
 std::string buildCommandCalltip(const std::string& command) {

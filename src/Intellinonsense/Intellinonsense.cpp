@@ -18,6 +18,7 @@ size_t currentArgumentNumber;
 nlohmann::ordered_json commandData;
 
 std::map<std::string, Calltip> labelCalltips;
+std::size_t fileContentsHash; //Cache the last file contents so we don't need to reparse the file if it didn't change;
 
 void loadManualData() {
   std::ifstream f(PATH_TO_MANUAL_DATA);
@@ -182,6 +183,15 @@ std::map<std::string, Calltip> buildLabelLookupTable(
 
 std::map<std::string, Calltip> parseDocument() {
   auto rawCode = getDocumentText();
+  
+
+  const auto hasher = std::hash<std::string>();
+  const auto fileHash = hasher(rawCode);
+  if (fileContentsHash == fileHash)
+    return labelCalltips;
+  else
+    fileContentsHash = fileHash;
+
   const auto filteredCode = std::regex_replace(
       rawCode, std::regex("\r"),
       "");  // Get rid of \r because it's needlessly complicated

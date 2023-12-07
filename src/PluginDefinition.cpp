@@ -71,7 +71,7 @@ void commandMenuCleanUp() {
 }
 
 void callTipInit() {
-  // Set the dwell time (in milliseconds) and the styler for dwell events
+  // Set the dwell time (in milliseconds) and the styler for dwell event
   ::SendMessage(nppData._scintillaMainHandle, SCI_SETMOUSEDWELLTIME, 1000,
                 0);  // Set a 1-second dwell time
 }

@@ -1,4 +1,4 @@
-# DavidsAwesomeNppExt
+# DavidsAwesomeTools
 
 ## Features
 
@@ -10,3 +10,11 @@
 ![Calltips](https://github.com/VimDiesel123/DavidsAwesomeNppExt/blob/master/media/calltip.gif)
 - ### Fix TreeItems.ini numbering
 ![Fix treeitems numbering](https://github.com/VimDiesel123/DavidsAwesomeNppExt/blob/master/media/setuptree.gif)
+
+## How to use
+
+- Download the latest release and paste the folder in your notepad++ plugins folder. 
+
+OR
+
+- You can clone this project and build it from source. Create a folder, put the DLL, and manual.json inside of it (The folder and the name of the dll inside must be the same for notepad++ to use it).

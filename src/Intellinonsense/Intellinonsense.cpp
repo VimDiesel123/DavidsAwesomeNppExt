@@ -39,9 +39,7 @@ std::string extractCommand(const std::string& word) {
 }
 
 tabulate::Table jsonToTable(const nlohmann::ordered_json& json) {
-  // Extract the "Arguments" array
   tabulate::Table table;
-  // Extract column names from the JSON
   tabulate::Table::Row_t header;
 
   const auto columns = json.items();
@@ -50,9 +48,11 @@ tabulate::Table jsonToTable(const nlohmann::ordered_json& json) {
   }
   table.add_row(header);
   if (columns.begin() == columns.end()) return table;
+
   // Add rows to the table
-  for (size_t i = 0; i < columns.begin().value().size();
-       ++i) {  // Demeter?? I barely know her!
+  for (size_t i = 0;
+       i < columns.begin().value().size();  // Demeter?? I barely know her!
+       ++i) {
     tabulate::Table::Row_t row;
     for (const auto& column : columns) {
       if (column.value().empty()) {
@@ -254,11 +254,9 @@ void updateArgumentHighlight() {
   setCallTipHighlightRange(argumentRange);
 }
 
-
 void onCharacterAdded(SCNotification* pNotify) {
   switch ((char)pNotify->ch) {
     case ('('): {
-      labelCalltips = parseDocument();
       updateCurrentCalltip();
       generateLabelCalltip();
       break;
